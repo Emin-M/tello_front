@@ -1,10 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import GlobalStyles from "./components/styles/GlobalStyles";
+import GlobalStyles from "./components/styles/GlobalStyled";
 
 /* Pages */
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
       </Routes>
+      <Footer />
     </div>
   );
 };

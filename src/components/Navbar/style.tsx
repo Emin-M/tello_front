@@ -7,7 +7,12 @@ export const NavbarContainer = styled.div`
   height: 128px;
   margin: 0 auto;
   border-bottom: 1px solid #2dd06e;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background: #ffffff;
 
   @media (max-width: 650px) {
     display: block;
@@ -19,7 +24,16 @@ export const NavbarTop = styled.div`
   display: flex;
   margin-bottom: 10px;
 
+  > img {
+    margin-right: 20px;
+    display: none;
+    cursor: pointer;
+  }
+
   @media (max-width: 650px) {
+    > img {
+      display: block;
+    }
   }
 `;
 
@@ -38,7 +52,7 @@ export const NavbarSearch = styled.div`
 
   @media (max-width: 650px) {
     position: absolute;
-    top: 100%;
+    top: 60%;
     left: 0;
     right: 0;
     padding: 0 12px;
@@ -91,6 +105,8 @@ export const NavbarInputSearch = styled.div`
   border-radius: 0 0 8px;
   display: none;
   opacity: 0;
+  background: #ffffff;
+  z-index: 1;
 
   > div:nth-child(1) {
     display: flex;
@@ -127,10 +143,6 @@ export const NavbarInputSearch = styled.div`
       border-radius: 4px;
     }
   }
-
-  @media (max-width: 650px) {
-    /* background: #ffffff; */
-  }
 `;
 
 export const NavbarRight = styled.div`
@@ -141,7 +153,6 @@ export const NavbarRight = styled.div`
   gap: 28px;
 
   > div {
-    position: relative;
     transform: translateY(5px);
   }
 
@@ -156,6 +167,10 @@ export const NavbarRight = styled.div`
     background: #2dd06e;
     border-radius: 50%;
     color: #ffffff;
+  }
+
+  @media (max-width: 650px) {
+    gap: 10px;
   }
 `;
 
@@ -201,6 +216,7 @@ export const NavbarBottom = styled.ul`
 
 export const BottomDropdown = styled.div`
   background: #ffffff;
+  z-index: 1;
   position: absolute;
   top: 100%;
   left: 0;

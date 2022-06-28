@@ -22,14 +22,18 @@ import person from "../../assets/images/icons/person.png";
 import heart from "../../assets/images/icons/heart.png";
 import basket from "../../assets/images/icons/basket.png";
 import dImg from "../../assets/images/dropdownImg.png";
+import resBtn from "../../assets/svg/responsive-button.svg";
 
 const Navbar = () => {
   return (
     <NavbarContainer>
       <Container>
         <NavbarTop>
+          <img src={resBtn} alt="resButton" />
           <NavbarLogo>
-            <img src={logo} alt="logo" />
+            <Link to="/">
+              <img src={logo} alt="logo" />
+            </Link>
           </NavbarLogo>
           <NavbarSearch>
             <NavbarInput>
