@@ -15,6 +15,9 @@ import instagram from "../../assets/svg/instagram.svg";
 import facebook from "../../assets/svg/facebook.svg";
 import youtube from "../../assets/svg/youtube.svg";
 import twitter from "../../assets/svg/twitter.svg";
+import pin from "../../assets/images/icons/pin.png";
+import phone from "../../assets/images/icons/phone.png";
+import email from "../../assets/images/icons/email.png";
 
 const Footer: FC = () => {
   return (
@@ -64,16 +67,18 @@ const Footer: FC = () => {
           <FooterLinks>
             <h2>Əlaqə</h2>
             <ul>
-              <li>
-                <img src={instagram} alt="instagram" />{" "}
-                <Link to="new">M. K. Ataturk avenue 89, Baku, Azerbaijan</Link>
+              <li style={{ justifyContent: "flex-start", textAlign: "left" }}>
+                <img src={pin} alt="pin" />
+                <Link to="new" style={{ color: "#2dd06e" }}>
+                  M. K. Ataturk avenue 89, Baku, <br /> Azerbaijan
+                </Link>
               </li>
-              <li>
-                <img src={instagram} alt="instagram" />
+              <li style={{ justifyContent: "flex-start", textAlign: "left" }}>
+                <img src={email} alt="email" />
                 <Link to="new">example@gmail.com</Link>
               </li>
-              <li>
-                <img src={instagram} alt="instagram" />
+              <li style={{ justifyContent: "flex-start", textAlign: "left" }}>
+                <img src={phone} alt="phone" />
                 <Link to="new">*2108</Link>
               </li>
             </ul>

@@ -8,9 +8,23 @@ export const StyledCard = styled.div`
   background: #ffffff;
   box-shadow: 0px 4px 8px rgba(164, 164, 164, 0.3);
   border-radius: 4px;
-  padding: 24px;
+  padding: 40px 24px;
   padding-bottom: 15px;
   cursor: pointer;
+  position: relative;
+
+  > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #f2f2f2;
+    border-radius: 50%;
+  }
 
   h3 {
     margin-top: 24px;

@@ -1,5 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { StyledCard } from "../styles/Card.styled";
+import heart from "../../assets/images/icons/heart.png";
 
 interface IProduct {
   id: number;
@@ -17,11 +19,16 @@ const Card = ({ product }: Props) => {
 
   return (
     <StyledCard>
-      <img src={product.img} alt={product.name} />
-      <h3>{product.name}</h3>
-      <p>
-        <del>200</del>$<span>{product.price}</span>$
-      </p>
+      <Link to={`products/${product.id}`}>
+        <div>
+          <img src={heart} alt="heart" />
+        </div>
+        <img src={product.img} alt={product.name} />
+        <h3>{product.name}</h3>
+        <p>
+          <del>200</del>$<span>{product.price}</span>$
+        </p>
+      </Link>
     </StyledCard>
   );
 };
