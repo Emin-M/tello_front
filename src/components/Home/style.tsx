@@ -13,6 +13,15 @@ export const HomeSlider = styled.div`
   > div {
     width: 100%;
     height: 90%;
+    padding-top: 50px;
+    padding-right: 50px;
+  }
+
+  @media (max-width: 650px) {
+    > div {
+      padding-top: 0;
+      padding-right: 0;
+    }
   }
 `;
 

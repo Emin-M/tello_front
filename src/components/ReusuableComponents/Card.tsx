@@ -15,8 +15,6 @@ interface Props {
 }
 
 const Card = ({ product }: Props) => {
-  console.log(product);
-
   return (
     <StyledCard>
       <Link to={`products/${product.id}`}>

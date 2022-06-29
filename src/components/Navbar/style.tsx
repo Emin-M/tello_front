@@ -84,10 +84,10 @@ export const NavbarInput = styled.div`
       display: block;
       opacity: 1;
     }
-  }
 
-  @media (max-width: 650px) {
-    /* padding: 0 12px; */
+    &::placeholder {
+      font-size: 15px;
+    }
   }
 `;
 
@@ -116,13 +116,13 @@ export const NavbarInputSearch = styled.div`
 
     h2 {
       font-weight: 500;
-      font-size: 16px;
+      font-size: 18px;
       line-height: 24px;
       color: #4f4f4f;
     }
 
     p {
-      font-size: 12px;
+      font-size: 16px;
       line-height: 16px;
       color: #828282;
       cursor: pointer;
@@ -135,10 +135,10 @@ export const NavbarInputSearch = styled.div`
     flex-wrap: wrap;
 
     a {
-      font-size: 14px;
+      font-size: 16px;
       line-height: 20px;
       color: #4f4f4f;
-      padding: 2px 6px;
+      padding: 3px 9px;
       background: #edf1f7;
       border-radius: 4px;
     }
@@ -178,13 +178,18 @@ export const NavbarRight = styled.div`
 export const NavbarBottom = styled.ul`
   display: flex;
   gap: 50px;
+  background: #ffffff;
+
+  > div {
+    display: none;
+  }
 
   > li {
     > a {
-      font-size: 14px;
+      font-size: 18px;
       line-height: 20px;
       color: #4f4f4f;
-      height: 45px;
+      height: 40px;
       display: inline-block;
 
       &:hover {
@@ -199,16 +204,45 @@ export const NavbarBottom = styled.ul`
     }
   }
 
+  @media (max-width: 1000px) {
+    gap: 20px;
+  }
+
   @media (max-width: 650px) {
-    display: none;
+    position: absolute;
+    top: 128px;
+    left: -100%;
     width: 100%;
-    height: 100%;
+    gap: 21px;
+    height: calc(100vh - 128px);
+    padding: 16px 16px 0 16px;
     flex-direction: column;
-    gap: 10px;
+    transition: all 0.3s;
+
+    > div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 0 16px;
+      width: 100%;
+      background: #faf9f9;
+      height: 80px;
+    }
 
     > li {
       > a {
-        height: auto;
+        font-size: 18px;
+        line-height: 20px;
+        height: 0;
+        margin-bottom: 5px;
+
+        &:hover {
+          color: #4f4f4f;
+          border: none;
+        }
       }
     }
   }
@@ -216,17 +250,15 @@ export const NavbarBottom = styled.ul`
 
 export const BottomDropdown = styled.div`
   background: #ffffff;
-  z-index: 1;
   position: absolute;
   top: 100%;
   left: 0;
-  width: 100%;
-  height: 350px;
   display: none;
-  padding-top: 40px;
-  background: #fff;
-  margin-top: 1px;
   opacity: 0;
+  padding: 20px 0;
+  width: 100%;
+  margin-top: 1px;
+  border-bottom: 1px solid #f5f5f5;
   transition: all 0.3s;
 
   &:hover {
@@ -234,41 +266,23 @@ export const BottomDropdown = styled.div`
     opacity: 1;
   }
 
-  > div {
+  ul {
     display: flex;
-    justify-content: space-between;
-  }
-
-  h2 {
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    color: #4f4f4f;
-    margin-bottom: 16px;
-
-    &:hover {
-      color: #2dd06e;
-      cursor: pointer;
-    }
+    width: 100%;
   }
 
   li {
-    margin-bottom: 12px;
+    margin-right: 80px;
   }
 
   a {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 20px;
     color: #4f4f4f;
-    height: auto;
+    transition: all 0.3s;
 
     &:hover {
       color: #2dd06e;
     }
-  }
-
-  img {
-    width: 488px;
-    height: 228px;
   }
 `;

@@ -13,7 +13,7 @@ export const StyledCard = styled.div`
   cursor: pointer;
   position: relative;
 
-  > div {
+  div {
     display: flex;
     justify-content: center;
     align-items: center;

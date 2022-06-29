@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import Button from "../ReusuableComponents/Button";
 
 /* Styles */
 import "./style";
@@ -21,15 +23,29 @@ import search from "../../assets/images/icons/search.png";
 import person from "../../assets/images/icons/person.png";
 import heart from "../../assets/images/icons/heart.png";
 import basket from "../../assets/images/icons/basket.png";
-import dImg from "../../assets/images/dropdownImg.png";
 import resBtn from "../../assets/svg/responsive-button.svg";
+import closeBtn from "../../assets/svg/close.svg";
 
 const Navbar = () => {
+  const [showSidebar, setShowSidebar] = useState<boolean>(false);
+
   return (
     <NavbarContainer>
       <Container>
         <NavbarTop>
-          <img src={resBtn} alt="resButton" />
+          {showSidebar ? (
+            <img
+              src={closeBtn}
+              alt="closeBtn"
+              onClick={() => setShowSidebar(!showSidebar)}
+            />
+          ) : (
+            <img
+              src={resBtn}
+              alt="resButton"
+              onClick={() => setShowSidebar(!showSidebar)}
+            />
+          )}
           <NavbarLogo>
             <Link to="/">
               <img src={logo} alt="logo" />
@@ -61,63 +77,28 @@ const Navbar = () => {
             </div>
           </NavbarRight>
         </NavbarTop>
-        <NavbarBottom>
+        <NavbarBottom style={showSidebar ? { left: "0" } : { left: "-100%" }}>
           <li>
             <Link to="/">Yeni</Link>
             <BottomDropdown>
               <Container>
-                <div>
-                  <h2>Yeni</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h2>Yeni</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h2>Yeni</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <img src={dImg} alt="dImg" />
+                <ul>
+                  <li>
+                    <Link to="/">Alt Başlıq</Link>
+                  </li>
+                  <li>
+                    <Link to="/">Alt Başlıq</Link>
+                  </li>
+                  <li>
+                    <Link to="/">Alt Başlıq</Link>
+                  </li>
+                  <li>
+                    <Link to="/">Alt Başlıq</Link>
+                  </li>
+                  <li>
+                    <Link to="/">Alt Başlıq</Link>
+                  </li>
+                </ul>
               </Container>
             </BottomDropdown>
           </li>
@@ -125,415 +106,52 @@ const Navbar = () => {
             <Link to="/">Apple</Link>
             <BottomDropdown>
               <Container>
-                <div>
-                  <h2>Apple</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h2>Apple</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h2>Apple</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <img src={dImg} alt="dImg" />
+                <ul>
+                  <li>
+                    <Link to="/">Alt Başlıq</Link>
+                  </li>
+                  <li>
+                    <Link to="/">Alt Başlıq</Link>
+                  </li>
+                  <li>
+                    <Link to="/">Alt Başlıq</Link>
+                  </li>
+                  <li>
+                    <Link to="/">Alt Başlıq</Link>
+                  </li>
+                  <li>
+                    <Link to="/">Alt Başlıq</Link>
+                  </li>
+                </ul>
               </Container>
             </BottomDropdown>
           </li>
           <li>
             <Link to="/">Samsung</Link>
-            <BottomDropdown>
-              <Container>
-                <div>
-                  <h2>Samsung</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h2>Samsung</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h2>Samsung</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <img src={dImg} alt="dImg" />
-              </Container>
-            </BottomDropdown>
           </li>
           <li>
             <Link to="/">Xiaomi</Link>
-            <BottomDropdown>
-              <Container>
-                <div>
-                  <h2>Başlıq</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h2>Başlıq</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h2>Başlıq</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <img src={dImg} alt="dImg" />
-              </Container>
-            </BottomDropdown>
           </li>
           <li>
             <Link to="/">Redmi</Link>
-            <BottomDropdown>
-              <Container>
-                <div>
-                  <h2>Başlıq</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h2>Başlıq</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h2>Başlıq</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <img src={dImg} alt="dImg" />
-              </Container>
-            </BottomDropdown>
           </li>
           <li>
             <Link to="/">Bütün Brendlər</Link>
-            <BottomDropdown>
-              <Container>
-                <div>
-                  <h2>Başlıq</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h2>Başlıq</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h2>Başlıq</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <img src={dImg} alt="dImg" />
-              </Container>
-            </BottomDropdown>
           </li>
           <li>
             <Link to="/">Aksessuarlar</Link>
-            <BottomDropdown>
-              <Container>
-                <div>
-                  <h2>Başlıq</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h2>Başlıq</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h2>Başlıq</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <img src={dImg} alt="dImg" />
-              </Container>
-            </BottomDropdown>
           </li>
           <li>
             <Link to="/">Endirimlər</Link>
-            <BottomDropdown>
-              <Container>
-                <div>
-                  <h2>Başlıq</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h2>Başlıq</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h2>Başlıq</h2>
-                  <ul>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Alt Başlıq</Link>
-                    </li>
-                  </ul>
-                </div>
-                <img src={dImg} alt="dImg" />
-              </Container>
-            </BottomDropdown>
           </li>
+          <div>
+            <Link to="/login" onClick={() => setShowSidebar(!showSidebar)}>
+              <Button title="Daxil ol" bg="#ffffff" color="#2dd06e" />
+            </Link>
+            <Link to="/signup" onClick={() => setShowSidebar(!showSidebar)}>
+              <Button title="Qeydiyyat" bg="#2dd06e" color="#ffffff" />
+            </Link>
+          </div>
         </NavbarBottom>
       </Container>
     </NavbarContainer>

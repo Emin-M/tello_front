@@ -10,22 +10,9 @@ export const AdvertisementContainer = styled.div`
   }
 
   img {
-    width: 554px;
-    height: 280px;
+    width: 50%;
+    height: 50%;
     cursor: pointer;
-  }
-
-  @media (max-width: 1200px) {
-    img {
-      width: 467px;
-    }
-  }
-
-  @media (max-width: 960px) {
-    img {
-      width: 344px;
-      height: 200px;
-    }
   }
 
   @media (max-width: 650px) {
