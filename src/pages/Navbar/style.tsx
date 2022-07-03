@@ -189,18 +189,22 @@ export const NavbarBottom = styled.ul`
       font-size: 18px;
       line-height: 20px;
       color: #4f4f4f;
-      height: 40px;
+      height: 41px;
       display: inline-block;
 
       &:hover {
-        color: #2dd06e;
-        border-bottom: 2px solid #2dd06e;
+        color: #2dd06e !important;
+        border-bottom: 2px solid #2dd06e !important;
       }
 
       &:hover ~ div {
         opacity: 1;
         display: block;
       }
+    }
+
+    img {
+      display: none;
     }
   }
 
@@ -233,16 +237,25 @@ export const NavbarBottom = styled.ul`
     }
 
     > li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      /* margin-bottom: 11px; */
+
       > a {
         font-size: 18px;
         line-height: 20px;
-        height: 0;
-        margin-bottom: 5px;
+        height: 100%;
+        /* margin-bottom: 5px; */
 
         &:hover {
           color: #4f4f4f;
           border: none;
         }
+      }
+
+      img {
+        display: block;
       }
     }
   }

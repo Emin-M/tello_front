@@ -6,4 +6,8 @@ export const StyledButton = styled.button`
   border-radius: 8px;
   width: 156px;
   height: 48px;
+
+  @media (max-width: 350px) {
+    width: 106px;
+  }
 `;

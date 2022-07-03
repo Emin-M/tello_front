@@ -1,6 +1,9 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { MouseEvent, useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Button from "../ReusuableComponents/Button";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import { ICategory } from "../../modules/types/products";
 
 /* Styles */
 import "./style";
@@ -15,7 +18,7 @@ import {
   NavbarBottom,
   BottomDropdown,
 } from "./style";
-import { Container } from "../styles/Container.styled";
+import { Container } from "../ReusuableComponents/styles/Container.styled";
 
 /* Images */
 import logo from "../../assets/svg/logo.svg";
@@ -25,9 +28,42 @@ import heart from "../../assets/images/icons/heart.png";
 import basket from "../../assets/images/icons/basket.png";
 import resBtn from "../../assets/svg/responsive-button.svg";
 import closeBtn from "../../assets/svg/close.svg";
+import arrowRight from "../../assets/images/icons/arrowRight.png";
 
 const Navbar = () => {
+  const { categories } = useSelector((state: RootState) => state.products);
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
+  const [showSub, setShowSub] = useState<boolean>(false);
+  const location = useLocation();
+  // console.log(categories?.[0]?.children);
+
+  useEffect(() => {
+    setShowSidebar(false);
+  }, [location]);
+
+  const boxMouseOverHandler = (event: MouseEvent<HTMLLIElement>) => {
+    const box: HTMLLIElement = event.currentTarget;
+    box.style.color = "#2dd06e";
+  };
+
+  const boxMouseOutHandler = (event: React.MouseEvent<HTMLLIElement>) => {
+    const box: HTMLLIElement = event.currentTarget;
+    box.style.color = "#4f4f4f";
+  };
+
+  const boxMouseOverHandlerDiv = (event: MouseEvent<HTMLDivElement>) => {
+    const element = event.currentTarget.parentElement as HTMLLIElement;
+    const child = element.firstChild as HTMLElement;
+    child.style.color = "#2dd06e";
+    child.style.borderBottom = "2px solid #2dd06e";
+  };
+
+  const boxMouseOutHandlerDiv = (event: MouseEvent<HTMLDivElement>) => {
+    const element = event.currentTarget.parentElement as HTMLLIElement;
+    const child = element.firstChild as HTMLElement;
+    child.style.color = "#4f4f4f";
+    child.style.borderBottom = "none";
+  };
 
   return (
     <NavbarContainer>
@@ -78,77 +114,36 @@ const Navbar = () => {
           </NavbarRight>
         </NavbarTop>
         <NavbarBottom style={showSidebar ? { left: "0" } : { left: "-100%" }}>
-          <li>
+          <li onMouseOver={boxMouseOverHandler} onMouseOut={boxMouseOutHandler}>
             <Link to="/">Yeni</Link>
-            <BottomDropdown>
-              <Container>
-                <ul>
-                  <li>
-                    <Link to="/">Alt Başlıq</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Alt Başlıq</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Alt Başlıq</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Alt Başlıq</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Alt Başlıq</Link>
-                  </li>
-                </ul>
-              </Container>
-            </BottomDropdown>
           </li>
-          <li>
-            <Link to="/">Apple</Link>
-            <BottomDropdown>
-              <Container>
-                <ul>
-                  <li>
-                    <Link to="/">Alt Başlıq</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Alt Başlıq</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Alt Başlıq</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Alt Başlıq</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Alt Başlıq</Link>
-                  </li>
-                </ul>
-              </Container>
-            </BottomDropdown>
-          </li>
-          <li>
-            <Link to="/">Samsung</Link>
-          </li>
-          <li>
-            <Link to="/">Xiaomi</Link>
-          </li>
-          <li>
-            <Link to="/">Redmi</Link>
-          </li>
-          <li>
-            <Link to="/">Bütün Brendlər</Link>
-          </li>
-          <li>
-            <Link to="/">Aksessuarlar</Link>
-          </li>
-          <li>
-            <Link to="/">Endirimlər</Link>
-          </li>
+          {categories?.[0]?.children.map((category: ICategory) => (
+            <li key={category.id}>
+              <Link to="/">{category.name}</Link>
+              {category.children[0] && (
+                <img src={arrowRight} alt="arrowRight" />
+              )}
+              <BottomDropdown
+                onMouseOver={boxMouseOverHandlerDiv}
+                onMouseOut={boxMouseOutHandlerDiv}
+              >
+                <Container>
+                  <ul>
+                    {category.children.map((subcategory: ICategory) => (
+                      <li key={subcategory.id}>
+                        <Link to="/">{subcategory.name}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </Container>
+              </BottomDropdown>
+            </li>
+          ))}
           <div>
-            <Link to="/login" onClick={() => setShowSidebar(!showSidebar)}>
+            <Link to="/login">
               <Button title="Daxil ol" bg="#ffffff" color="#2dd06e" />
             </Link>
-            <Link to="/signup" onClick={() => setShowSidebar(!showSidebar)}>
+            <Link to="/signup">
               <Button title="Qeydiyyat" bg="#2dd06e" color="#ffffff" />
             </Link>
           </div>

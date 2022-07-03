@@ -1,21 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "./redux/store";
-import { addProduct } from "./redux/productsSlice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "./redux/store";
+import { fetchCategories, fetchProducts } from "./redux/productsSlice";
 
 /* Styles */
 import "./App.css";
-import GlobalStyles from "./components/styles/GlobalStyled";
+import GlobalStyles from "./pages/ReusuableComponents/styles/GlobalStyled";
 
 /* Pages */
-import Home from "./components/Home";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import Navbar from "./pages/Navbar";
+import Footer from "./pages/Footer";
 
 const App = () => {
-  const products = useSelector((state: RootState) => state.products.products);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+    dispatch(fetchCategories());
+  }, []);
 
   return (
     <div className="App">
@@ -23,6 +27,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="login" element={<div>Login</div>} />
       </Routes>
       <Footer />
     </div>

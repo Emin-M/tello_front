@@ -5,6 +5,7 @@ export const StyledCard = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 100%;
+  max-height: 380px;
   background: #ffffff;
   box-shadow: 0px 4px 8px rgba(164, 164, 164, 0.3);
   border-radius: 4px;
@@ -12,6 +13,26 @@ export const StyledCard = styled.div`
   padding-bottom: 15px;
   cursor: pointer;
   position: relative;
+
+  img {
+    transition: all 0.3s;
+  }
+
+  &:hover img {
+    transform: scale(1.1);
+  }
+
+  > a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    > img {
+      width: 183px;
+      height: 210px;
+    }
+  }
 
   div {
     display: flex;
@@ -27,6 +48,7 @@ export const StyledCard = styled.div`
   }
 
   h3 {
+    align-self: flex-start;
     margin-top: 24px;
     font-size: 16px;
     line-height: 24px;
@@ -34,6 +56,7 @@ export const StyledCard = styled.div`
   }
 
   p {
+    align-self: flex-start;
     margin-top: 16px;
     font-size: 16px;
     line-height: 24px;

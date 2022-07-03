@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import { Container } from "../styles/Container.styled";
-import { AdvertisementContainer } from "./Styles/Advertisement";
+import { Container } from "../../ReusuableComponents/styles/Container.styled";
+import { AdvertisementContainer } from "../styles/Advertisement";
 
-import ad1 from "../../assets/images/home/advertisement1.png";
-import ad2 from "../../assets/images/home/advertisement2.png";
+import ad1 from "../../../assets/images/home/advertisement1.png";
+import ad2 from "../../../assets/images/home/advertisement2.png";
 
 const Advertisement: FC = () => {
   return (

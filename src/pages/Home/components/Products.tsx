@@ -1,15 +1,15 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
-import { Container } from "../styles/Container.styled";
+import { Container } from "../../ReusuableComponents/styles/Container.styled";
 
 /* Images */
-import arrowRight from "../../assets/images/icons/arrowRight.png";
-import productPhone from "../../assets/images/home/product-phone.png";
-import productWatch from "../../assets/images/home/product-watch.png";
-import productAccessory from "../../assets/images/home/product-accessory.png";
+import arrowRight from "../../../assets/images/icons/arrowRight.png";
+import productPhone from "../../../assets/images/home/product-phone.png";
+import productWatch from "../../../assets/images/home/product-watch.png";
+import productAccessory from "../../../assets/images/home/product-accessory.png";
 
 /* Styles */
-import { Product, ProductContainer } from "./Styles/Products";
+import { Product, ProductContainer } from "../styles/Products";
 
 const Products: FC = () => {
   return (

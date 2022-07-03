@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
-import { Container } from "../styles/Container.styled";
+import { Container } from "../ReusuableComponents/styles/Container.styled";
 import {
   FooterBotttom,
   FooterContainer,
