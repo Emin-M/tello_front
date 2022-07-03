@@ -9,9 +9,12 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { FilterMobileTop, StyledFilters } from "./styles/Filters.styled";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
 
 /* Images */
 import close from "../../../assets/images/icons/close.png";
+import { useParams } from "react-router-dom";
 
 interface IProps {
   showFilter: boolean;
@@ -19,6 +22,17 @@ interface IProps {
 }
 
 const Filters = ({ showFilter, setShowFilter }: IProps) => {
+  const { categories } = useSelector((state: RootState) => state.categories);
+  const { id } = useParams();
+
+  categories?.[0]?.children.map((sub) => {
+    if (sub.name === id) {
+      sub.children.map((s: { name: any }) => {
+        console.log(s.name);
+      });
+    }
+  });
+
   return (
     <StyledFilters style={showFilter ? { left: "0" } : { left: "-100%" }}>
       <FilterMobileTop>
@@ -35,8 +49,15 @@ const Filters = ({ showFilter, setShowFilter }: IProps) => {
         </AccordionSummary>
         <AccordionDetails>
           <FormGroup>
-            <FormControlLabel control={<Checkbox />} label="Label" />
-            <FormControlLabel control={<Checkbox />} label="Disabled" />
+            {categories?.[0]?.children.map((subCategories) => {
+              if (subCategories.name === id) {
+                return subCategories.children.map((s: { name: string }) => {
+                  return (
+                    <FormControlLabel control={<Checkbox />} label={s.name} />
+                  );
+                });
+              }
+            })}
           </FormGroup>
         </AccordionDetails>
       </Accordion>

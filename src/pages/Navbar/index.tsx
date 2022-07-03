@@ -131,7 +131,11 @@ const Navbar = () => {
                   <ul>
                     {category.children.map((subcategory: ICategory) => (
                       <li key={subcategory.id}>
-                        <Link to="/">{subcategory.name}</Link>
+                        <Link
+                          to={`products/${category.name}/?brand=${subcategory.name}`}
+                        >
+                          {subcategory.name}
+                        </Link>
                       </li>
                     ))}
                   </ul>

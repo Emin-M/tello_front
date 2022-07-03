@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
 import { IProduct } from "../../../modules/types/products";
@@ -32,13 +32,21 @@ const ProductsContainer = ({ setShowFilter }: IProps) => {
   const { categoryProducts, allProducts, loading } = useSelector(
     (state: RootState) => state.products
   );
-  const dispatch = useDispatch<AppDispatch>();
 
+  const dispatch = useDispatch<AppDispatch>();
   const [selectValue, setSelectValue] = useState("new");
 
-  console.log(selectValue);
-
   const { id } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    // location.search("s");
+    setSearchParams("brand=apple,samsung");
+    // console.log(searchParams.getAll("brand"));
+    categoryProducts.map((categoryProduct) => {
+      // console.log(categoryProduct.variant_groups[0]);
+    });
+  }, []);
 
   useEffect(() => {
     if (id) {
@@ -63,7 +71,7 @@ const ProductsContainer = ({ setShowFilter }: IProps) => {
         </div>
       </StyledFilters>
       <div>
-        <p>287 məhsul tapıldı</p>
+        <p>{categoryProducts ? categoryProducts.length : 0} məhsul tapıldı</p>
         <FormControl>
           <Select
             id="demo-simple-select"
