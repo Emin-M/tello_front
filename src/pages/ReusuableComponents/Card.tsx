@@ -13,7 +13,7 @@ const Card = ({ product }: any) => {
         <img src={product?.image?.url} alt={product?.name} />
         <h3>{product?.name}</h3>
         <p>
-          <del>200</del>
+          {/* <del>200</del> */}
           <span>{product?.price?.formatted_with_code}</span>
         </p>
       </Link>

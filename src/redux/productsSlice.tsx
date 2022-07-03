@@ -4,7 +4,8 @@ import { IProducts } from "../modules/types/products";
 
 const initialState: IProducts = {
   loading: false,
-  products: [],
+  allProducts: [],
+  categoryProducts: [],
 };
 
 export const fetchProducts = createAsyncThunk(
@@ -12,6 +13,20 @@ export const fetchProducts = createAsyncThunk(
   async () => {
     try {
       const response = await api.get("/products");
+      return response.data;
+    } catch (error: any) {
+      return error.message;
+    }
+  }
+);
+
+export const fetchProductsByCategory = createAsyncThunk(
+  "products/fetchProductsByCategory",
+  async (category: string[]) => {
+    try {
+      const response = await api.get("/products", {
+        params: { category_slug: category },
+      });
       return response.data;
     } catch (error: any) {
       return error.message;
@@ -31,16 +46,19 @@ export const productsSlice = createSlice({
       return (state = {
         ...state,
         loading: false,
-        products: action.payload.data,
+        allProducts: action.payload.data,
       });
     });
-    // builder.addCase(fetchProducts.rejected, (state) => {
-    //   return (state = {
-    //     ...state,
-    //     loading: false,
-    //     error: "Error in Fetching products...",
-    //   });
-    // });
+    builder.addCase(fetchProductsByCategory.pending, (state) => {
+      return (state = { ...state, loading: true });
+    });
+    builder.addCase(fetchProductsByCategory.fulfilled, (state, action) => {
+      return (state = {
+        ...state,
+        loading: false,
+        categoryProducts: action.payload?.data,
+      });
+    });
   },
 });
 

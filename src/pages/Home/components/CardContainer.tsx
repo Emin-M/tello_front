@@ -18,10 +18,11 @@ interface Props {
 }
 
 const CardContainer = ({ title, link }: Props) => {
-  const { products, loading } = useSelector(
+  const { allProducts, loading } = useSelector(
     (state: RootState) => state.products
   );
-  console.log(products);
+
+  console.log(allProducts);
 
   return (
     <Container>
@@ -67,7 +68,7 @@ const CardContainer = ({ title, link }: Props) => {
               />
             </div>
           ) : (
-            products
+            allProducts
               ?.slice(0, 4)
               .map((product: IProduct) => (
                 <Card key={product.id} product={product} />

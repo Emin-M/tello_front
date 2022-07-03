@@ -115,11 +115,11 @@ const Navbar = () => {
         </NavbarTop>
         <NavbarBottom style={showSidebar ? { left: "0" } : { left: "-100%" }}>
           <li onMouseOver={boxMouseOverHandler} onMouseOut={boxMouseOutHandler}>
-            <Link to="/">Yeni</Link>
+            <Link to="/products/new">Yeni</Link>
           </li>
           {categories?.[0]?.children.map((category: ICategory) => (
             <li key={category.id}>
-              <Link to="/">{category.name}</Link>
+              <Link to={`products/${category.name}`}>{category.name}</Link>
               {category.children[0] && (
                 <img src={arrowRight} alt="arrowRight" />
               )}

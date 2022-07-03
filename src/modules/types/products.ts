@@ -99,5 +99,6 @@ export interface IProduct {
 export interface IProducts {
   loading: boolean;
   // error: string;
-  products: IProduct[];
+  allProducts: IProduct[];
+  categoryProducts: IProduct[];
 }

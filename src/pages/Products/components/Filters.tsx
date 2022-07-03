@@ -1,3 +1,4 @@
+import { FC, useState } from "react";
 import {
   Accordion,
   AccordionDetails,
@@ -7,11 +8,23 @@ import {
   FormGroup,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { StyledFilters } from "./styles/Filters.styled";
+import { FilterMobileTop, StyledFilters } from "./styles/Filters.styled";
 
-const Filters = () => {
+/* Images */
+import close from "../../../assets/images/icons/close.png";
+
+interface IProps {
+  showFilter: boolean;
+  setShowFilter: (value: boolean | ((prevVar: boolean) => boolean)) => void;
+}
+
+const Filters = ({ showFilter, setShowFilter }: IProps) => {
   return (
-    <StyledFilters>
+    <StyledFilters style={showFilter ? { left: "0" } : { left: "-100%" }}>
+      <FilterMobileTop>
+        <img src={close} alt="close" onClick={() => setShowFilter(false)} />
+        <p>Filterləmələr</p>
+      </FilterMobileTop>
       <Accordion expanded>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
