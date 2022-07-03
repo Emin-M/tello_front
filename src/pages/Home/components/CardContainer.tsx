@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Card from "../../ReusuableComponents/Card";
 import { Container } from "../../ReusuableComponents/styles/Container.styled";
-import { CardBottom, Cards, CardTop } from "../styles/CardContainer";
+import { CardBottom, Cards, CardTop } from "./styles/CardContainer.styled";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { IProduct } from "../../../modules/types/products";
@@ -10,6 +10,7 @@ import Loading from "../../ReusuableComponents/Loading";
 
 /* Images */
 import arrowRight from "../../../assets/images/icons/arrowRight.png";
+import { Skeleton } from "@mui/material";
 
 interface Props {
   title: string;
@@ -33,7 +34,38 @@ const CardContainer = ({ title, link }: Props) => {
         </CardTop>
         <CardBottom>
           {loading ? (
-            <Loading />
+            <div
+              style={{
+                display: "flex",
+                gap: "22px",
+                width: "100%",
+              }}
+            >
+              <Skeleton
+                variant="rectangular"
+                animation="wave"
+                width={350}
+                height={305}
+              />
+              <Skeleton
+                variant="rectangular"
+                animation="wave"
+                width={350}
+                height={305}
+              />
+              <Skeleton
+                variant="rectangular"
+                animation="wave"
+                width={350}
+                height={305}
+              />
+              <Skeleton
+                variant="rectangular"
+                animation="wave"
+                width={350}
+                height={305}
+              />
+            </div>
           ) : (
             products
               ?.slice(0, 4)

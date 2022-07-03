@@ -1,1 +1,14 @@
 @import url("//db.onlinewebfonts.com/c/a575313c6dc4fd00c1a9506e1c3ea4fc?family=Euclid+Circular+A");
+
+.MuiAccordion-gutters {
+    box-shadow: none !important;
+    border-radius: none !important;
+}
+
+.MuiAccordionSummary-root {
+    border-bottom: 1px solid #bdbdbd !important;
+}
+
+.MuiPaper-root::before {
+    display: none !important;
+}

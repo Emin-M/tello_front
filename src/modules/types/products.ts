@@ -1,21 +1,3 @@
-/* Categories */
-export interface Meta {
-  season: string;
-}
-
-export interface ICategory {
-  id: string;
-  slug: string;
-  name: string;
-  description: string;
-  created: number;
-  updated: number;
-  meta: Meta;
-  assets: any[];
-  children: any[];
-}
-
-/* Products */
 export interface Price {
   raw: number;
   formatted: string;
@@ -114,11 +96,8 @@ export interface IProduct {
   attributes: any[];
 }
 
-/* Error */
-
 export interface IProducts {
   loading: boolean;
   // error: string;
   products: IProduct[];
-  categories: ICategory[];
 }

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Container } from "../../ReusuableComponents/styles/Container.styled";
-import { Service, ServicesContainer } from "../styles/Service";
+import { Service, ServicesContainer } from "./styles/Service.styled";
 
 /* Images */
 import service1 from "../../../assets/images/home/box.png";

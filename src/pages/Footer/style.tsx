@@ -30,7 +30,7 @@ export const FooterTop = styled.div`
 export const FooterSocial = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 
   > div {

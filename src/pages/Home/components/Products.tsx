@@ -9,7 +9,7 @@ import productWatch from "../../../assets/images/home/product-watch.png";
 import productAccessory from "../../../assets/images/home/product-accessory.png";
 
 /* Styles */
-import { Product, ProductContainer } from "../styles/Products";
+import { Product, ProductContainer } from "./styles/Products.styled";
 
 const Products: FC = () => {
   return (

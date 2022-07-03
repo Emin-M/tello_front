@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import Button from "../ReusuableComponents/Button";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import { ICategory } from "../../modules/types/products";
+import { ICategory } from "../../modules/types/categories";
 
 /* Styles */
 import "./style";
@@ -31,7 +31,7 @@ import closeBtn from "../../assets/svg/close.svg";
 import arrowRight from "../../assets/images/icons/arrowRight.png";
 
 const Navbar = () => {
-  const { categories } = useSelector((state: RootState) => state.products);
+  const { categories } = useSelector((state: RootState) => state.categories);
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
   const [showSub, setShowSub] = useState<boolean>(false);
   const location = useLocation();

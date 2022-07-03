@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "./redux/store";
-import { fetchCategories, fetchProducts } from "./redux/productsSlice";
+import { fetchProducts } from "./redux/productsSlice";
+import { fetchCategories } from "./redux/categoriesSlice";
 
 /* Styles */
 import "./App.css";
@@ -12,6 +13,7 @@ import GlobalStyles from "./pages/ReusuableComponents/styles/GlobalStyled";
 import Home from "./pages/Home";
 import Navbar from "./pages/Navbar";
 import Footer from "./pages/Footer";
+import Products from "./pages/Products";
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -27,6 +29,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="products" element={<Products />} />
         <Route path="login" element={<div>Login</div>} />
       </Routes>
       <Footer />
