@@ -1,20 +1,26 @@
+import { FC } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
 import { StyledLinks } from "./styles/Links.styled";
 
 /* Images */
 import arrowRight from "../../../assets/images/icons/arrowRight.png";
 
-const Links = () => {
+const Links: FC = () => {
+  /* Url */
+  const { id } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const params = searchParams.getAll("brand");
+
   return (
     <StyledLinks>
       <li>
         Ana səhifə <img src={arrowRight} alt="arrowRight" />
       </li>
       <li>
-        Telefonlar <img src={arrowRight} alt="arrowRight" />
+        {id} <img src={arrowRight} alt="arrowRight" />
       </li>
       <li>
-        <p>Apple, </p>
-        <p> Samsung</p>
+        <p>{params}</p>
       </li>
     </StyledLinks>
   );

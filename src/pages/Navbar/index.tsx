@@ -4,6 +4,7 @@ import Button from "../ReusuableComponents/Button";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { ICategory } from "../../modules/types/categories";
+import { Skeleton } from "@mui/material";
 
 /* Styles */
 import "./style";
@@ -31,11 +32,12 @@ import closeBtn from "../../assets/svg/close.svg";
 import arrowRight from "../../assets/images/icons/arrowRight.png";
 
 const Navbar = () => {
-  const { categories } = useSelector((state: RootState) => state.categories);
+  const { categories, loading } = useSelector(
+    (state: RootState) => state.categories
+  );
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
   const [showSub, setShowSub] = useState<boolean>(false);
   const location = useLocation();
-  // console.log(categories?.[0]?.children);
 
   useEffect(() => {
     setShowSidebar(false);
@@ -113,45 +115,52 @@ const Navbar = () => {
             </div>
           </NavbarRight>
         </NavbarTop>
-        <NavbarBottom style={showSidebar ? { left: "0" } : { left: "-100%" }}>
-          <li onMouseOver={boxMouseOverHandler} onMouseOut={boxMouseOutHandler}>
-            <Link to="/products/new">Yeni</Link>
-          </li>
-          {categories?.[0]?.children.map((category: ICategory) => (
-            <li key={category.id}>
-              <Link to={`products/${category.name}`}>{category.name}</Link>
-              {category.children[0] && (
-                <img src={arrowRight} alt="arrowRight" />
-              )}
-              <BottomDropdown
-                onMouseOver={boxMouseOverHandlerDiv}
-                onMouseOut={boxMouseOutHandlerDiv}
-              >
-                <Container>
-                  <ul>
-                    {category.children.map((subcategory: ICategory) => (
-                      <li key={subcategory.id}>
-                        <Link
-                          to={`products/${category.name}/?brand=${subcategory.name}`}
-                        >
-                          {subcategory.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </Container>
-              </BottomDropdown>
-            </li>
-          ))}
-          <div>
-            <Link to="/login">
-              <Button title="Daxil ol" bg="#ffffff" color="#2dd06e" />
-            </Link>
-            <Link to="/signup">
-              <Button title="Qeydiyyat" bg="#2dd06e" color="#ffffff" />
-            </Link>
-          </div>
-        </NavbarBottom>
+        {loading ? (
+          <NavbarBottom>
+            <Skeleton animation="wave" width={100} height={30} variant="text" />
+            <Skeleton animation="wave" width={100} height={30} variant="text" />
+            <Skeleton animation="wave" width={100} height={30} variant="text" />
+            <Skeleton animation="wave" width={100} height={30} variant="text" />
+            <Skeleton animation="wave" width={100} height={30} variant="text" />
+          </NavbarBottom>
+        ) : (
+          <NavbarBottom style={showSidebar ? { left: "0" } : { left: "-100%" }}>
+            {categories?.[0]?.children.map((category: ICategory) => (
+              <li key={category.id}>
+                <Link to={`products/${category.name}`}>{category.name}</Link>
+                {category.children[0] && (
+                  <img src={arrowRight} alt="arrowRight" />
+                )}
+                <BottomDropdown
+                  onMouseOver={boxMouseOverHandlerDiv}
+                  onMouseOut={boxMouseOutHandlerDiv}
+                >
+                  <Container>
+                    <ul>
+                      {category.children.map((subcategory: ICategory) => (
+                        <li key={subcategory.id}>
+                          <Link
+                            to={`products/${category.name}?brand=${subcategory.name}`}
+                          >
+                            {subcategory.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </Container>
+                </BottomDropdown>
+              </li>
+            ))}
+            <div>
+              <Link to="/login">
+                <Button title="Daxil ol" bg="#ffffff" color="#2dd06e" />
+              </Link>
+              <Link to="/signup">
+                <Button title="Qeydiyyat" bg="#2dd06e" color="#ffffff" />
+              </Link>
+            </div>
+          </NavbarBottom>
+        )}
       </Container>
     </NavbarContainer>
   );

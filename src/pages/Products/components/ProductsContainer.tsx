@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../redux/store";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
 import { IProduct } from "../../../modules/types/products";
 import Card from "../../ReusuableComponents/Card";
 
@@ -24,9 +24,10 @@ import filter from "../../../assets/svg/filter.svg";
 
 interface IProps {
   setShowFilter: (value: boolean | ((prevVar: boolean) => boolean)) => void;
+  filteredProducts: IProduct[];
 }
 
-const ProductsContainer = ({ setShowFilter }: IProps) => {
+const ProductsContainer = ({ setShowFilter, filteredProducts }: IProps) => {
   const { categoryProducts, loading } = useSelector(
     (state: RootState) => state.products
   );
@@ -49,7 +50,15 @@ const ProductsContainer = ({ setShowFilter }: IProps) => {
         </div>
       </StyledFilters>
       <div>
-        <p>{categoryProducts ? categoryProducts.length : 0} məhsul tapıldı</p>
+        <p>
+          {loading ? (
+            <Skeleton animation="wave" width={200} height={40} variant="text" />
+          ) : filteredProducts.length > 0 ? (
+            filteredProducts.length + " mehsul tapildi"
+          ) : (
+            "0 mehsul tapildi"
+          )}
+        </p>
         <FormControl>
           <Select
             id="demo-simple-select"
@@ -112,7 +121,7 @@ const ProductsContainer = ({ setShowFilter }: IProps) => {
             />
           </div>
         ) : (
-          categoryProducts?.map((product: IProduct) => (
+          filteredProducts?.map((product: IProduct) => (
             <Card key={product?.id} product={product} />
           ))
         )}

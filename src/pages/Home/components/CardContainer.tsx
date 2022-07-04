@@ -22,8 +22,6 @@ const CardContainer = ({ title, link }: Props) => {
     (state: RootState) => state.products
   );
 
-  console.log(allProducts);
-
   return (
     <Container>
       <Cards>

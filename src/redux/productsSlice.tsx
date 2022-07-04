@@ -37,24 +37,7 @@ export const fetchProductsByCategory = createAsyncThunk(
 export const productsSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {
-    filterProductsByCategory: (state, action: PayloadAction<string>) => {
-      let filteredData: IProduct[] = [];
-
-      // state.categoryProducts.map((categoryProduct) => {
-      //   // console.log(categoryProduct);
-
-      //   return categoryProduct.categories.map((subCategory) => {
-      //     // console.log(subCategory);
-
-      //     if (subCategory.name === action.payload) {
-      //       return (filteredData = [...filteredData, categoryProduct]);
-      //     }
-      //   });
-      // });
-      // return (state = { ...state, categoryProducts: filteredData });
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state) => {
       return (state = { ...state, loading: true });
@@ -78,7 +61,5 @@ export const productsSlice = createSlice({
     });
   },
 });
-
-export const { filterProductsByCategory } = productsSlice.actions;
 
 export default productsSlice.reducer;
