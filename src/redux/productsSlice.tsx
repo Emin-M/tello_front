@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import api from "../api/api";
-import { IProducts } from "../modules/types/products";
+import { IProduct, IProducts } from "../modules/types/products";
 
 const initialState: IProducts = {
   loading: false,
@@ -37,7 +37,24 @@ export const fetchProductsByCategory = createAsyncThunk(
 export const productsSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {},
+  reducers: {
+    filterProductsByCategory: (state, action: PayloadAction<string>) => {
+      let filteredData: IProduct[] = [];
+
+      // state.categoryProducts.map((categoryProduct) => {
+      //   // console.log(categoryProduct);
+
+      //   return categoryProduct.categories.map((subCategory) => {
+      //     // console.log(subCategory);
+
+      //     if (subCategory.name === action.payload) {
+      //       return (filteredData = [...filteredData, categoryProduct]);
+      //     }
+      //   });
+      // });
+      // return (state = { ...state, categoryProducts: filteredData });
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state) => {
       return (state = { ...state, loading: true });
@@ -61,5 +78,7 @@ export const productsSlice = createSlice({
     });
   },
 });
+
+export const { filterProductsByCategory } = productsSlice.actions;
 
 export default productsSlice.reducer;

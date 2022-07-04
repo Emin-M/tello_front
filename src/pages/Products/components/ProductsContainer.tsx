@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
 import { IProduct } from "../../../modules/types/products";
 import Card from "../../ReusuableComponents/Card";
-import { fetchProductsByCategory } from "../../../redux/productsSlice";
 
 /* Styles */
 import {
@@ -29,30 +27,10 @@ interface IProps {
 }
 
 const ProductsContainer = ({ setShowFilter }: IProps) => {
-  const { categoryProducts, allProducts, loading } = useSelector(
+  const { categoryProducts, loading } = useSelector(
     (state: RootState) => state.products
   );
-
-  const dispatch = useDispatch<AppDispatch>();
   const [selectValue, setSelectValue] = useState("new");
-
-  const { id } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  useEffect(() => {
-    // location.search("s");
-    setSearchParams("brand=apple,samsung");
-    // console.log(searchParams.getAll("brand"));
-    categoryProducts.map((categoryProduct) => {
-      // console.log(categoryProduct.variant_groups[0]);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (id) {
-      dispatch(fetchProductsByCategory([id]));
-    }
-  }, [id]);
 
   const onChange = (event: SelectChangeEvent) => {
     setSelectValue(event.target.value);
@@ -135,7 +113,7 @@ const ProductsContainer = ({ setShowFilter }: IProps) => {
           </div>
         ) : (
           categoryProducts?.map((product: IProduct) => (
-            <Card key={product.id} product={product} />
+            <Card key={product?.id} product={product} />
           ))
         )}
       </Cards>

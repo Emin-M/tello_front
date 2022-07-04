@@ -1,4 +1,14 @@
-import { FC, useState } from "react";
+import { useEffect, useState } from "react";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../redux/store";
+import { useParams, useSearchParams } from "react-router-dom";
+import {
+  fetchProductsByCategory,
+  filterProductsByCategory,
+} from "../../../redux/productsSlice";
+
+/* Styles */
 import {
   Accordion,
   AccordionDetails,
@@ -7,14 +17,10 @@ import {
   FormControlLabel,
   FormGroup,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { FilterMobileTop, StyledFilters } from "./styles/Filters.styled";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
 
 /* Images */
 import close from "../../../assets/images/icons/close.png";
-import { useParams } from "react-router-dom";
 
 interface IProps {
   showFilter: boolean;
@@ -23,15 +29,38 @@ interface IProps {
 
 const Filters = ({ showFilter, setShowFilter }: IProps) => {
   const { categories } = useSelector((state: RootState) => state.categories);
+  const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const params = searchParams.getAll("brand");
+  const paramsArray = params?.[0]?.split(",");
 
-  categories?.[0]?.children.map((sub) => {
-    if (sub.name === id) {
-      sub.children.map((s: { name: any }) => {
-        console.log(s.name);
-      });
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchProductsByCategory([id]));
     }
-  });
+  }, [id]);
+
+  /* Handle when checking checkbox */
+  const handleChange = (event: any): void => {
+    const newParam = event?.target?.value;
+    const par: string[] = [];
+
+    if (paramsArray?.includes(newParam)) {
+      const index = paramsArray.indexOf(newParam);
+      paramsArray.splice(index, 1);
+      setSearchParams(`brand=${paramsArray}`);
+    } else {
+      par.push(...params, newParam);
+      setSearchParams(`brand=${par}`);
+    }
+
+    if (paramsArray?.length === 0) {
+      setSearchParams("");
+    }
+
+    dispatch(filterProductsByCategory("apple"));
+  };
 
   return (
     <StyledFilters style={showFilter ? { left: "0" } : { left: "-100%" }}>
@@ -53,7 +82,19 @@ const Filters = ({ showFilter, setShowFilter }: IProps) => {
               if (subCategories.name === id) {
                 return subCategories.children.map((s: { name: string }) => {
                   return (
-                    <FormControlLabel control={<Checkbox />} label={s.name} />
+                    <FormControlLabel
+                      key={s.name}
+                      control={
+                        paramsArray?.includes(s.name) ? (
+                          <Checkbox checked />
+                        ) : (
+                          <Checkbox />
+                        )
+                      }
+                      label={s.name}
+                      value={s.name}
+                      onChange={handleChange}
+                    />
                   );
                 });
               }
