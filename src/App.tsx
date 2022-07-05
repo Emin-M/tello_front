@@ -14,6 +14,7 @@ import Home from "./pages/Home";
 import Navbar from "./pages/Navbar";
 import Footer from "./pages/Footer";
 import Products from "./pages/Products";
+import Product from "./pages/Product";
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -31,6 +32,9 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />}>
           <Route path=":id" element={<Products />} />
+        </Route>
+        <Route path="/product" element={<Product />}>
+          <Route path=":id" element={<Product />} />
         </Route>
         <Route path="login" element={<div>Login</div>} />
       </Routes>

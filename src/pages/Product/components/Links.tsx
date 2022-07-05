@@ -1,15 +1,13 @@
 import { FC } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
 import { StyledLinks } from "./styles/Links.styled";
 
 /* Images */
 import arrowRight from "../../../assets/images/icons/arrowRight.png";
 
 const Links: FC = () => {
-  /* Url */
-  const { id } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const params = searchParams.getAll("brand");
+  const { singleProduct } = useSelector((state: RootState) => state.products);
 
   return (
     <StyledLinks>
@@ -17,10 +15,10 @@ const Links: FC = () => {
         Ana səhifə <img src={arrowRight} alt="arrowRight" />
       </li>
       <li>
-        {id} <img src={arrowRight} alt="arrowRight" />
+        Product <img src={arrowRight} alt="arrowRight" />
       </li>
       <li>
-        <p>{params.length > 0 ? params : "Hamısı"}</p>
+        <p>{singleProduct?.name}</p>
       </li>
     </StyledLinks>
   );

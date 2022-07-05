@@ -6,6 +6,7 @@ const initialState: IProducts = {
   loading: false,
   allProducts: [],
   categoryProducts: [],
+  singleProduct: null,
 };
 
 export const fetchProducts = createAsyncThunk(
@@ -34,11 +35,24 @@ export const fetchProductsByCategory = createAsyncThunk(
   }
 );
 
+export const fetchProductById = createAsyncThunk(
+  "products/fetchProductById",
+  async (id: string) => {
+    try {
+      const response = await api.get(`/products/${id}`);
+      return response.data;
+    } catch (error: any) {
+      return error.message;
+    }
+  }
+);
+
 export const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    /* Fetching All Products */
     builder.addCase(fetchProducts.pending, (state) => {
       return (state = { ...state, loading: true });
     });
@@ -49,6 +63,8 @@ export const productsSlice = createSlice({
         allProducts: action.payload.data,
       });
     });
+
+    /* Fetching Products By Category */
     builder.addCase(fetchProductsByCategory.pending, (state) => {
       return (state = { ...state, loading: true });
     });
@@ -57,6 +73,18 @@ export const productsSlice = createSlice({
         ...state,
         loading: false,
         categoryProducts: action.payload?.data,
+      });
+    });
+
+    /* Fetching Single Product */
+    builder.addCase(fetchProductById.pending, (state) => {
+      return (state = { ...state, loading: true });
+    });
+    builder.addCase(fetchProductById.fulfilled, (state, action) => {
+      return (state = {
+        ...state,
+        loading: false,
+        singleProduct: action.payload,
       });
     });
   },

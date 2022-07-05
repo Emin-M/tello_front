@@ -101,4 +101,5 @@ export interface IProducts {
   // error: string;
   allProducts: IProduct[];
   categoryProducts: IProduct[];
+  singleProduct: IProduct | null;
 }

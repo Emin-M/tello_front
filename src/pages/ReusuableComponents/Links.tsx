@@ -3,7 +3,7 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { StyledLinks } from "./styles/Links.styled";
 
 /* Images */
-import arrowRight from "../../../assets/images/icons/arrowRight.png";
+import arrowRight from "../../assets/images/icons/arrowRight.png";
 
 const Links: FC = () => {
   /* Url */
@@ -20,7 +20,7 @@ const Links: FC = () => {
         {id} <img src={arrowRight} alt="arrowRight" />
       </li>
       <li>
-        <p>{params.length > 0 ? params : "Hamısı"}</p>
+        <p>{params}</p>
       </li>
     </StyledLinks>
   );

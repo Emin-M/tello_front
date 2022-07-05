@@ -32,7 +32,8 @@ const ProductsBottom: FC = () => {
             }
           });
         })
-      : (filteredProducts = [...categoryProducts]);
+      : categoryProducts?.length > 0 &&
+        (filteredProducts = [...categoryProducts]);
   };
 
   filterProductsByBrands();

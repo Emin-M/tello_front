@@ -156,6 +156,10 @@ export const NavbarRight = styled.div`
     transform: translateY(5px);
   }
 
+  img {
+    cursor: pointer;
+  }
+
   span {
     position: absolute;
     top: -10px;

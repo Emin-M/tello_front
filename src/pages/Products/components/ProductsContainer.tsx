@@ -28,9 +28,7 @@ interface IProps {
 }
 
 const ProductsContainer = ({ setShowFilter, filteredProducts }: IProps) => {
-  const { categoryProducts, loading } = useSelector(
-    (state: RootState) => state.products
-  );
+  const { loading } = useSelector((state: RootState) => state.products);
   const [selectValue, setSelectValue] = useState("new");
 
   const onChange = (event: SelectChangeEvent) => {
