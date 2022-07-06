@@ -110,7 +110,9 @@ const Navbar = () => {
             <img src={person} alt="person" />
             <img src={heart} alt="heart" />
             <div>
-              <img src={basket} alt="basket" />
+              <Link to="/card">
+                <img src={basket} alt="basket" />
+              </Link>
               <span>0</span>
             </div>
           </NavbarRight>

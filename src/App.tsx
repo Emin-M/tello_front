@@ -17,6 +17,7 @@ import Products from "./pages/Products";
 import Product from "./pages/Product";
 import Params from "./pages/Product/components/Params";
 import Comments from "./pages/Product/components/Comments";
+import Card from "./pages/Card";
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -43,6 +44,7 @@ const App = () => {
             <Route path=":id" element={<Comments />} />
           </Route>
         </Route>
+        <Route path="/card" element={<Card />} />
         <Route path="login" element={<div>Login</div>} />
       </Routes>
       <Footer />
