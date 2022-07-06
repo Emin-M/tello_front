@@ -1,105 +1,96 @@
-import React from "react";
+import { FC, useState } from "react";
 import { CardsStyled, CardTotal, SingleCard } from "./styles/Cards.styled";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../redux/store";
+import { ILineItem } from "../../../modules/types/card";
+import {
+  deleteItemFromCart,
+  fetchCards,
+  updateItemInCart,
+} from "../../../redux/cardSlice";
 
 /* Images */
-import phone from "../../../assets/images/home/phone1.png";
 import minus from "../../../assets/svg/minus.svg";
 import plus from "../../../assets/svg/plus.svg";
 import del from "../../../assets/svg/delete.svg";
 
-const Cards = () => {
+const Cards: FC = () => {
+  const { items } = useSelector((state: RootState) => state.card);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const deleteItem = (id: string) => {
+    dispatch(deleteItemFromCart(id));
+    setTimeout(() => {
+      dispatch(fetchCards());
+    }, 1000);
+  };
+
+  const updateCard = (sign: string, id: string, q: number) => {
+    let quantity = q;
+    if (sign === "-") {
+      quantity = q - 1;
+      dispatch(updateItemInCart({ id, quantity }));
+      setTimeout(() => {
+        dispatch(fetchCards());
+      }, 1000);
+    } else {
+      quantity = q + 1;
+      dispatch(updateItemInCart({ id, quantity }));
+      setTimeout(() => {
+        dispatch(fetchCards());
+      }, 1000);
+    }
+  };
+
   return (
     <CardsStyled>
       <div>
-        <SingleCard>
-          <img src={phone} alt="phone" />
-          <div className="about">
-            <h2>
-              iPhone 12, 64 GB, Bənövşəyi, (MJNM3) Golden 5 G 8690604083886
-              0212042
-            </h2>
-            <div>
-              <p>
-                <span>Rəng:</span>
-                <span>Bənövşəyi</span>
-              </p>
-              <p>
-                <span>Price:</span>
-                <span>300</span>
-              </p>
+        {items?.line_items.map((item: ILineItem) => (
+          <SingleCard key={item.id}>
+            <img src={item.image.url} alt={item.name} />
+            <div className="about">
+              <h2>{item.name}</h2>
+              <div>
+                <p>
+                  <span>Rəng:</span>
+                  <span>Bənövşəyi</span>
+                </p>
+                <p>
+                  <span>Price:</span>
+                  <span>{item.price.formatted_with_code}</span>
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="quantity">
-            <img src={minus} alt="minus" />
-            <span>1</span>
-            <img src={plus} alt="plus" />
-          </div>
-          <img src={del} alt="delete" />
-        </SingleCard>
-        <SingleCard>
-          <img src={phone} alt="phone" />
-          <div className="about">
-            <h2>
-              iPhone 12, 64 GB, Bənövşəyi, (MJNM3) Golden 5 G 8690604083886
-              0212042
-            </h2>
-            <div>
-              <p>
-                <span>Rəng:</span>
-                <span>Bənövşəyi</span>
-              </p>
-              <p>
-                <span>Price:</span>
-                <span>300</span>
-              </p>
+            <div className="quantity">
+              <img
+                src={minus}
+                alt="minus"
+                onClick={() => updateCard("-", item.id, item.quantity)}
+              />
+              <span>{item.quantity}</span>
+              <img
+                src={plus}
+                alt="plus"
+                onClick={() => updateCard("+", item.id, item.quantity)}
+              />
             </div>
-          </div>
-          <div className="quantity">
-            <img src={minus} alt="minus" />
-            <span>1</span>
-            <img src={plus} alt="plus" />
-          </div>
-          <img src={del} alt="delete" />
-        </SingleCard>
-        <SingleCard>
-          <img src={phone} alt="phone" />
-          <div className="about">
-            <h2>
-              iPhone 12, 64 GB, Bənövşəyi, (MJNM3) Golden 5 G 8690604083886
-              0212042
-            </h2>
-            <div>
-              <p>
-                <span>Rəng:</span>
-                <span>Bənövşəyi</span>
-              </p>
-              <p>
-                <span>Price:</span>
-                <span>300</span>
-              </p>
-            </div>
-          </div>
-          <div className="quantity">
-            <img src={minus} alt="minus" />
-            <span>1</span>
-            <img src={plus} alt="plus" />
-          </div>
-          <img src={del} alt="delete" />
-        </SingleCard>
+            <img src={del} alt="delete" onClick={() => deleteItem(item.id)} />
+          </SingleCard>
+        ))}
       </div>
       <CardTotal>
         <h2>Ümumi</h2>
         <p>
           <span>Məbləğ</span>
-          <span>66.5</span>
+          <span>{items?.subtotal.formatted_with_code}</span>
         </p>
         <p>
           <span>Çatdırılma</span>
-          <span>66.5</span>
+          <span>0.00 USD</span>
         </p>
         <p>
           <span>Cəmi</span>
-          <span>66.5</span>
+          <span>{items?.subtotal.formatted_with_code}</span>
         </p>
       </CardTotal>
     </CardsStyled>

@@ -37,6 +37,7 @@ export const SingleCard = styled.div`
   > img:nth-child(4) {
     width: 18px;
     height: 20px;
+    cursor: pointer;
   }
 
   h2 {

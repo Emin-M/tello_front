@@ -7,7 +7,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
 import { Skeleton } from "@mui/material";
-import { addProductToBasket } from "../../../redux/cardSlice";
+import { addProductToBasket, fetchCards } from "../../../redux/cardSlice";
 import { useParams } from "react-router-dom";
 
 /* Images */
@@ -26,6 +26,7 @@ const ProductTop: FC = () => {
   const [imageOrder, setImageOrder] = useState<number>(0);
   const [orderCount, setOrderCount] = useState<number>(1);
   const dispatch = useDispatch<AppDispatch>();
+  const { id } = useParams();
 
   useEffect(() => {
     setMainImage(singleProduct?.assets?.[imageOrder]?.url);
@@ -43,8 +44,19 @@ const ProductTop: FC = () => {
     }
   };
 
-  const { id } = useParams();
-  console.log(items);
+  const addingToBasket = () => {
+    if (id && items?.id) {
+      dispatch(
+        addProductToBasket({
+          id: id,
+          quantity: orderCount,
+        })
+      );
+      setTimeout(() => {
+        dispatch(fetchCards());
+      }, 1000);
+    }
+  };
 
   return (
     <ProductTopContainer>
@@ -162,13 +174,7 @@ const ProductTop: FC = () => {
             }}
           />
         </div>
-        <button
-          onClick={() => {
-            id &&
-              items?.id &&
-              dispatch(addProductToBasket({ cartId: items?.id, id: id }));
-          }}
-        >
+        <button onClick={() => addingToBasket()}>
           <img src={basket} alt="basket" />
           <p>Səbətə at</p>
         </button>

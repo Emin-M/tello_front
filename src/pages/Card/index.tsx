@@ -1,18 +1,21 @@
-import React from "react";
+import React, { FC } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 import { Container } from "../ReusuableComponents/styles/Container.styled";
 import Cards from "./components/Cards";
 import EmptyCard from "./components/EmptyCard";
 import { CardContainer, CardTop } from "./style";
 
-const Card = () => {
+const Card: FC = () => {
+  const { items } = useSelector((state: RootState) => state.card);
+
   return (
     <CardContainer>
       <Container>
         <CardTop>
           <h2>Səbət (0 məhsul)</h2>
         </CardTop>
-        {/* <EmptyCard /> */}
-        <Cards />
+        {items && items.total_items > 0 ? <Cards /> : <EmptyCard />}
       </Container>
     </CardContainer>
   );

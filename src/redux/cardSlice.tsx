@@ -19,13 +19,39 @@ export const fetchCards = createAsyncThunk("card/fetchCards", async () => {
 
 export const addProductToBasket = createAsyncThunk(
   "card/addProductToBasket",
-  async ({ cartId, id }: { cartId: string; id: string }) => {
+  async ({ id, quantity }: { id: string; quantity: number }) => {
+    let cartId = localStorage.getItem("cartId") || "";
     try {
-      const response = await api.post(`/carts/${cartId}`, {
+      await api.post(`/carts/${cartId}`, {
         id: id,
-        quantity: 1,
+        quantity: quantity,
       });
-      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const deleteItemFromCart = createAsyncThunk(
+  "card/deleteItemFromCart",
+  async (id: string) => {
+    let cartId = localStorage.getItem("cartId") || "";
+    try {
+      await api.delete(`/carts/${cartId}/items/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const updateItemInCart = createAsyncThunk(
+  "card/updateItemInCart",
+  async ({ id, quantity }: { id: string; quantity: number }) => {
+    let cartId = localStorage.getItem("cartId") || "";
+    try {
+      await api.put(`/carts/${cartId}/items/${id}`, {
+        quantity: quantity,
+      });
     } catch (error) {
       console.log(error);
     }

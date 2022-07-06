@@ -114,7 +114,7 @@ const Navbar = () => {
               <Link to="/card">
                 <img src={basket} alt="basket" />
               </Link>
-              <span>{items ? items?.line_items.length : 0}</span>
+              <span>{items ? items?.total_unique_items : 0}</span>
             </div>
           </NavbarRight>
         </NavbarTop>
