@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { fetchProductById } from "../../redux/productsSlice";
 import { AppDispatch } from "../../redux/store";
 import { Container } from "../ReusuableComponents/styles/Container.styled";
@@ -21,6 +21,7 @@ const Product = () => {
       <Container>
         <Links />
         <ProductTop />
+        <Outlet />
       </Container>
     </ProductContainer>
   );

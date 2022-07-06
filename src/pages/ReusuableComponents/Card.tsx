@@ -6,7 +6,7 @@ import heart from "../../assets/images/icons/heart.png";
 const Card = ({ product }: any) => {
   return (
     <StyledCard>
-      <Link to={`/product/${product?.id}`}>
+      <Link to={`/product/params/${product?.id}`}>
         <div>
           <img src={heart} alt="heart" />
         </div>

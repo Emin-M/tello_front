@@ -15,6 +15,8 @@ import Navbar from "./pages/Navbar";
 import Footer from "./pages/Footer";
 import Products from "./pages/Products";
 import Product from "./pages/Product";
+import Params from "./pages/Product/components/Params";
+import Comments from "./pages/Product/components/Comments";
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -34,7 +36,12 @@ const App = () => {
           <Route path=":id" element={<Products />} />
         </Route>
         <Route path="/product" element={<Product />}>
-          <Route path=":id" element={<Product />} />
+          <Route path="params" element={<Params />}>
+            <Route path=":id" element={<Product />} />
+          </Route>
+          <Route path="comments" element={<Comments />}>
+            <Route path=":id" element={<Comments />} />
+          </Route>
         </Route>
         <Route path="login" element={<div>Login</div>} />
       </Routes>

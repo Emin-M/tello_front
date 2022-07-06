@@ -26,7 +26,7 @@ const ProductTop: FC = () => {
   console.log(singleProduct);
 
   useEffect(() => {
-    setMainImage(singleProduct?.assets[imageOrder]?.url);
+    setMainImage(singleProduct?.assets?.[imageOrder]?.url);
   }, [singleProduct, imageOrder]);
 
   const imageChange = (sign: string) => {
@@ -95,7 +95,7 @@ const ProductTop: FC = () => {
               />
             </>
           ) : (
-            singleProduct?.assets.map((image, index) => (
+            singleProduct?.assets?.map((image, index) => (
               <img
                 src={image.url}
                 key={image.id}
@@ -117,14 +117,14 @@ const ProductTop: FC = () => {
         )}
         <p>
           {/* <del>200</del> */}
-          <span>{singleProduct?.price.formatted_with_code}</span>
+          <span>{singleProduct?.price?.formatted_with_code}</span>
         </p>
-        {singleProduct?.variant_groups.map((variant) => (
+        {singleProduct?.variant_groups?.map((variant) => (
           <div key={variant.name}>
             <p>{variant.name.toUpperCase()}:</p>
             {variant.name !== "color" ? (
               <ul>
-                {variant.options.map((option: any) => (
+                {variant.options?.map((option: any) => (
                   <li key={option.name}>{option.name}</li>
                 ))}
               </ul>
