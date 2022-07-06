@@ -4,19 +4,33 @@ import { ICards } from "../modules/types/card";
 
 const initialState: ICards = {
   loading: false,
-  items: [],
+  items: null,
 };
 
 export const fetchCards = createAsyncThunk("card/fetchCards", async () => {
+  let cartId = localStorage.getItem("cartId") || "";
   try {
-    const response = await api.get("/carts", {
-      params: { type: "slug", depth: "2" },
-    });
+    const response = await api.get(`/carts/${cartId}`);
     return response.data;
   } catch (error) {
     return error;
   }
 });
+
+export const addProductToBasket = createAsyncThunk(
+  "card/addProductToBasket",
+  async ({ cartId, id }: { cartId: string; id: string }) => {
+    try {
+      const response = await api.post(`/carts/${cartId}`, {
+        id: id,
+        quantity: 1,
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 
 export const cardSlice = createSlice({
   name: "card",
@@ -27,7 +41,8 @@ export const cardSlice = createSlice({
       return (state = { ...state, loading: true });
     });
     builder.addCase(fetchCards.fulfilled, (state, { payload }) => {
-      return (state = { ...state, loading: false, items: payload.data });
+      localStorage.setItem("cartId", payload.id);
+      return (state = { ...state, loading: false, items: payload });
     });
   },
 });

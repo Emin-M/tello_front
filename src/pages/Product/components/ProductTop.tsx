@@ -4,8 +4,11 @@ import {
   ProductImg,
   ProductTopContainer,
 } from "./styles/ProductTop.styled";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../redux/store";
+import { Skeleton } from "@mui/material";
+import { addProductToBasket } from "../../../redux/cardSlice";
+import { useParams } from "react-router-dom";
 
 /* Images */
 import leftArrow from "../../../assets/images/icons/arrowLeft.png";
@@ -13,17 +16,16 @@ import rightArrow from "../../../assets/images/icons/arrowRight.png";
 import minus from "../../../assets/svg/minus.svg";
 import plus from "../../../assets/svg/plus.svg";
 import basket from "../../../assets/svg/cart.svg";
-import { Skeleton } from "@mui/material";
 
 const ProductTop: FC = () => {
   const { singleProduct, loading } = useSelector(
     (state: RootState) => state.products
   );
+  const { items } = useSelector((state: RootState) => state.card);
   const [mainImage, setMainImage] = useState<string>();
   const [imageOrder, setImageOrder] = useState<number>(0);
   const [orderCount, setOrderCount] = useState<number>(1);
-
-  console.log(singleProduct);
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     setMainImage(singleProduct?.assets?.[imageOrder]?.url);
@@ -40,6 +42,9 @@ const ProductTop: FC = () => {
         : setImageOrder(imageOrder - 1);
     }
   };
+
+  const { id } = useParams();
+  console.log(items);
 
   return (
     <ProductTopContainer>
@@ -157,8 +162,15 @@ const ProductTop: FC = () => {
             }}
           />
         </div>
-        <button>
-          <img src={basket} alt="basket" /> <p>Səbətə at</p>
+        <button
+          onClick={() => {
+            id &&
+              items?.id &&
+              dispatch(addProductToBasket({ cartId: items?.id, id: id }));
+          }}
+        >
+          <img src={basket} alt="basket" />
+          <p>Səbətə at</p>
         </button>
       </ProductFilter>
     </ProductTopContainer>

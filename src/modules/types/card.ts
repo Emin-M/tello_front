@@ -28,5 +28,5 @@ export interface ICard {
 export interface ICards {
   loading: boolean;
   // error: string;
-  items: ICard[];
+  items: ICard | null;
 }

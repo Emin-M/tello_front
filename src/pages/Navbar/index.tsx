@@ -40,8 +40,6 @@ const Navbar = () => {
   const [showSub, setShowSub] = useState<boolean>(false);
   const location = useLocation();
 
-  console.log(items);
-
   useEffect(() => {
     setShowSidebar(false);
   }, [location]);
@@ -116,7 +114,7 @@ const Navbar = () => {
               <Link to="/card">
                 <img src={basket} alt="basket" />
               </Link>
-              <span>{items?.length}</span>
+              <span>{items ? items?.line_items.length : 0}</span>
             </div>
           </NavbarRight>
         </NavbarTop>

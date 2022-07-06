@@ -18,7 +18,7 @@ const Products: FC = () => {
         <Product>
           <h2>Telefon</h2>
           <p>Məhsul sayı: 322</p>
-          <Link to="phones">
+          <Link to="products/telefonlar">
             Məhsullara keçid <img src={arrowRight} alt="arrowRight" />
           </Link>
           <img
@@ -30,7 +30,7 @@ const Products: FC = () => {
         <Product>
           <h2>Telefon</h2>
           <p>Məhsul sayı: 322</p>
-          <Link to="accessory">
+          <Link to="products/telefonlar">
             Məhsullara keçid <img src={arrowRight} alt="arrowRight" />
           </Link>
           <img style={{ width: "40%" }} src={productWatch} alt="productWatch" />
@@ -38,7 +38,7 @@ const Products: FC = () => {
         <Product>
           <h2>Telefon</h2>
           <p>Məhsul sayı: 322</p>
-          <Link to="accessory">
+          <Link to="products/telefonlar">
             Məhsullara keçid <img src={arrowRight} alt="arrowRight" />
           </Link>
           <img

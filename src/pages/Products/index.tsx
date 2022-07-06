@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 /* Styles */
 import { StyledProductsContainer } from "./style";
@@ -9,13 +9,6 @@ import Links from "./components/Links";
 import ProductsBottom from "./components/ProductsBottom";
 
 const Products = () => {
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }, []);
-
   return (
     <StyledProductsContainer>
       <Container>

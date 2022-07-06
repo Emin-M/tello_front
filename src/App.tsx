@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "./redux/store";
 import { fetchProducts } from "./redux/productsSlice";
@@ -22,12 +22,20 @@ import Card from "./pages/Card";
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const location = useLocation();
 
   useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchCategories());
     dispatch(fetchCards());
   }, []);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [location]);
 
   return (
     <div className="App">

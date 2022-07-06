@@ -167,7 +167,7 @@ export const NavbarRight = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2px 6px;
+    padding: 3px 8px;
     background: #2dd06e;
     border-radius: 50%;
     color: #ffffff;

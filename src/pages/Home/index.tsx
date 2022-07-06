@@ -131,16 +131,22 @@ const Home: FC = () => {
       </HomeSlider>
 
       {/* Most Seller */}
-      <CardContainer title="Ən çox satılan məhsullar" link="products" />
+      <CardContainer
+        title="Ən çox satılan məhsullar"
+        link="products/telefonlar"
+      />
 
       {/* New */}
-      <CardContainer title="Yeni gələn məhsullar" link="products" />
+      <CardContainer title="Yeni gələn məhsullar" link="products/telefonlar" />
 
       {/* Advertisement */}
       <Advertisement />
 
       {/* Accessory */}
-      <CardContainer title="Yeni gələn aksessuarlar" link="products" />
+      <CardContainer
+        title="Yeni gələn aksessuarlar"
+        link="products/telefonlar"
+      />
 
       {/* Products */}
       <Products />
