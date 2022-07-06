@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "./redux/store";
 import { fetchProducts } from "./redux/productsSlice";
 import { fetchCategories } from "./redux/categoriesSlice";
+import { fetchCards } from "./redux/cardSlice";
 
 /* Styles */
 import "./App.css";
@@ -25,6 +26,7 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchCategories());
+    dispatch(fetchCards());
   }, []);
 
   return (

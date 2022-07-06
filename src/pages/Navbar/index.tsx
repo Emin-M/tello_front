@@ -35,9 +35,12 @@ const Navbar = () => {
   const { categories, loading } = useSelector(
     (state: RootState) => state.categories
   );
+  const { items } = useSelector((state: RootState) => state.card);
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
   const [showSub, setShowSub] = useState<boolean>(false);
   const location = useLocation();
+
+  console.log(items);
 
   useEffect(() => {
     setShowSidebar(false);
@@ -113,7 +116,7 @@ const Navbar = () => {
               <Link to="/card">
                 <img src={basket} alt="basket" />
               </Link>
-              <span>0</span>
+              <span>{items?.length}</span>
             </div>
           </NavbarRight>
         </NavbarTop>
