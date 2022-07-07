@@ -9,6 +9,7 @@ import { fetchCards } from "./redux/cardSlice";
 /* Styles */
 import "./App.css";
 import GlobalStyles from "./pages/ReusuableComponents/styles/GlobalStyled";
+import "react-toastify/dist/ReactToastify.css";
 
 /* Pages */
 import Home from "./pages/Home";

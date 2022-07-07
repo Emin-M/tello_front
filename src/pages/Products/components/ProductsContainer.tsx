@@ -1,8 +1,12 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../redux/store";
 import { IProduct } from "../../../modules/types/products";
 import Card from "../../ReusuableComponents/Card";
+import {
+  fetchProductsByCategory,
+  filterProducts,
+} from "../../../redux/productsSlice";
+import { useParams } from "react-router-dom";
 
 /* Styles */
 import {
@@ -29,10 +33,21 @@ interface IProps {
 
 const ProductsContainer = ({ setShowFilter, filteredProducts }: IProps) => {
   const { loading } = useSelector((state: RootState) => state.products);
-  const [selectValue, setSelectValue] = useState("new");
+  const dispatch = useDispatch<AppDispatch>();
+  const { id } = useParams();
 
   const onChange = (event: SelectChangeEvent) => {
-    setSelectValue(event.target.value);
+    const value = event.target.value;
+    if (value === "new" && id) {
+      dispatch(fetchProductsByCategory([id]));
+    } else if (id && value) {
+      dispatch(
+        filterProducts({
+          direction: value,
+          category: [id],
+        })
+      );
+    }
   };
 
   return (
@@ -61,12 +76,11 @@ const ProductsContainer = ({ setShowFilter, filteredProducts }: IProps) => {
           <Select
             id="demo-simple-select"
             defaultValue="new"
-            value={selectValue}
             onChange={onChange}
           >
             <MenuItem value="new">Ən yenilər</MenuItem>
-            <MenuItem value="increase">Ucuzdan bahaya</MenuItem>
-            <MenuItem value="decrease">Bahadan ucuza</MenuItem>
+            <MenuItem value="asc">Ucuzdan bahaya</MenuItem>
+            <MenuItem value="desc">Bahadan ucuza</MenuItem>
           </Select>
         </FormControl>
       </div>

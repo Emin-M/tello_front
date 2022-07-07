@@ -108,6 +108,11 @@ export const NavbarInputSearch = styled.div`
   background: #ffffff;
   z-index: 1;
 
+  &:hover {
+    display: block;
+    opacity: 1;
+  }
+
   > div:nth-child(1) {
     display: flex;
     justify-content: space-between;

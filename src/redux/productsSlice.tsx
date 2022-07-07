@@ -16,7 +16,31 @@ export const fetchProducts = createAsyncThunk(
       const response = await api.get("/products");
       return response.data;
     } catch (error: any) {
-      return error.message;
+      console.log(error);
+    }
+  }
+);
+
+export const filterProducts = createAsyncThunk(
+  "products/filterProducts",
+  async ({
+    direction,
+    category,
+  }: {
+    direction: string;
+    category: string[];
+  }) => {
+    try {
+      const response = await api.get("/products", {
+        params: {
+          category_slug: category,
+          sortBy: "price",
+          sortOrder: direction,
+        },
+      });
+      return response.data;
+    } catch (error: any) {
+      console.log(error);
     }
   }
 );
@@ -30,7 +54,7 @@ export const fetchProductsByCategory = createAsyncThunk(
       });
       return response.data;
     } catch (error: any) {
-      return error.message;
+      console.log(error);
     }
   }
 );
@@ -42,7 +66,7 @@ export const fetchProductById = createAsyncThunk(
       const response = await api.get(`/products/${id}`);
       return response.data;
     } catch (error: any) {
-      return error.message;
+      console.log(error);
     }
   }
 );
@@ -61,6 +85,18 @@ export const productsSlice = createSlice({
         ...state,
         loading: false,
         allProducts: action.payload.data,
+      });
+    });
+
+    /* Filtering Products */
+    builder.addCase(filterProducts.pending, (state) => {
+      return (state = { ...state, loading: true });
+    });
+    builder.addCase(filterProducts.fulfilled, (state, action) => {
+      return (state = {
+        ...state,
+        loading: false,
+        categoryProducts: action.payload?.data,
       });
     });
 

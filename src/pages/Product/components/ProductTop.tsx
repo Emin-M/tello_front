@@ -16,6 +16,7 @@ import rightArrow from "../../../assets/images/icons/arrowRight.png";
 import minus from "../../../assets/svg/minus.svg";
 import plus from "../../../assets/svg/plus.svg";
 import basket from "../../../assets/svg/cart.svg";
+import { toast } from "react-toastify";
 
 const ProductTop: FC = () => {
   const { singleProduct, loading } = useSelector(
@@ -45,17 +46,27 @@ const ProductTop: FC = () => {
   };
 
   const addingToBasket = () => {
-    if (id && items?.id) {
-      dispatch(
-        addProductToBasket({
-          id: id,
-          quantity: orderCount,
-        })
-      );
-      setTimeout(() => {
-        dispatch(fetchCards());
-      }, 1000);
-    }
+    toast.success("🦄 Wow so easy!", {
+      position: "bottom-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    // if (id && items?.id) {
+    //   dispatch(
+    //     addProductToBasket({
+    //       id: id,
+    //       quantity: orderCount,
+    //     })
+    //   );
+
+    //   setTimeout(() => {
+    //     dispatch(fetchCards());
+    //   }, 1000);
+    // }
   };
 
   return (
