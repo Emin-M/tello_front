@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Container } from "../../ReusuableComponents/styles/Container.styled";
+import { Container } from "../../../components/ReusuableComponents/styles/Container.styled";
 import { Service, ServicesContainer } from "./styles/Service.styled";
 
 /* Images */

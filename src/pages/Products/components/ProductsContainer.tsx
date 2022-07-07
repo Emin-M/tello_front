@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
 import { IProduct } from "../../../modules/types/products";
-import Card from "../../ReusuableComponents/Card";
+import Card from "../../../components/ReusuableComponents/Card";
 import {
   fetchProductsByCategory,
   filterProducts,
-} from "../../../redux/productsSlice";
+} from "../../../redux/actions/productActions";
 import { useParams } from "react-router-dom";
 
 /* Styles */

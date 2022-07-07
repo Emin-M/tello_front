@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet, useParams } from "react-router-dom";
-import { fetchProductById } from "../../redux/productsSlice";
+import { fetchProductById } from "../../redux/actions/productActions";
 import { AppDispatch } from "../../redux/store";
-import { Container } from "../ReusuableComponents/styles/Container.styled";
+import { Container } from "../../components/ReusuableComponents/styles/Container.styled";
 import Links from "./components/Links";
 import ProductTop from "./components/ProductTop";
 import { ProductContainer } from "./style";

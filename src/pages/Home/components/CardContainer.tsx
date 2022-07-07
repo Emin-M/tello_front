@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import Card from "../../ReusuableComponents/Card";
-import { Container } from "../../ReusuableComponents/styles/Container.styled";
+import Card from "../../../components/ReusuableComponents/Card";
+import { Container } from "../../../components/ReusuableComponents/styles/Container.styled";
 import { CardBottom, Cards, CardTop } from "./styles/CardContainer.styled";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { IProduct } from "../../../modules/types/products";
-import Loading from "../../ReusuableComponents/Loading";
 
 /* Images */
 import arrowRight from "../../../assets/images/icons/arrowRight.png";

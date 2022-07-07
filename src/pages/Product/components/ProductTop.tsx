@@ -7,7 +7,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
 import { Skeleton } from "@mui/material";
-import { addProductToBasket, fetchCards } from "../../../redux/cardSlice";
+import {
+  addProductToBasket,
+  fetchCards,
+} from "../../../redux/actions/cardActions";
 import { useParams } from "react-router-dom";
 
 /* Images */
@@ -16,7 +19,6 @@ import rightArrow from "../../../assets/images/icons/arrowRight.png";
 import minus from "../../../assets/svg/minus.svg";
 import plus from "../../../assets/svg/plus.svg";
 import basket from "../../../assets/svg/cart.svg";
-import { toast } from "react-toastify";
 
 const ProductTop: FC = () => {
   const { singleProduct, loading } = useSelector(
@@ -46,27 +48,17 @@ const ProductTop: FC = () => {
   };
 
   const addingToBasket = () => {
-    toast.success("🦄 Wow so easy!", {
-      position: "bottom-right",
-      autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-    // if (id && items?.id) {
-    //   dispatch(
-    //     addProductToBasket({
-    //       id: id,
-    //       quantity: orderCount,
-    //     })
-    //   );
-
-    //   setTimeout(() => {
-    //     dispatch(fetchCards());
-    //   }, 1000);
-    // }
+    if (id && items?.id) {
+      dispatch(
+        addProductToBasket({
+          id: id,
+          quantity: orderCount,
+        })
+      );
+      setTimeout(() => {
+        dispatch(fetchCards());
+      }, 1000);
+    }
   };
 
   return (

@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
 import { useParams, useSearchParams } from "react-router-dom";
-import { fetchProductsByCategory } from "../../../redux/productsSlice";
+import { fetchProductsByCategory } from "../../../redux/actions/productActions";
 
 /* Styles */
 import {

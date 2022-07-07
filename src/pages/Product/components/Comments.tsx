@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   CommentsBottom,
@@ -13,8 +13,8 @@ import {
 /* Images */
 import star_full from "../../../assets/images/icons/star_full.png";
 import star from "../../../assets/images/icons/star.png";
-import { Container } from "../../ReusuableComponents/styles/Container.styled";
-import Button from "../../ReusuableComponents/Button";
+import { Container } from "../../../components/ReusuableComponents/styles/Container.styled";
+import Button from "../../../components/ReusuableComponents/Button";
 
 const Comments: FC = () => {
   const { id } = useParams();

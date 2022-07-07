@@ -1,25 +1,11 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import api from "../api/api";
+import { createSlice } from "@reduxjs/toolkit";
 import { ICategories } from "../modules/types/categories";
+import { fetchCategories } from "./actions/categoryActions";
 
 const initialState: ICategories = {
   loading: false,
   categories: [],
 };
-
-export const fetchCategories = createAsyncThunk(
-  "categories/fetchCategories",
-  async () => {
-    try {
-      const response = await api.get("/categories", {
-        params: { type: "slug", depth: "2" },
-      });
-      return response.data;
-    } catch (error) {
-      return error;
-    }
-  }
-);
 
 export const categoriesSlice = createSlice({
   name: "categories",

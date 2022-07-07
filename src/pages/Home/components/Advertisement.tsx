@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Container } from "../../ReusuableComponents/styles/Container.styled";
+import { Container } from "../../../components/ReusuableComponents/styles/Container.styled";
 import { AdvertisementContainer } from "./styles/Advertisement.styled";
 
 import ad1 from "../../../assets/images/home/advertisement1.png";

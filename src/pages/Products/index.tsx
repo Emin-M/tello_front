@@ -1,8 +1,6 @@
-import React from "react";
-
 /* Styles */
 import { StyledProductsContainer } from "./style";
-import { Container } from "../ReusuableComponents/styles/Container.styled";
+import { Container } from "../../components/ReusuableComponents/styles/Container.styled";
 
 /* Components */
 import Links from "./components/Links";

@@ -8,7 +8,7 @@ import Services from "./components/Services";
 /* Styles */
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Container } from "../ReusuableComponents/styles/Container.styled";
+import { Container } from "../../components/ReusuableComponents/styles/Container.styled";
 import {
   HomeSlider,
   SliderItem,

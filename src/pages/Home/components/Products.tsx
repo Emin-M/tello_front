@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
-import { Container } from "../../ReusuableComponents/styles/Container.styled";
+import { Container } from "../../../components/ReusuableComponents/styles/Container.styled";
 
 /* Images */
 import arrowRight from "../../../assets/images/icons/arrowRight.png";

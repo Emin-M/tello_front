@@ -2,24 +2,25 @@ import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "./redux/store";
-import { fetchProducts } from "./redux/productsSlice";
-import { fetchCategories } from "./redux/categoriesSlice";
-import { fetchCards } from "./redux/cardSlice";
+import { fetchProducts } from "./redux/actions/productActions";
+import { fetchCategories } from "./redux/actions/categoryActions";
+import { fetchCards } from "./redux/actions/cardActions";
 
 /* Styles */
 import "./App.css";
-import GlobalStyles from "./pages/ReusuableComponents/styles/GlobalStyled";
+import GlobalStyles from "./components/ReusuableComponents/styles/GlobalStyled";
 import "react-toastify/dist/ReactToastify.css";
 
 /* Pages */
 import Home from "./pages/Home";
-import Navbar from "./pages/Navbar";
-import Footer from "./pages/Footer";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Products from "./pages/Products";
 import Product from "./pages/Product";
 import Params from "./pages/Product/components/Params";
 import Comments from "./pages/Product/components/Comments";
 import Card from "./pages/Card";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -41,6 +42,7 @@ const App = () => {
   return (
     <div className="App">
       <GlobalStyles />
+      <ToastContainer />;
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

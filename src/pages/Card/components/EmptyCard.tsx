@@ -1,7 +1,6 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import Button from "../../ReusuableComponents/Button";
 import { EmptyCardStyled } from "./styles/EmptyCard.styled";
+import Button from "../../../components/ReusuableComponents/Button";
 
 /* Images */
 import shoppingCard from "../../../assets/svg/shopping-cart.svg";

@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { CardsStyled, CardTotal, SingleCard } from "./styles/Cards.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
@@ -7,7 +7,8 @@ import {
   deleteItemFromCart,
   fetchCards,
   updateItemInCart,
-} from "../../../redux/cardSlice";
+} from "../../../redux/actions/cardActions";
+import { alertError, alertSuccess } from "../../../modules/alert";
 
 /* Images */
 import minus from "../../../assets/svg/minus.svg";
@@ -29,13 +30,19 @@ const Cards: FC = () => {
     let quantity = q;
     if (sign === "-") {
       quantity = q - 1;
-      dispatch(updateItemInCart({ id, quantity }));
-      setTimeout(() => {
-        dispatch(fetchCards());
-      }, 1000);
+      if (quantity > 0) {
+        dispatch(updateItemInCart({ id, quantity }));
+        alertSuccess("Məhsul azaldıldı!");
+        setTimeout(() => {
+          dispatch(fetchCards());
+        }, 1000);
+      } else {
+        alertError("Bu mehsuldan 1 ededdir!");
+      }
     } else {
       quantity = q + 1;
       dispatch(updateItemInCart({ id, quantity }));
+      alertSuccess("Məhsul artırıldı!");
       setTimeout(() => {
         dispatch(fetchCards());
       }, 1000);

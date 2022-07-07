@@ -1,7 +1,7 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import { Container } from "../ReusuableComponents/styles/Container.styled";
+import { Container } from "../../components/ReusuableComponents/styles/Container.styled";
 import Cards from "./components/Cards";
 import EmptyCard from "./components/EmptyCard";
 import { CardContainer, CardTop } from "./style";
