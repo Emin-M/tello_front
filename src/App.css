@@ -1,5 +1,10 @@
 @import url("//db.onlinewebfonts.com/c/a575313c6dc4fd00c1a9506e1c3ea4fc?family=Euclid+Circular+A");
 
+p,
+a {
+    margin: 0;
+}
+
 .MuiAccordion-gutters {
     box-shadow: none !important;
     border-radius: none !important;

@@ -7,9 +7,10 @@ import { fetchCategories } from "./redux/actions/categoryActions";
 import { fetchCards } from "./redux/actions/cardActions";
 
 /* Styles */
-import "./App.css";
 import GlobalStyles from "./components/ReusuableComponents/styles/GlobalStyled";
 import "react-toastify/dist/ReactToastify.css";
+import "bootstrap/dist/css/bootstrap.css";
+import "./App.css";
 
 /* Pages */
 import Home from "./pages/Home";
