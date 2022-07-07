@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ProductTopContainer = styled.div`
   display: flex;
-  height: calc(100vh - 200px);
+  min-height: calc(100vh - 200px);
   padding: 10px 0;
 
   @media (max-width: 650px) {

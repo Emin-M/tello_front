@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ICards } from "../modules/types/card";
-import { fetchCards } from "./actions/cardActions";
+import { fetchCards, updateItemInCart } from "./actions/cardActions";
 
 const initialState: ICards = {
   loading: false,
@@ -18,6 +18,12 @@ export const cardSlice = createSlice({
     builder.addCase(fetchCards.fulfilled, (state, { payload }) => {
       localStorage.setItem("cartId", payload.id);
       return (state = { ...state, loading: false, items: payload });
+    });
+    builder.addCase(updateItemInCart.pending, (state) => {
+      return (state = { ...state, loading: true });
+    });
+    builder.addCase(updateItemInCart.fulfilled, (state) => {
+      return (state = { ...state, loading: false });
     });
   },
 });

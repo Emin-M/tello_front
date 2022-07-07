@@ -199,7 +199,7 @@ export const NavbarBottom = styled.ul`
       font-size: 18px;
       line-height: 20px;
       color: #4f4f4f;
-      height: 41px;
+      height: 45px;
       display: inline-block;
 
       &:hover {

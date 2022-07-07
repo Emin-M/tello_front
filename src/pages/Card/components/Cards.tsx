@@ -8,8 +8,8 @@ import {
   fetchCards,
   updateItemInCart,
 } from "../../../redux/actions/cardActions";
-import { alertError, alertSuccess } from "../../../modules/alert";
-import { Button, Modal } from "react-bootstrap";
+import { alertSuccess } from "../../../modules/alert";
+import { Button, Modal, Spinner } from "react-bootstrap";
 
 /* Images */
 import minus from "../../../assets/svg/minus.svg";
@@ -17,7 +17,7 @@ import plus from "../../../assets/svg/plus.svg";
 import del from "../../../assets/svg/delete.svg";
 
 const Cards: FC = () => {
-  const { items } = useSelector((state: RootState) => state.card);
+  const { items, loading } = useSelector((state: RootState) => state.card);
   const dispatch = useDispatch<AppDispatch>();
   const [modal, setModal] = useState<boolean>(false);
   const [idForDel, setIdForDel] = useState<string>("");
@@ -76,7 +76,15 @@ const Cards: FC = () => {
                     setNameForDel(item.name);
                   }}
                 />
-                <span>{item.quantity}</span>
+                <span>
+                  {loading ? (
+                    <Spinner animation="border" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </Spinner>
+                  ) : (
+                    item.quantity
+                  )}
+                </span>
                 <img
                   src={plus}
                   alt="plus"
