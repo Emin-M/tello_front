@@ -1,9 +1,7 @@
-import { useEffect } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../redux/store";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
 import { useParams, useSearchParams } from "react-router-dom";
-import { fetchProductsByCategory } from "../../../redux/actions/productActions";
 
 /* Styles */
 import {
@@ -26,19 +24,12 @@ interface IProps {
 
 const Filters = ({ showFilter, setShowFilter }: IProps) => {
   const { categories } = useSelector((state: RootState) => state.categories);
-  const dispatch = useDispatch<AppDispatch>();
 
   /* Url */
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const params = searchParams.getAll("brand");
   let paramsArray = params?.[0]?.split(",");
-
-  useEffect(() => {
-    if (id) {
-      dispatch(fetchProductsByCategory([id]));
-    }
-  }, [id]);
 
   /* Handle when checking checkbox */
   const handleChange = (event: any): void => {
