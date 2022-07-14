@@ -52,7 +52,7 @@ const Cards: FC = () => {
         <div>
           {items?.line_items.map((item: ILineItem) => (
             <SingleCard key={item.id}>
-              <img src={item.image.url} alt={item.name} />
+              <img src={item?.image?.url} alt={item.name} />
               <div className="about">
                 <h2>{item.name}</h2>
                 <div>
