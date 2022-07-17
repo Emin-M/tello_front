@@ -88,7 +88,7 @@ export const SingleCard = styled.div`
     margin-right: 0;
     position: relative;
 
-    > img {
+    a > img {
       width: 80%;
       height: 80%;
     }
@@ -101,8 +101,9 @@ export const SingleCard = styled.div`
 
     .about {
       margin-top: 20px;
+      align-self: flex-start;
 
-      > div {
+      a > div {
         flex-direction: column;
       }
 
