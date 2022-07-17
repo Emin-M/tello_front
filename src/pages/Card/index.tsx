@@ -13,7 +13,7 @@ const Card: FC = () => {
     <CardContainer>
       <Container>
         <CardTop>
-          <h2>Səbət (0 məhsul)</h2>
+          <h2>Səbət ({items?.total_items || "0"} məhsul)</h2>
         </CardTop>
         {items && items.total_items > 0 ? <Cards /> : <EmptyCard />}
       </Container>

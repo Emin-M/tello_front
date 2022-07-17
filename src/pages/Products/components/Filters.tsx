@@ -11,6 +11,7 @@ import {
   Checkbox,
   FormControlLabel,
   FormGroup,
+  Skeleton,
 } from "@mui/material";
 import { FilterMobileTop, StyledFilters } from "./styles/Filters.styled";
 
@@ -23,7 +24,9 @@ interface IProps {
 }
 
 const Filters = ({ showFilter, setShowFilter }: IProps) => {
-  const { categories } = useSelector((state: RootState) => state.categories);
+  const { categories, loading } = useSelector(
+    (state: RootState) => state.categories
+  );
 
   /* Url */
   const { id } = useParams();
@@ -65,27 +68,50 @@ const Filters = ({ showFilter, setShowFilter }: IProps) => {
         </AccordionSummary>
         <AccordionDetails>
           <FormGroup>
-            {categories?.[0]?.children.map((subCategories) => {
-              if (subCategories.name === id) {
-                return subCategories.children.map((s: { name: string }) => {
-                  return (
-                    <FormControlLabel
-                      key={s.name}
-                      control={
-                        paramsArray?.includes(s.name) ? (
-                          <Checkbox checked />
-                        ) : (
-                          <Checkbox />
-                        )
-                      }
-                      label={s.name}
-                      value={s.name}
-                      onChange={handleChange}
-                    />
-                  );
-                });
-              }
-            })}
+            {loading ? (
+              <>
+                <Skeleton
+                  animation="wave"
+                  width={150}
+                  height={30}
+                  variant="text"
+                />
+                <Skeleton
+                  animation="wave"
+                  width={150}
+                  height={30}
+                  variant="text"
+                />
+                <Skeleton
+                  animation="wave"
+                  width={150}
+                  height={30}
+                  variant="text"
+                />
+              </>
+            ) : (
+              categories?.[0]?.children.map((subCategories) => {
+                if (subCategories.name === id) {
+                  return subCategories.children.map((s: { name: string }) => {
+                    return (
+                      <FormControlLabel
+                        key={s.name}
+                        control={
+                          paramsArray?.includes(s.name) ? (
+                            <Checkbox checked />
+                          ) : (
+                            <Checkbox />
+                          )
+                        }
+                        label={s.name}
+                        value={s.name}
+                        onChange={handleChange}
+                      />
+                    );
+                  });
+                }
+              })
+            )}
           </FormGroup>
         </AccordionDetails>
       </Accordion>

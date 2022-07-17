@@ -7,7 +7,6 @@ export const CardsStyled = styled.div`
     display: flex;
     flex-direction: column;
     flex: 4;
-    padding-top: 100px;
   }
 
   @media (max-width: 650px) {
@@ -30,8 +29,8 @@ export const SingleCard = styled.div`
   padding: 16px;
 
   > img {
-    width: 50px;
-    height: 72px;
+    width: 75px;
+    height: 90%;
   }
 
   > img:nth-child(4) {

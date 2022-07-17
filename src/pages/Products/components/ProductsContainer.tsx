@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
 import { IProduct } from "../../../modules/types/products";
@@ -35,9 +36,11 @@ const ProductsContainer = ({ setShowFilter, filteredProducts }: IProps) => {
   const { loading } = useSelector((state: RootState) => state.products);
   const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams();
+  const [selectValue, setSelectValue] = useState<string>("new");
 
   const onChange = (event: SelectChangeEvent) => {
     const value = event.target.value;
+    setSelectValue(value);
     if (value === "new" && id) {
       dispatch(fetchProductsByCategory([id]));
     } else if (id && value) {
@@ -75,8 +78,9 @@ const ProductsContainer = ({ setShowFilter, filteredProducts }: IProps) => {
         <FormControl>
           <Select
             id="demo-simple-select"
-            defaultValue="new"
             onChange={onChange}
+            value={selectValue}
+            label={false}
           >
             <MenuItem value="new">Ən yenilər</MenuItem>
             <MenuItem value="asc">Ucuzdan bahaya</MenuItem>

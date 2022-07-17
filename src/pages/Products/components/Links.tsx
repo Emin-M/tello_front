@@ -17,7 +17,8 @@ const Links: FC = () => {
         Ana səhifə <img src={arrowRight} alt="arrowRight" />
       </li>
       <li>
-        {id} <img src={arrowRight} alt="arrowRight" />
+        {id && id?.charAt(0).toUpperCase() + id?.slice(1)}
+        <img src={arrowRight} alt="arrowRight" />
       </li>
       <li>
         <p>{params.length > 0 ? params : "Hamısı"}</p>

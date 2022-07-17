@@ -8,7 +8,6 @@ import {
   fetchCards,
   updateItemInCart,
 } from "../../../redux/actions/cardActions";
-import { alertSuccess } from "../../../modules/alert";
 import { Button, Modal, Spinner } from "react-bootstrap";
 
 /* Images */
@@ -17,11 +16,14 @@ import plus from "../../../assets/svg/plus.svg";
 import del from "../../../assets/svg/delete.svg";
 
 const Cards: FC = () => {
-  const { items, loading } = useSelector((state: RootState) => state.card);
+  const { items, loading, updateLoading } = useSelector(
+    (state: RootState) => state.card
+  );
   const dispatch = useDispatch<AppDispatch>();
   const [modal, setModal] = useState<boolean>(false);
   const [idForDel, setIdForDel] = useState<string>("");
   const [nameForDel, setNameForDel] = useState<string>("");
+  const [updateId, setUpdateId] = useState<string>("");
 
   const updateCard = (sign: string, id: string, q: number) => {
     let quantity = q;
@@ -29,7 +31,6 @@ const Cards: FC = () => {
       quantity = q - 1;
       if (quantity > 0) {
         dispatch(updateItemInCart({ id, quantity }));
-        alertSuccess("Məhsul azaldıldı!");
         setTimeout(() => {
           dispatch(fetchCards());
         }, 1000);
@@ -39,7 +40,6 @@ const Cards: FC = () => {
     } else {
       quantity = q + 1;
       dispatch(updateItemInCart({ id, quantity }));
-      alertSuccess("Məhsul artırıldı!");
       setTimeout(() => {
         dispatch(fetchCards());
       }, 1000);
@@ -67,17 +67,18 @@ const Cards: FC = () => {
                 </div>
               </div>
               <div className="quantity">
-                <img
-                  src={minus}
-                  alt="minus"
+                <div
                   onClick={() => {
                     updateCard("-", item.id, item.quantity);
                     setIdForDel(item.id);
                     setNameForDel(item.name);
+                    setUpdateId(item.id);
                   }}
-                />
+                >
+                  <img src={minus} alt="minus" />
+                </div>
                 <span>
-                  {loading ? (
+                  {updateLoading && updateId === item.id ? (
                     <Spinner animation="border" role="status">
                       <span className="visually-hidden">Loading...</span>
                     </Spinner>
@@ -85,11 +86,14 @@ const Cards: FC = () => {
                     item.quantity
                   )}
                 </span>
-                <img
-                  src={plus}
-                  alt="plus"
-                  onClick={() => updateCard("+", item.id, item.quantity)}
-                />
+                <div
+                  onClick={() => {
+                    updateCard("+", item.id, item.quantity);
+                    setUpdateId(item.id);
+                  }}
+                >
+                  <img src={plus} alt="plus" />
+                </div>
               </div>
               <img
                 src={del}

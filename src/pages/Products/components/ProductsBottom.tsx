@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import Filters from "./Filters";
 import { useSearchParams } from "react-router-dom";
 import { IProduct } from "../../../modules/types/products";
@@ -36,7 +36,7 @@ const ProductsBottom: FC = () => {
         (filteredProducts = [...categoryProducts]);
   };
 
-  filterProductsByBrands();
+  const memoized = useMemo(() => filterProductsByBrands(), [params]);
 
   return (
     <StyledProductsBottom>

@@ -49,6 +49,7 @@ export const updateItemInCart = createAsyncThunk(
       await api.put(`/carts/${cartId}/items/${id}`, {
         quantity: quantity,
       });
+      alertSuccess("Məhsul yeniləndi!");
     } catch (error) {
       console.log(error);
     }

@@ -4,6 +4,7 @@ import { fetchCards, updateItemInCart } from "./actions/cardActions";
 
 const initialState: ICards = {
   loading: false,
+  updateLoading: false,
   items: null,
 };
 
@@ -20,10 +21,10 @@ export const cardSlice = createSlice({
       return (state = { ...state, loading: false, items: payload });
     });
     builder.addCase(updateItemInCart.pending, (state) => {
-      return (state = { ...state, loading: true });
+      return (state = { ...state, updateLoading: true });
     });
     builder.addCase(updateItemInCart.fulfilled, (state) => {
-      return (state = { ...state, loading: false });
+      return (state = { ...state, updateLoading: false });
     });
   },
 });

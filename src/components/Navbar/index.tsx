@@ -108,8 +108,16 @@ const Navbar = () => {
             </NavbarInput>
           </NavbarSearch>
           <NavbarRight>
-            <img src={person} alt="person" />
-            <img src={heart} alt="heart" />
+            <div>
+              <Link to="/account">
+                <img src={person} alt="person" />
+              </Link>
+            </div>
+            <div>
+              <Link to="/favorites">
+                <img src={heart} alt="heart" />
+              </Link>
+            </div>
             <div>
               <Link to="/card">
                 <img src={basket} alt="basket" />
@@ -130,7 +138,10 @@ const Navbar = () => {
           <NavbarBottom style={showSidebar ? { left: "0" } : { left: "-100%" }}>
             {categories?.[0]?.children.map((category: ICategory) => (
               <li key={category.id}>
-                <Link to={`products/${category.name}`}>{category.name}</Link>
+                <Link to={`products/${category.slug}`}>
+                  {category.name.charAt(0).toUpperCase() +
+                    category.name.slice(1)}
+                </Link>
                 {category.children[0] && (
                   <img src={arrowRight} alt="arrowRight" />
                 )}

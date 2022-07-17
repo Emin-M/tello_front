@@ -58,6 +58,7 @@ export interface ICard {
 
 export interface ICards {
   loading: boolean;
+  updateLoading: boolean;
   // error: string;
   items: ICard | null;
 }

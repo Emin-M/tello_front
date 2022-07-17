@@ -161,21 +161,21 @@ const ProductTop: FC = () => {
           </div>
         ))}
         <div className="quantity">
-          <img
-            src={minus}
-            alt="minus"
+          <div
             onClick={() => {
               orderCount > 1 && setOrderCount(orderCount - 1);
             }}
-          />
+          >
+            <img src={minus} alt="minus" />
+          </div>
           <span>{orderCount}</span>
-          <img
-            src={plus}
-            alt="plus"
+          <div
             onClick={() => {
               setOrderCount(orderCount + 1);
             }}
-          />
+          >
+            <img src={plus} alt="plus" />
+          </div>
         </div>
         <button onClick={() => addingToBasket()}>
           <img src={basket} alt="basket" />
