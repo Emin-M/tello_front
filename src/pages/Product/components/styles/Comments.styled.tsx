@@ -27,7 +27,7 @@ export const CommentsTop = styled.div`
     color: #bdbdbd;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     margin-top: 50px;
 
     div {
@@ -46,7 +46,7 @@ export const CommentsCommentContainer = styled.div`
   padding: 40px 0;
   border-bottom: 1px solid #bdbdbd;
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     flex-direction: column;
     align-items: center;
   }
@@ -68,7 +68,7 @@ export const CommentsStar = styled.div`
     margin-bottom: 40px;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     margin-bottom: 20px;
     border-right: none;
     border-bottom: 1px solid #bdbdbd;
@@ -101,7 +101,7 @@ export const CommentsComment = styled.div`
     color: #4f4f4f;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     padding: 0;
 
     div {
@@ -180,7 +180,7 @@ export const FormContainer = styled.div`
     }
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     > div > div:nth-child(2) {
       flex-direction: column;
     }

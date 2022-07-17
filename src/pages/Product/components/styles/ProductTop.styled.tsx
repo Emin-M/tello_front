@@ -5,7 +5,7 @@ export const ProductTopContainer = styled.div`
   min-height: calc(100vh - 200px);
   padding: 10px 0;
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -60,7 +60,7 @@ export const ProductImg = styled.div`
     }
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     > div {
       left: 0;
     }
@@ -73,6 +73,8 @@ export const ProductFilter = styled.div`
   flex-direction: column;
   flex: 1;
   padding: 0 50px;
+  width: 100%;
+  position: relative;
 
   h2 {
     font-weight: 600;
@@ -187,7 +189,15 @@ export const ProductFilter = styled.div`
     }
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     margin-top: 200px;
+    padding: 0;
+
+    button {
+      position: absolute;
+      width: 50%;
+      top: 40px;
+      right: 0;
+    }
   }
 `;

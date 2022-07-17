@@ -27,7 +27,7 @@ export const ParamsTop = styled.div`
     color: #bdbdbd;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     margin-top: 50px;
 
     div {
@@ -40,7 +40,7 @@ export const ParamsBottom = styled.div`
   display: flex;
   padding: 30px 50px;
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     flex-direction: column-reverse;
     padding: 30px 0;
   }
@@ -83,7 +83,7 @@ export const BottomLeft = styled.div`
     margin-bottom: 16px;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     > div {
       padding: 0;
     }
@@ -118,7 +118,7 @@ export const BottomRight = styled.div`
     color: #828282;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     p {
       padding: 0 10px;
       padding-bottom: 20px;

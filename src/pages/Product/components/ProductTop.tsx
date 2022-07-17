@@ -169,6 +169,7 @@ const ProductTop: FC = () => {
           ))
         )}
         <div className="quantity">
+          <p style={{ marginRight: "30px" }}>MIQDAR:</p>
           <div
             onClick={() => {
               orderCount > 1 && setOrderCount(orderCount - 1);
