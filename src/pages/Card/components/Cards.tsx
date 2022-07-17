@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import { CardsStyled, CardTotal, SingleCard } from "./styles/Cards.styled";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
 import { ILineItem } from "../../../modules/types/card";
@@ -31,18 +32,12 @@ const Cards: FC = () => {
       quantity = q - 1;
       if (quantity > 0) {
         dispatch(updateItemInCart({ id, quantity }));
-        setTimeout(() => {
-          dispatch(fetchCards());
-        }, 1000);
       } else {
         setModal(true);
       }
     } else {
       quantity = q + 1;
       dispatch(updateItemInCart({ id, quantity }));
-      setTimeout(() => {
-        dispatch(fetchCards());
-      }, 1000);
     }
   };
 
@@ -52,19 +47,23 @@ const Cards: FC = () => {
         <div>
           {items?.line_items.map((item: ILineItem) => (
             <SingleCard key={item.id}>
-              <img src={item?.image?.url} alt={item.name} />
+              <Link to={`/product/params/${item.product_id}`}>
+                <img src={item?.image?.url} alt={item.name} />
+              </Link>
               <div className="about">
-                <h2>{item.name}</h2>
-                <div>
-                  <p>
-                    <span>Rəng:</span>
-                    <span>Bənövşəyi</span>
-                  </p>
-                  <p>
-                    <span>Price:</span>
-                    <span>{item.price.formatted_with_code}</span>
-                  </p>
-                </div>
+                <Link to={`/product/params/${item.product_id}`}>
+                  <h2>{item.name}</h2>
+                  <div>
+                    <p>
+                      <span>Rəng:</span>
+                      <span>Bənövşəyi</span>
+                    </p>
+                    <p>
+                      <span>Price:</span>
+                      <span>{item.price.formatted_with_code}</span>
+                    </p>
+                  </div>
+                </Link>
               </div>
               <div className="quantity">
                 <div

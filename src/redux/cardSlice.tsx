@@ -23,8 +23,12 @@ export const cardSlice = createSlice({
     builder.addCase(updateItemInCart.pending, (state) => {
       return (state = { ...state, updateLoading: true });
     });
-    builder.addCase(updateItemInCart.fulfilled, (state) => {
-      return (state = { ...state, updateLoading: false });
+    builder.addCase(updateItemInCart.fulfilled, (state, { payload }) => {
+      return (state = {
+        ...state,
+        items: payload.cart,
+        updateLoading: false,
+      });
     });
   },
 });

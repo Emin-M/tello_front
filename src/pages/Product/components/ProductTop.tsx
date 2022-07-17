@@ -57,6 +57,7 @@ const ProductTop: FC = () => {
       );
       setTimeout(() => {
         dispatch(fetchCards());
+        setOrderCount(1);
       }, 1000);
     }
   };
@@ -139,27 +140,34 @@ const ProductTop: FC = () => {
           {/* <del>200</del> */}
           <span>{singleProduct?.price?.formatted_with_code}</span>
         </p>
-        {singleProduct?.variant_groups?.map((variant) => (
-          <div key={variant.name}>
-            <p>{variant.name.toUpperCase()}:</p>
-            {variant.name !== "color" ? (
-              <ul>
-                {variant.options?.map((option: any) => (
-                  <li key={option.name}>{option.name}</li>
-                ))}
-              </ul>
-            ) : (
-              <ul>
-                {variant.options.map((option: any) => (
-                  <li
-                    key={option.name}
-                    style={{ background: option.name }}
-                  ></li>
-                ))}
-              </ul>
-            )}
-          </div>
-        ))}
+        {loading ? (
+          <>
+            <Skeleton variant="text" animation="wave" width={200} height={30} />
+            <Skeleton variant="text" animation="wave" width={200} height={30} />
+          </>
+        ) : (
+          singleProduct?.variant_groups?.map((variant) => (
+            <div key={variant.name}>
+              <p>{variant.name.toUpperCase()}:</p>
+              {variant.name !== "color" ? (
+                <ul>
+                  {variant.options?.map((option: any) => (
+                    <li key={option.name}>{option.name}</li>
+                  ))}
+                </ul>
+              ) : (
+                <ul>
+                  {variant.options.map((option: any) => (
+                    <li
+                      key={option.name}
+                      style={{ background: option.name }}
+                    ></li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))
+        )}
         <div className="quantity">
           <div
             onClick={() => {

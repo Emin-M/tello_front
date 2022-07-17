@@ -1,9 +1,12 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Slider from "react-slick";
 import CardContainer from "./components/CardContainer";
 import Advertisement from "./components/Advertisement";
 import Products from "./components/Products";
 import Services from "./components/Services";
+import { fetchProducts } from "../../redux/actions/productActions";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
 
 /* Styles */
 import "slick-carousel/slick/slick.css";
@@ -26,6 +29,11 @@ import marka6 from "../../assets/images/home/marka6.png";
 import homeImg from "../../assets/images/home/homeImg.png";
 
 const Home: FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
+
   /* Sliders Settings */
   const SlickSettings = {
     dots: true,

@@ -5,9 +5,10 @@ import { Container } from "../../components/ReusuableComponents/styles/Container
 import Cards from "./components/Cards";
 import EmptyCard from "./components/EmptyCard";
 import { CardContainer, CardTop } from "./style";
+import { Skeleton } from "@mui/material";
 
 const Card: FC = () => {
-  const { items } = useSelector((state: RootState) => state.card);
+  const { items, loading } = useSelector((state: RootState) => state.card);
 
   return (
     <CardContainer>
@@ -15,7 +16,40 @@ const Card: FC = () => {
         <CardTop>
           <h2>Səbət ({items?.total_items || "0"} məhsul)</h2>
         </CardTop>
-        {items && items.total_items > 0 ? <Cards /> : <EmptyCard />}
+        {loading ? (
+          <div
+            style={{
+              display: "flex",
+              gap: "20px",
+              overflowX: "hidden",
+            }}
+          >
+            <div>
+              <Skeleton
+                animation="wave"
+                width={1000}
+                height={150}
+                variant="text"
+              />
+              <Skeleton
+                animation="wave"
+                width={1000}
+                height={150}
+                variant="text"
+              />
+            </div>
+            <Skeleton
+              animation="wave"
+              width={400}
+              height={300}
+              variant="text"
+            />
+          </div>
+        ) : items && items.total_items > 0 ? (
+          <Cards />
+        ) : (
+          <EmptyCard />
+        )}
       </Container>
     </CardContainer>
   );

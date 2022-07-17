@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "./redux/store";
-import { fetchProducts } from "./redux/actions/productActions";
 import { fetchCategories } from "./redux/actions/categoryActions";
 import { fetchCards } from "./redux/actions/cardActions";
 
@@ -28,7 +27,6 @@ const App = () => {
   const location = useLocation();
 
   useEffect(() => {
-    dispatch(fetchProducts());
     dispatch(fetchCategories());
     dispatch(fetchCards());
   }, []);

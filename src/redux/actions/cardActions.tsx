@@ -46,10 +46,11 @@ export const updateItemInCart = createAsyncThunk(
   async ({ id, quantity }: { id: string; quantity: number }) => {
     let cartId = localStorage.getItem("cartId") || "";
     try {
-      await api.put(`/carts/${cartId}/items/${id}`, {
+      const response = await api.put(`/carts/${cartId}/items/${id}`, {
         quantity: quantity,
       });
       alertSuccess("Məhsul yeniləndi!");
+      return response.data;
     } catch (error) {
       console.log(error);
     }

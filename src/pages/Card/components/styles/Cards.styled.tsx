@@ -9,7 +9,7 @@ export const CardsStyled = styled.div`
     flex: 4;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     flex-direction: column;
 
     > div:nth-child(1) {
@@ -28,7 +28,7 @@ export const SingleCard = styled.div`
   border-radius: 8px;
   padding: 16px;
 
-  > img {
+  a > img {
     width: 75px;
     height: 90%;
   }
@@ -47,7 +47,12 @@ export const SingleCard = styled.div`
   }
 
   .about {
-    > div {
+    a {
+      align-self: flex-start;
+      color: inherit;
+    }
+
+    a > div {
       display: flex;
       margin-top: 12px;
     }
@@ -78,14 +83,14 @@ export const SingleCard = styled.div`
     }
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     flex-direction: column;
     margin-right: 0;
     position: relative;
 
     > img {
-      width: auto;
-      height: auto;
+      width: 80%;
+      height: 80%;
     }
 
     > img:nth-child(4) {
@@ -95,6 +100,8 @@ export const SingleCard = styled.div`
     }
 
     .about {
+      margin-top: 20px;
+
       > div {
         flex-direction: column;
       }
@@ -111,7 +118,7 @@ export const SingleCard = styled.div`
 
     .quantity {
       position: absolute;
-      bottom: 40px;
+      bottom: 30px;
       right: 24px;
     }
   }
@@ -153,7 +160,7 @@ export const CardTotal = styled.div`
     color: #1d2123;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     width: 100%;
     margin-bottom: 50px;
   }
