@@ -194,6 +194,10 @@ export const NavbarBottom = styled.ul`
     display: none;
   }
 
+  .active {
+    left: 0;
+  }
+
   > li {
     > a {
       font-size: 18px;
@@ -250,13 +254,11 @@ export const NavbarBottom = styled.ul`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      /* margin-bottom: 11px; */
 
       > a {
         font-size: 18px;
         line-height: 20px;
         height: 100%;
-        /* margin-bottom: 5px; */
 
         &:hover {
           color: #4f4f4f;
@@ -292,6 +294,7 @@ export const BottomDropdown = styled.div`
   ul {
     display: flex;
     width: 100%;
+    padding-inline-start: 0px;
   }
 
   li {
@@ -306,6 +309,32 @@ export const BottomDropdown = styled.div`
 
     &:hover {
       color: #2dd06e;
+    }
+  }
+
+  @media (max-width: 650px) {
+    top: 0;
+    left: -100%;
+    padding: 20px 0;
+    height: calc(100vh - 128px);
+    display: block;
+    opacity: 1;
+
+    img {
+      margin-bottom: 20px;
+    }
+
+    ul {
+      flex-direction: column;
+    }
+
+    li {
+      margin-right: 0px;
+      margin-bottom: 20px;
+
+      a {
+        display: block;
+      }
     }
   }
 `;

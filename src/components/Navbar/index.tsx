@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Button from "../ReusuableComponents/Button";
 import { useSelector } from "react-redux";
@@ -30,6 +30,7 @@ import basket from "../../assets/images/icons/basket.png";
 import resBtn from "../../assets/svg/responsive-button.svg";
 import closeBtn from "../../assets/svg/close.svg";
 import arrowRight from "../../assets/images/icons/arrowRight.png";
+import arrowLeft from "../../assets/images/icons/arrowLeft.png";
 
 const Navbar = () => {
   const { categories, loading } = useSelector(
@@ -37,8 +38,8 @@ const Navbar = () => {
   );
   const { items } = useSelector((state: RootState) => state.card);
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
-  const [showSub, setShowSub] = useState<boolean>(false);
   const location = useLocation();
+  const itemEls = useRef(new Array());
 
   useEffect(() => {
     setShowSidebar(false);
@@ -66,6 +67,25 @@ const Navbar = () => {
     const child = element.firstChild as HTMLElement;
     child.style.color = "#4f4f4f";
     child.style.borderBottom = "none";
+  };
+
+  const showSub = (event: MouseEvent<HTMLLIElement>) => {
+    /* clearing all "active" classes */
+    itemEls.current.map((itemEl) => {
+      itemEl.classList.remove("active");
+    });
+
+    /* adding "active class to the clicked item" */
+    const element = event.currentTarget as HTMLLIElement;
+    const child = element.lastChild as HTMLDivElement;
+    child.classList.add("active");
+  };
+
+  const hideSub = (event: MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    const element = event.currentTarget.parentElement
+      ?.parentElement as HTMLDivElement;
+    element.classList.remove("active");
   };
 
   return (
@@ -137,7 +157,7 @@ const Navbar = () => {
         ) : (
           <NavbarBottom style={showSidebar ? { left: "0" } : { left: "-100%" }}>
             {categories?.[0]?.children.map((category: ICategory) => (
-              <li key={category.id}>
+              <li key={category.id} onClick={(event) => showSub(event)}>
                 <Link to={`products/${category.slug}`}>
                   {category.name.charAt(0).toUpperCase() +
                     category.name.slice(1)}
@@ -148,8 +168,14 @@ const Navbar = () => {
                 <BottomDropdown
                   onMouseOver={boxMouseOverHandlerDiv}
                   onMouseOut={boxMouseOutHandlerDiv}
+                  ref={(element) => {
+                    element && itemEls.current.push(element);
+                  }}
                 >
                   <Container>
+                    <div onClick={(event) => hideSub(event)}>
+                      <img src={arrowLeft} alt="arrowLeft" />
+                    </div>
                     <ul>
                       {category.children.map((subcategory: ICategory) => (
                         <li key={subcategory.id}>
