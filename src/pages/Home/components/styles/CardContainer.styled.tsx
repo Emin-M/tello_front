@@ -7,7 +7,7 @@ export const Cards = styled.div`
   width: 100%;
   position: relative;
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     margin-bottom: 70px;
   }
 `;
@@ -36,7 +36,7 @@ export const CardTop = styled.div`
     margin-left: 10px;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     a {
       position: absolute;
       bottom: -28px;

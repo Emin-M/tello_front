@@ -15,7 +15,7 @@ export const AdvertisementContainer = styled.div`
     cursor: pointer;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     > div {
       flex-direction: column;
       gap: 24px;

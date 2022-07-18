@@ -46,7 +46,7 @@ export const SliderItem = styled.div`
     color: #4f4f4f;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     > div {
       flex-direction: column-reverse;
       justify-content: center;

@@ -25,7 +25,7 @@ export const ProductContainer = styled.div`
     grid-column: 2 / 3;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     > div {
       display: grid;
       grid-template-columns: 100%;
@@ -91,9 +91,10 @@ export const Product = styled.div`
     position: absolute;
     right: 30px;
     bottom: 0;
+    max-height: 90%;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     h2 {
       font-weight: 600;
       font-size: 13.2973px;

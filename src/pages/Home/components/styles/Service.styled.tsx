@@ -9,7 +9,7 @@ export const ServicesContainer = styled.div`
     gap: 80px;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     > div {
       flex-direction: column;
     }
@@ -45,7 +45,7 @@ export const Service = styled.div`
     color: #333333;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     width: 100%;
   }
 `;
