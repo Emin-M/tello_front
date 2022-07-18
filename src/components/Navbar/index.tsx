@@ -69,7 +69,10 @@ const Navbar = () => {
     child.style.borderBottom = "none";
   };
 
-  const showSub = (event: MouseEvent<HTMLLIElement>) => {
+  const showSub = (category: ICategory, event: MouseEvent<HTMLLIElement>) => {
+    let showSubCategory = false;
+    category.children[0] ? (showSubCategory = true) : (showSubCategory = false);
+
     /* clearing all "active" classes */
     itemEls.current.map((itemEl) => {
       itemEl.classList.remove("active");
@@ -78,7 +81,7 @@ const Navbar = () => {
     /* adding "active class to the clicked item" */
     const element = event.currentTarget as HTMLLIElement;
     const child = element.lastChild as HTMLDivElement;
-    child.classList.add("active");
+    showSubCategory && child.classList.add("active");
   };
 
   const hideSub = (event: MouseEvent<HTMLDivElement>) => {
@@ -157,7 +160,10 @@ const Navbar = () => {
         ) : (
           <NavbarBottom style={showSidebar ? { left: "0" } : { left: "-100%" }}>
             {categories?.[0]?.children.map((category: ICategory) => (
-              <li key={category.id} onClick={(event) => showSub(event)}>
+              <li
+                key={category.id}
+                onClick={(event) => showSub(category, event)}
+              >
                 <Link to={`products/${category.slug}`}>
                   {category.name.charAt(0).toUpperCase() +
                     category.name.slice(1)}
