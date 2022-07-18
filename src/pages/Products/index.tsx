@@ -17,9 +17,7 @@ const Products = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    if (id) {
-      dispatch(fetchProductsByCategory([id]));
-    }
+    id && dispatch(fetchProductsByCategory([id]));
   }, [id]);
 
   return (

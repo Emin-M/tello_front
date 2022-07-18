@@ -31,7 +31,7 @@ const Filters = ({ showFilter, setShowFilter }: IProps) => {
   /* Url */
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-  const params = searchParams.getAll("brand");
+  let params = searchParams.getAll("brand");
   let paramsArray = params?.[0]?.split(",");
 
   /* Handle when checking checkbox */
