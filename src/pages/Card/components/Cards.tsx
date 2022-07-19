@@ -61,12 +61,6 @@ const Cards: FC = () => {
                   </h2>
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <p>
-                      <span>Xüsusiyyətləri:</span>
-                      <span>
-                        {item.variant ? item.variant.sku.toUpperCase() : "---"}
-                      </span>
-                    </p>
-                    <p>
                       <span>Qiyməti:</span>
                       <span>{item.price.formatted_with_code}</span>
                     </p>
