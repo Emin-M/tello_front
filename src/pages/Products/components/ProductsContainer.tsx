@@ -102,37 +102,37 @@ const ProductsContainer = ({ setShowFilter, filteredProducts }: IProps) => {
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={340}
+              width={300}
               height={380}
             />
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={340}
+              width={300}
               height={380}
             />
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={340}
+              width={300}
               height={380}
             />
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={340}
+              width={300}
               height={380}
             />
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={340}
+              width={300}
               height={380}
             />
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={340}
+              width={300}
               height={380}
             />
           </div>

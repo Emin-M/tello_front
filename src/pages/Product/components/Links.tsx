@@ -2,12 +2,15 @@ import { FC } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { StyledLinks } from "./styles/Links.styled";
+import { Skeleton } from "@mui/material";
 
 /* Images */
 import arrowRight from "../../../assets/images/icons/arrowRight.png";
 
 const Links: FC = () => {
-  const { singleProduct } = useSelector((state: RootState) => state.products);
+  const { singleProduct, loading } = useSelector(
+    (state: RootState) => state.products
+  );
 
   return (
     <StyledLinks>
@@ -18,7 +21,13 @@ const Links: FC = () => {
         Product <img src={arrowRight} alt="arrowRight" />
       </li>
       <li>
-        <p>{singleProduct?.name}</p>
+        <p>
+          {loading ? (
+            <Skeleton variant="text" animation="wave" width={100} height={30} />
+          ) : (
+            singleProduct?.name
+          )}
+        </p>
       </li>
     </StyledLinks>
   );

@@ -34,7 +34,6 @@ const ProductTop: FC = () => {
   const [product, setProduct] = useState<ProductVariants>();
   const [option_1, setOption_1] = useState<string>("");
   const [option_2, setOption_2] = useState<string>("");
-  const [variantId, setVariantId] = useState<string>("");
 
   /* Setting Default Options */
   useEffect(() => {
@@ -56,11 +55,6 @@ const ProductTop: FC = () => {
       }
     });
   }, [singleProduct, product, option_1, option_2]);
-
-  /* Setting Variant ID For Busket */
-  // useEffect(() => {
-  //   setVariantId(product)
-  // }, [product])
 
   /* Setting Main Image */
   useEffect(() => {
@@ -123,8 +117,8 @@ const ProductTop: FC = () => {
         {loading ? (
           <Skeleton
             variant="rectangular"
-            width={300}
-            height={400}
+            width={250}
+            height={300}
             animation="wave"
           />
         ) : (
