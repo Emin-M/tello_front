@@ -60,7 +60,7 @@ const ProductTop: FC = () => {
         setProduct(productVariant);
       }
     });
-  }, [singleProduct, product, option_1, option_2]);
+  }, [singleProduct, product, option_1, option_2, loading]);
 
   /* Setting Main Image */
   useEffect(() => {
