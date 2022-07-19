@@ -6,7 +6,6 @@ import { AppDispatch, RootState } from "../../../redux/store";
 import { ILineItem } from "../../../modules/types/card";
 import {
   deleteItemFromCart,
-  fetchCards,
   updateItemInCart,
 } from "../../../redux/actions/cardActions";
 import { Button, Modal, Spinner } from "react-bootstrap";
@@ -17,7 +16,7 @@ import plus from "../../../assets/svg/plus.svg";
 import del from "../../../assets/svg/delete.svg";
 
 const Cards: FC = () => {
-  const { items, loading, updateLoading } = useSelector(
+  const { items, updateLoading } = useSelector(
     (state: RootState) => state.card
   );
   const dispatch = useDispatch<AppDispatch>();
@@ -26,6 +25,7 @@ const Cards: FC = () => {
   const [nameForDel, setNameForDel] = useState<string>("");
   const [updateId, setUpdateId] = useState<string>("");
 
+  /* Updating Card */
   const updateCard = (sign: string, id: string, q: number) => {
     let quantity = q;
     if (sign === "-") {
@@ -47,19 +47,27 @@ const Cards: FC = () => {
         <div>
           {items?.line_items.map((item: ILineItem) => (
             <SingleCard key={item.id}>
-              <Link to={`/product/params/${item.product_id}`}>
-                <img src={item?.image?.url} alt={item.name} />
-              </Link>
+              <div className="img">
+                <Link to={`/product/params/${item.product_id}`}>
+                  <img src={item?.image?.url} alt={item.name} />
+                </Link>
+              </div>
               <div className="about">
                 <Link to={`/product/params/${item.product_id}`}>
-                  <h2>{item.name}</h2>
-                  <div>
+                  <h2>
+                    {item.variant?.description
+                      ? item.variant?.description
+                      : item.name}
+                  </h2>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
                     <p>
-                      <span>Rəng:</span>
-                      <span>Bənövşəyi</span>
+                      <span>Xüsusiyyətləri:</span>
+                      <span>
+                        {item.variant ? item.variant.sku.toUpperCase() : "---"}
+                      </span>
                     </p>
                     <p>
-                      <span>Price:</span>
+                      <span>Qiyməti:</span>
                       <span>{item.price.formatted_with_code}</span>
                     </p>
                   </div>
@@ -94,15 +102,16 @@ const Cards: FC = () => {
                   <img src={plus} alt="plus" />
                 </div>
               </div>
-              <img
-                src={del}
-                alt="delete"
+              <div
+                className="delete"
                 onClick={() => {
                   setModal(true);
                   setIdForDel(item.id);
                   setNameForDel(item.name);
                 }}
-              />
+              >
+                <img src={del} alt="delete" />
+              </div>
             </SingleCard>
           ))}
         </div>

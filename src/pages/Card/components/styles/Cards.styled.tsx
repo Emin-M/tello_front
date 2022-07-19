@@ -26,14 +26,26 @@ export const SingleCard = styled.div`
   margin-bottom: 32px;
   margin-right: 32px;
   border-radius: 8px;
-  padding: 16px;
+  padding: 16px 50px;
+
+  @media (max-width: 1100px) {
+    padding: 16px;
+  }
+
+  .img {
+    flex: 1;
+
+    a {
+      display: block;
+    }
+  }
 
   a > img {
     width: 75px;
     height: 90%;
   }
 
-  > img:nth-child(4) {
+  > .delete {
     width: 18px;
     height: 20px;
     cursor: pointer;
@@ -47,6 +59,8 @@ export const SingleCard = styled.div`
   }
 
   .about {
+    flex: 2;
+
     a {
       align-self: flex-start;
       color: inherit;
@@ -68,6 +82,7 @@ export const SingleCard = styled.div`
 
   .quantity {
     display: flex;
+    flex: 1;
     margin-right: 10px;
 
     img {
@@ -88,12 +103,20 @@ export const SingleCard = styled.div`
     margin-right: 0;
     position: relative;
 
+    .img {
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
     a > img {
       width: 80%;
       height: 80%;
     }
 
-    > img:nth-child(4) {
+    > .delete {
       position: absolute;
       top: 24px;
       right: 24px;
