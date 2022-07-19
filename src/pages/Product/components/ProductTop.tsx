@@ -31,9 +31,15 @@ const ProductTop: FC = () => {
   const { id } = useParams();
 
   /* Product Variant States */
-  const [product, setProduct] = useState<ProductVariants>();
+  const [product, setProduct] = useState<ProductVariants | null>();
   const [option_1, setOption_1] = useState<string>("");
   const [option_2, setOption_2] = useState<string>("");
+
+  useEffect(() => {
+    setProduct(null);
+    setOption_1("");
+    setOption_2("");
+  }, []);
 
   /* Setting Default Options */
   useEffect(() => {
@@ -41,7 +47,7 @@ const ProductTop: FC = () => {
       setOption_1(singleProduct?.variant_groups?.[0]?.options?.[0].name);
       setOption_2(singleProduct?.variant_groups?.[1]?.options?.[0].name);
     }
-  }, [singleProduct]);
+  }, [singleProduct?.name]);
 
   /* Selecting Product Option */
   useEffect(() => {

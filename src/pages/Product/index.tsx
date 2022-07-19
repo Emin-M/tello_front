@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet, useParams } from "react-router-dom";
 import {
@@ -13,15 +13,11 @@ import { ProductContainer } from "./style";
 
 const Product = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const [value, setValue] = useState<number>(0);
   const { id } = useParams();
 
   useEffect(() => {
     id && dispatch(fetchProductById(id));
     id && dispatch(fetchProductVariants(id));
-    setTimeout(() => {
-      setValue(value + 1);
-    }, 1000);
   }, [id]);
 
   return (
