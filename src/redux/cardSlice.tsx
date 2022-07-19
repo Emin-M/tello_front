@@ -32,7 +32,7 @@ export const cardSlice = createSlice({
       return (state = { ...state, loading: true });
     });
     builder.addCase(addProductToBasket.fulfilled, (state, { payload }) => {
-      return (state = { ...state, loading: false, items: payload.cart });
+      return (state = { ...state, loading: false, items: payload?.cart });
     });
 
     /* Deleting Item From Card */

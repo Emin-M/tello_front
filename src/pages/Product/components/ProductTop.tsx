@@ -1,17 +1,10 @@
 import { FC, useEffect, useState } from "react";
-import {
-  ProductFilter,
-  ProductImg,
-  ProductTopContainer,
-} from "./styles/ProductTop.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
 import { Skeleton } from "@mui/material";
-import {
-  addProductToBasket,
-  fetchCards,
-} from "../../../redux/actions/cardActions";
+import { addProductToBasket } from "../../../redux/actions/cardActions";
 import { useParams } from "react-router-dom";
+import { ProductVariants } from "../../../modules/types/products";
 
 /* Images */
 import leftArrow from "../../../assets/images/icons/arrowLeft.png";
@@ -20,45 +13,106 @@ import minus from "../../../assets/svg/minus.svg";
 import plus from "../../../assets/svg/plus.svg";
 import basket from "../../../assets/svg/cart.svg";
 
+/* Styles */
+import {
+  ProductFilter,
+  ProductImg,
+  ProductTopContainer,
+} from "./styles/ProductTop.styled";
+
 const ProductTop: FC = () => {
-  const { singleProduct, loading } = useSelector(
+  const { singleProduct, productVariants, loading } = useSelector(
     (state: RootState) => state.products
   );
-  const { items } = useSelector((state: RootState) => state.card);
   const [mainImage, setMainImage] = useState<string>();
   const [imageOrder, setImageOrder] = useState<number>(0);
   const [orderCount, setOrderCount] = useState<number>(1);
   const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams();
 
-  useEffect(() => {
-    setMainImage(singleProduct?.assets?.[imageOrder]?.url);
-  }, [singleProduct, imageOrder]);
+  /* Product Variant States */
+  const [product, setProduct] = useState<ProductVariants>();
+  const [option_1, setOption_1] = useState<string>("");
+  const [option_2, setOption_2] = useState<string>("");
+  const [variantId, setVariantId] = useState<string>("");
 
+  /* Setting Default Options */
+  useEffect(() => {
+    if (singleProduct) {
+      setOption_1(singleProduct?.variant_groups?.[0]?.options?.[0].name);
+      setOption_2(singleProduct?.variant_groups?.[1]?.options?.[0].name);
+    }
+  }, [singleProduct]);
+
+  /* Selecting Product Option */
+  useEffect(() => {
+    productVariants?.map((productVariant) => {
+      let variantSkuArray = productVariant?.sku?.split(",");
+      if (
+        variantSkuArray?.includes(option_1.toUpperCase()) &&
+        variantSkuArray?.includes(option_2)
+      ) {
+        setProduct(productVariant);
+      }
+    });
+  }, [singleProduct, product, option_1, option_2]);
+
+  /* Setting Variant ID For Busket */
+  // useEffect(() => {
+  //   setVariantId(product)
+  // }, [product])
+
+  /* Setting Main Image */
+  useEffect(() => {
+    productVariants
+      ? setMainImage(product?.assets?.[0]?.url)
+      : setMainImage(singleProduct?.assets?.[0]?.url);
+  }, [singleProduct, product]);
+
+  useEffect(() => {
+    productVariants
+      ? setMainImage(product?.assets?.[imageOrder]?.url)
+      : setMainImage(singleProduct?.assets?.[imageOrder]?.url);
+  }, [imageOrder]);
+
+  /* Image Changing */
   const imageChange = (sign: string) => {
     if (sign === "+" && singleProduct?.assets) {
-      imageOrder >= singleProduct?.assets.length - 1
+      product
+        ? imageOrder >= product?.assets.length - 1
+          ? setImageOrder(0)
+          : setImageOrder(imageOrder + 1)
+        : imageOrder >= singleProduct?.assets.length - 1
         ? setImageOrder(0)
         : setImageOrder(imageOrder + 1);
     } else if (sign === "-" && singleProduct?.assets) {
-      imageOrder <= 0
+      product
+        ? imageOrder <= 0
+          ? setImageOrder(product?.assets.length - 1)
+          : setImageOrder(imageOrder - 1)
+        : imageOrder <= 0
         ? setImageOrder(singleProduct?.assets.length - 1)
         : setImageOrder(imageOrder - 1);
     }
   };
 
+  /* Add Item To Basket */
   const addingToBasket = () => {
     if (id) {
-      dispatch(
-        addProductToBasket({
-          id: id,
-          quantity: orderCount,
-        })
-      );
-      // setTimeout(() => {
-      //   dispatch(fetchCards());
-      //   setOrderCount(1);
-      // }, 1000);
+      product
+        ? dispatch(
+            addProductToBasket({
+              id: id,
+              variant_id: product.id,
+              quantity: orderCount,
+            })
+          )
+        : dispatch(
+            addProductToBasket({
+              id: id,
+              quantity: orderCount,
+            })
+          );
     }
   };
 
@@ -115,6 +169,18 @@ const ProductTop: FC = () => {
                 animation="wave"
               />
             </>
+          ) : productVariants ? (
+            product?.assets?.map((image, index) => (
+              <img
+                src={image.url}
+                key={image.id}
+                onClick={() => {
+                  setMainImage(image.url);
+                  setImageOrder(index);
+                }}
+                alt={image.filename}
+              />
+            ))
           ) : (
             singleProduct?.assets?.map((image, index) => (
               <img
@@ -134,11 +200,17 @@ const ProductTop: FC = () => {
         {loading ? (
           <Skeleton variant="text" animation="wave" width={200} height={30} />
         ) : (
-          <h2>{singleProduct?.name}</h2>
+          <h2>
+            {productVariants ? product?.description : singleProduct?.name}
+          </h2>
         )}
         <p>
           {/* <del>200</del> */}
-          <span>{singleProduct?.price?.formatted_with_code}</span>
+          <span>
+            {productVariants
+              ? product?.price?.formatted_with_code
+              : singleProduct?.price.formatted_with_code}
+          </span>
         </p>
         {loading ? (
           <>
@@ -152,7 +224,12 @@ const ProductTop: FC = () => {
               {variant.name !== "color" ? (
                 <ul>
                   {variant.options?.map((option: any) => (
-                    <li key={option.name}>{option.name}</li>
+                    <li
+                      key={option.name}
+                      onClick={() => setOption_1(option.name)}
+                    >
+                      {option.name}
+                    </li>
                   ))}
                 </ul>
               ) : (
@@ -160,6 +237,7 @@ const ProductTop: FC = () => {
                   {variant.options.map((option: any) => (
                     <li
                       key={option.name}
+                      onClick={() => setOption_2(option.name)}
                       style={{ background: option.name }}
                     ></li>
                   ))}

@@ -14,10 +14,19 @@ export const fetchCards = createAsyncThunk("card/fetchCards", async () => {
 
 export const addProductToBasket = createAsyncThunk(
   "card/addProductToBasket",
-  async ({ id, quantity }: { id: string; quantity: number }) => {
+  async ({
+    variant_id,
+    id,
+    quantity,
+  }: {
+    variant_id?: string;
+    id?: string;
+    quantity: number;
+  }) => {
     let cartId = localStorage.getItem("cartId") || "";
     try {
       const response = await api.post(`/carts/${cartId}`, {
+        variant_id: variant_id,
         id: id,
         quantity: quantity,
       });
