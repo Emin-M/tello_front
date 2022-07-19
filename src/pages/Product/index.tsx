@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet, useParams } from "react-router-dom";
-import { fetchProductById } from "../../redux/actions/productActions";
+import {
+  fetchProductById,
+  fetchProductVariants,
+} from "../../redux/actions/productActions";
 import { AppDispatch } from "../../redux/store";
 import { Container } from "../../components/ReusuableComponents/styles/Container.styled";
 import Links from "./components/Links";
@@ -14,6 +17,7 @@ const Product = () => {
 
   useEffect(() => {
     id && dispatch(fetchProductById(id));
+    id && dispatch(fetchProductVariants(id));
   }, []);
 
   return (

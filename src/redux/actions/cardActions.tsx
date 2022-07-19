@@ -17,11 +17,12 @@ export const addProductToBasket = createAsyncThunk(
   async ({ id, quantity }: { id: string; quantity: number }) => {
     let cartId = localStorage.getItem("cartId") || "";
     try {
-      await api.post(`/carts/${cartId}`, {
+      const response = await api.post(`/carts/${cartId}`, {
         id: id,
         quantity: quantity,
       });
       alertSuccess("Məhsul səbətə əlavə olundu!");
+      return response.data;
     } catch (error) {
       console.log(error);
     }
@@ -33,8 +34,9 @@ export const deleteItemFromCart = createAsyncThunk(
   async (id: string) => {
     let cartId = localStorage.getItem("cartId") || "";
     try {
-      await api.delete(`/carts/${cartId}/items/${id}`);
+      const response = await api.delete(`/carts/${cartId}/items/${id}`);
       alertSuccess("Məhsul silindi!");
+      return response.data;
     } catch (error) {
       console.log(error);
     }

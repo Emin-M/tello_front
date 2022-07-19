@@ -138,7 +138,7 @@ const Cards: FC = () => {
         </Modal.Header>
 
         <Modal.Body>
-          Silmək istədiyinizə əminsiniz: <b>{nameForDel}</b>
+          Silmək istədiyinizə əminsiniz?: <b>{nameForDel}</b>
         </Modal.Body>
 
         <Modal.Footer>
@@ -148,7 +148,7 @@ const Cards: FC = () => {
             disabled
             onClick={() => setModal(false)}
           >
-            Cancel
+            Geri
           </Button>
           <Button
             rel="noreferrer"
@@ -156,13 +156,10 @@ const Cards: FC = () => {
             disabled
             onClick={() => {
               dispatch(deleteItemFromCart(idForDel));
-              setTimeout(() => {
-                dispatch(fetchCards());
-              }, 1000);
               setModal(false);
             }}
           >
-            Delete
+            Sil
           </Button>
         </Modal.Footer>
       </Modal>

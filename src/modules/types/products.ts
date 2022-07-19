@@ -67,6 +67,27 @@ export interface ExtraField {
   updated: number;
 }
 
+/* Product variants */
+export interface Options {
+  vgrp_bWZ3l83Ke5kpEQ: string;
+  vgrp_QG375vPzLwrMOg: string;
+}
+
+export interface ProductVariants {
+  id: string;
+  sku: string;
+  description: string;
+  inventory: number;
+  price: Price;
+  is_valid: boolean;
+  invalid_reason_code?: any;
+  meta?: any;
+  created: number;
+  updated: number;
+  options: Options;
+  assets: any[];
+}
+
 export interface IProduct {
   id: string;
   created: number;
@@ -102,4 +123,5 @@ export interface IProducts {
   allProducts: IProduct[];
   categoryProducts: IProduct[];
   singleProduct: IProduct | null;
+  productVariants: ProductVariants[];
 }

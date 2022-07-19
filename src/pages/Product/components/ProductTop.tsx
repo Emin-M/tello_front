@@ -48,17 +48,17 @@ const ProductTop: FC = () => {
   };
 
   const addingToBasket = () => {
-    if (id && items?.id) {
+    if (id) {
       dispatch(
         addProductToBasket({
           id: id,
           quantity: orderCount,
         })
       );
-      setTimeout(() => {
-        dispatch(fetchCards());
-        setOrderCount(1);
-      }, 1000);
+      // setTimeout(() => {
+      //   dispatch(fetchCards());
+      //   setOrderCount(1);
+      // }, 1000);
     }
   };
 

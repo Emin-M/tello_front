@@ -62,3 +62,15 @@ export const fetchProductById = createAsyncThunk(
     }
   }
 );
+
+export const fetchProductVariants = createAsyncThunk(
+  "products/fetchProductVariants",
+  async (id: string) => {
+    try {
+      const response = await api.get(`/products/${id}/variants`);
+      return response?.data?.data;
+    } catch (error: any) {
+      console.log(error);
+    }
+  }
+);

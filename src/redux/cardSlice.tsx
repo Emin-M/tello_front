@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ICards } from "../modules/types/card";
-import { fetchCards, updateItemInCart } from "./actions/cardActions";
+import {
+  addProductToBasket,
+  deleteItemFromCart,
+  fetchCards,
+  updateItemInCart,
+} from "./actions/cardActions";
 
 const initialState: ICards = {
   loading: false,
@@ -13,6 +18,7 @@ export const cardSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    /* Fetching Card Products */
     builder.addCase(fetchCards.pending, (state) => {
       return (state = { ...state, loading: true });
     });
@@ -20,6 +26,24 @@ export const cardSlice = createSlice({
       localStorage.setItem("cartId", payload.id);
       return (state = { ...state, loading: false, items: payload });
     });
+
+    /* Adding Item To Card */
+    builder.addCase(addProductToBasket.pending, (state) => {
+      return (state = { ...state, loading: true });
+    });
+    builder.addCase(addProductToBasket.fulfilled, (state, { payload }) => {
+      return (state = { ...state, loading: false, items: payload.cart });
+    });
+
+    /* Deleting Item From Card */
+    builder.addCase(deleteItemFromCart.pending, (state) => {
+      return (state = { ...state, loading: true });
+    });
+    builder.addCase(deleteItemFromCart.fulfilled, (state, { payload }) => {
+      return (state = { ...state, loading: false, items: payload.cart });
+    });
+
+    /* Update Item In Card */
     builder.addCase(updateItemInCart.pending, (state) => {
       return (state = { ...state, updateLoading: true });
     });
