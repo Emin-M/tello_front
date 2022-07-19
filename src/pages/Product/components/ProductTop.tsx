@@ -54,7 +54,7 @@ const ProductTop: FC = () => {
     productVariants?.map((productVariant) => {
       let variantSkuArray = productVariant?.sku?.split(",");
       if (
-        variantSkuArray?.includes(option_1.toUpperCase()) &&
+        variantSkuArray?.includes(option_1?.toUpperCase()) &&
         variantSkuArray?.includes(option_2)
       ) {
         setProduct(productVariant);
