@@ -18,7 +18,7 @@ const Product = () => {
   useEffect(() => {
     id && dispatch(fetchProductById(id));
     id && dispatch(fetchProductVariants(id));
-  }, []);
+  }, [id]);
 
   return (
     <ProductContainer>
