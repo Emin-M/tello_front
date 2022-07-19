@@ -39,7 +39,7 @@ const ProductTop: FC = () => {
     setProduct(null);
     setOption_1("");
     setOption_2("");
-  }, []);
+  }, [loading]);
 
   /* Setting Default Options */
   useEffect(() => {
