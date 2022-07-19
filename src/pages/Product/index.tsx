@@ -19,7 +19,9 @@ const Product = () => {
   useEffect(() => {
     id && dispatch(fetchProductById(id));
     id && dispatch(fetchProductVariants(id));
-    setValue(value + 1);
+    setTimeout(() => {
+      setValue(value + 1);
+    }, 1000);
   }, [id]);
 
   return (
