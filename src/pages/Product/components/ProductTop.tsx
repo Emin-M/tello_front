@@ -47,7 +47,7 @@ const ProductTop: FC = () => {
       setOption_1(singleProduct?.variant_groups?.[0]?.options?.[0].name);
       setOption_2(singleProduct?.variant_groups?.[1]?.options?.[0].name);
     }
-  }, [singleProduct?.name]);
+  }, [productVariants]);
 
   /* Selecting Product Option */
   useEffect(() => {
@@ -60,7 +60,7 @@ const ProductTop: FC = () => {
         setProduct(productVariant);
       }
     });
-  }, [singleProduct, product, option_1, option_2, loading]);
+  }, [productVariants, option_1, option_2]);
 
   /* Setting Main Image */
   useEffect(() => {
