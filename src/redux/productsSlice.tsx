@@ -3,7 +3,6 @@ import { IProducts } from "../modules/types/products";
 import {
   fetchProductById,
   fetchProducts,
-  fetchProductsByCategory,
   fetchProductVariants,
   filterProducts,
 } from "./actions/productActions";
@@ -38,18 +37,6 @@ export const productsSlice = createSlice({
       return (state = { ...state, loading: true });
     });
     builder.addCase(filterProducts.fulfilled, (state, action) => {
-      return (state = {
-        ...state,
-        loading: false,
-        categoryProducts: action.payload?.data,
-      });
-    });
-
-    /* Fetching Products By Category */
-    builder.addCase(fetchProductsByCategory.pending, (state) => {
-      return (state = { ...state, loading: true });
-    });
-    builder.addCase(fetchProductsByCategory.fulfilled, (state, action) => {
       return (state = {
         ...state,
         loading: false,

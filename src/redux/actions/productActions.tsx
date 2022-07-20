@@ -16,33 +16,21 @@ export const fetchProducts = createAsyncThunk(
 export const filterProducts = createAsyncThunk(
   "products/filterProducts",
   async ({
+    sortBy,
     direction,
     category,
   }: {
-    direction: string;
-    category: string[];
+    sortBy?: string;
+    direction?: string;
+    category?: string[];
   }) => {
     try {
       const response = await api.get("/products", {
         params: {
           category_slug: category,
-          sortBy: "price",
-          sortOrder: direction,
+          sortBy: sortBy,
+          sortDirection: direction,
         },
-      });
-      return response.data;
-    } catch (error: any) {
-      console.log(error);
-    }
-  }
-);
-
-export const fetchProductsByCategory = createAsyncThunk(
-  "products/fetchProductsByCategory",
-  async (category: string[]) => {
-    try {
-      const response = await api.get("/products", {
-        params: { category_slug: category },
       });
       return response.data;
     } catch (error: any) {

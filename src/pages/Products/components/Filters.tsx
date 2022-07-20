@@ -31,8 +31,9 @@ const Filters = ({ showFilter, setShowFilter }: IProps) => {
   /* Url */
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-  let params = searchParams.getAll("brand");
-  let paramsArray = params?.[0]?.split(",");
+  let paramsBrand = searchParams.getAll("brand");
+  let paramsSort = searchParams.getAll("sort");
+  let paramsArray = paramsBrand?.[0]?.split(",");
 
   /* Handle when checking checkbox */
   const handleChange = (event: any): void => {
@@ -41,14 +42,20 @@ const Filters = ({ showFilter, setShowFilter }: IProps) => {
     if (paramsArray?.includes(newParam)) {
       const index = paramsArray.indexOf(newParam);
       paramsArray.splice(index, 1);
-      setSearchParams(`brand=${paramsArray}`);
+      paramsSort
+        ? setSearchParams(`brand=${paramsArray}&sort=${paramsSort}`)
+        : setSearchParams(`brand=${paramsArray}`);
     } else {
-      paramsArray = [...params, newParam];
-      setSearchParams(`brand=${paramsArray}`);
+      paramsArray = [...paramsBrand, newParam];
+      paramsSort
+        ? setSearchParams(`brand=${paramsArray}&sort=${paramsSort}`)
+        : setSearchParams(`brand=${paramsArray}`);
     }
 
     if (paramsArray?.length === 0) {
-      setSearchParams("");
+      setSearchParams(`sort=${paramsSort}`);
+    } else if (paramsSort.length === 0) {
+      setSearchParams(`brand=${paramsArray}`);
     }
   };
 

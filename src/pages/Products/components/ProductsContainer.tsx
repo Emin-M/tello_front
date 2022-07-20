@@ -1,13 +1,9 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../redux/store";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
 import { IProduct } from "../../../modules/types/products";
 import Card from "../../../components/ReusuableComponents/Card";
-import {
-  fetchProductsByCategory,
-  filterProducts,
-} from "../../../redux/actions/productActions";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 /* Styles */
 import {
@@ -34,23 +30,34 @@ interface IProps {
 
 const ProductsContainer = ({ setShowFilter, filteredProducts }: IProps) => {
   const { loading } = useSelector((state: RootState) => state.products);
-  const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams();
   const [selectValue, setSelectValue] = useState<string>("new");
+
+  /* Url */
+  const [searchParams, setSearchParams] = useSearchParams();
+  let paramsBrand = searchParams.getAll("brand");
+  let paramsSort = searchParams.getAll("sort");
+  let paramsArray = paramsBrand?.[0]?.split(",");
+
+  useEffect(() => {
+    paramsSort?.[0]?.length > 0 && setSelectValue(paramsSort?.[0]);
+  }, [id]);
+
+  useEffect(() => {
+    if (paramsArray?.length > 0 && selectValue !== "new") {
+      setSearchParams(`brand=${paramsArray}&sort=${selectValue}`);
+    } else if (paramsArray?.length > 0 && selectValue === "new") {
+      setSearchParams(`brand=${paramsArray}`);
+    } else if (selectValue !== "new") {
+      setSearchParams(`sort=${selectValue}`);
+    } else if (selectValue === "new") {
+      setSearchParams("");
+    }
+  }, [selectValue, id]);
 
   const onChange = (event: SelectChangeEvent) => {
     const value = event.target.value;
     setSelectValue(value);
-    if (value === "new" && id) {
-      dispatch(fetchProductsByCategory([id]));
-    } else if (id && value) {
-      dispatch(
-        filterProducts({
-          direction: value,
-          category: [id],
-        })
-      );
-    }
   };
 
   return (
