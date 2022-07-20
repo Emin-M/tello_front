@@ -114,6 +114,7 @@ const ProductTop: FC = () => {
             })
           );
     }
+    setOrderCount(1);
   };
 
   return (
