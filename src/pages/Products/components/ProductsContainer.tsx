@@ -43,6 +43,7 @@ const ProductsContainer = ({ setShowFilter, filteredProducts }: IProps) => {
     paramsSort?.[0]?.length > 0 && setSelectValue(paramsSort?.[0]);
   }, [id]);
 
+  /* Changing URL When Filter Products */
   useEffect(() => {
     if (paramsArray?.length > 0 && selectValue !== "new") {
       setSearchParams(`brand=${paramsArray}&sort=${selectValue}`);
@@ -55,6 +56,7 @@ const ProductsContainer = ({ setShowFilter, filteredProducts }: IProps) => {
     }
   }, [selectValue, id]);
 
+  /* Changing Select */
   const onChange = (event: SelectChangeEvent) => {
     const value = event.target.value;
     setSelectValue(value);
@@ -77,9 +79,9 @@ const ProductsContainer = ({ setShowFilter, filteredProducts }: IProps) => {
           {loading ? (
             <Skeleton animation="wave" width={200} height={40} variant="text" />
           ) : filteredProducts.length > 0 ? (
-            filteredProducts.length + " mehsul tapildi"
+            filteredProducts.length + " məhsul tapıldı"
           ) : (
-            "0 mehsul tapildi"
+            "0 məhsul tapıldı"
           )}
         </p>
         <FormControl>
@@ -95,7 +97,13 @@ const ProductsContainer = ({ setShowFilter, filteredProducts }: IProps) => {
           </Select>
         </FormControl>
       </div>
-      <Cards>
+      <Cards
+        style={
+          filteredProducts.length > 2
+            ? { justifyContent: "space-between" }
+            : { justifyContent: "flex-start", gap: "20px" }
+        }
+      >
         {loading ? (
           <div
             style={{

@@ -78,7 +78,7 @@ const Navbar = () => {
       itemEl.classList.remove("active");
     });
 
-    /* adding "active class to the clicked item" */
+    /* adding active class to the clicked item */
     const element = event.currentTarget as HTMLLIElement;
     const child = element.lastChild as HTMLDivElement;
     showSubCategory && child.classList.add("active");

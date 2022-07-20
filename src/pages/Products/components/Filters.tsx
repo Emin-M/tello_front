@@ -42,20 +42,22 @@ const Filters = ({ showFilter, setShowFilter }: IProps) => {
     if (paramsArray?.includes(newParam)) {
       const index = paramsArray.indexOf(newParam);
       paramsArray.splice(index, 1);
-      paramsSort
+      paramsSort.length > 0
         ? setSearchParams(`brand=${paramsArray}&sort=${paramsSort}`)
         : setSearchParams(`brand=${paramsArray}`);
     } else {
       paramsArray = [...paramsBrand, newParam];
-      paramsSort
+      paramsSort.length > 0
         ? setSearchParams(`brand=${paramsArray}&sort=${paramsSort}`)
         : setSearchParams(`brand=${paramsArray}`);
     }
 
-    if (paramsArray?.length === 0) {
+    if (paramsArray?.length === 0 && paramsSort.length > 0) {
       setSearchParams(`sort=${paramsSort}`);
-    } else if (paramsSort.length === 0) {
+    } else if (paramsArray?.length > 0 && paramsSort.length === 0) {
       setSearchParams(`brand=${paramsArray}`);
+    } else if (paramsArray?.length === 0 && paramsSort.length === 0) {
+      setSearchParams("");
     }
   };
 

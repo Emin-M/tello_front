@@ -64,7 +64,6 @@ export const StyledCard = styled.div`
   }
 
   span {
-    /* margin-left: 8px; */
     margin-right: 5px;
   }
 
@@ -72,5 +71,14 @@ export const StyledCard = styled.div`
     margin-right: 2px;
     font-size: 14px;
     color: #828282;
+  }
+
+  @media (max-width: 850px) {
+    width: 100% !important;
+    margin-left: 20px;
+  }
+
+  @media (max-width: 650px) {
+    margin: 0;
   }
 `;

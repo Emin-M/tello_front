@@ -70,16 +70,12 @@ export const Cards = styled.div`
   }
 
   @media (max-width: 1000px) {
-    flex: 1;
-
     > div {
       width: 47%;
     }
   }
 
   @media (max-width: 650px) {
-    flex: 1;
-
     > div {
       width: 100%;
     }

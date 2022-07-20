@@ -19,7 +19,6 @@ const Products = () => {
   /* Url */
   const [searchParams, setSearchParams] = useSearchParams();
   let paramsSort = searchParams.getAll("sort");
-  console.log(paramsSort?.[0]);
 
   useEffect(() => {
     if (id && paramsSort?.[0]) {
