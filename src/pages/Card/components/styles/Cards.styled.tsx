@@ -182,6 +182,8 @@ export const CardRight = styled.div`
   }
 
   @media (max-width: 850px) {
+    margin-bottom: 20px;
+
     button {
       margin-top: 0;
       margin-bottom: 30px;
