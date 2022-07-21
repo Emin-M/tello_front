@@ -67,3 +67,14 @@ export const updateItemInCart = createAsyncThunk(
     }
   }
 );
+
+export const emptyCard = createAsyncThunk("card/emptyCard", async () => {
+  let cartId = localStorage.getItem("cartId") || "";
+  try {
+    const response = await api.delete(`/carts/${cartId}/items`);
+    alertSuccess("Səbət boşaldıldı!");
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+});

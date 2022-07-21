@@ -1,11 +1,17 @@
 import { FC, useState } from "react";
-import { CardsStyled, CardTotal, SingleCard } from "./styles/Cards.styled";
+import {
+  CardRight,
+  CardsStyled,
+  CardTotal,
+  SingleCard,
+} from "./styles/Cards.styled";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
 import { ILineItem } from "../../../modules/types/card";
 import {
   deleteItemFromCart,
+  emptyCard,
   updateItemInCart,
 } from "../../../redux/actions/cardActions";
 import { Button, Modal, Spinner } from "react-bootstrap";
@@ -21,6 +27,7 @@ const Cards: FC = () => {
   );
   const dispatch = useDispatch<AppDispatch>();
   const [modal, setModal] = useState<boolean>(false);
+  const [modal2, setModal2] = useState<boolean>(false);
   const [idForDel, setIdForDel] = useState<string>("");
   const [nameForDel, setNameForDel] = useState<string>("");
   const [updateId, setUpdateId] = useState<string>("");
@@ -40,6 +47,11 @@ const Cards: FC = () => {
       dispatch(updateItemInCart({ id, quantity }));
     }
   };
+
+  window.addEventListener("click", () => {
+    setModal(false);
+    setModal2(false);
+  });
 
   return (
     <>
@@ -69,11 +81,12 @@ const Cards: FC = () => {
               </div>
               <div className="quantity">
                 <div
-                  onClick={() => {
+                  onClick={(e) => {
                     updateCard("-", item.id, item.quantity);
                     setIdForDel(item.id);
-                    setNameForDel(item.name);
+                    setNameForDel(item.variant?.description);
                     setUpdateId(item.id);
+                    e.stopPropagation();
                   }}
                 >
                   <img src={minus} alt="minus" />
@@ -98,10 +111,11 @@ const Cards: FC = () => {
               </div>
               <div
                 className="delete"
-                onClick={() => {
+                onClick={(e) => {
                   setModal(true);
                   setIdForDel(item.id);
                   setNameForDel(item.name);
+                  e.stopPropagation();
                 }}
               >
                 <img src={del} alt="delete" />
@@ -109,26 +123,38 @@ const Cards: FC = () => {
             </SingleCard>
           ))}
         </div>
-        <CardTotal>
-          <h2>Ümumi</h2>
-          <p>
-            <span>Məbləğ</span>
-            <span>{items?.subtotal.formatted_with_code}</span>
-          </p>
-          <p>
-            <span>Çatdırılma</span>
-            <span>0.00 USD</span>
-          </p>
-          <p>
-            <span>Cəmi</span>
-            <span>{items?.subtotal.formatted_with_code}</span>
-          </p>
-        </CardTotal>
+        <CardRight>
+          <CardTotal>
+            <h2>Ümumi</h2>
+            <p>
+              <span>Məbləğ</span>
+              <span>{items?.subtotal.formatted_with_code}</span>
+            </p>
+            <p>
+              <span>Çatdırılma</span>
+              <span>0.00 USD</span>
+            </p>
+            <p>
+              <span>Cəmi</span>
+              <span>{items?.subtotal.formatted_with_code}</span>
+            </p>
+          </CardTotal>
+          <button
+            onClick={(e) => {
+              setModal2(true);
+              e.stopPropagation();
+            }}
+          >
+            Səbəti təmizlə
+          </button>
+          <button>Səbəti təsdiqlə</button>
+        </CardRight>
       </CardsStyled>
       <Modal
         className="modal-header"
         show={modal}
         onHide={() => setModal(false)}
+        onClick={(e: { stopPropagation: () => any }) => e.stopPropagation()}
         backdrop="static"
         keyboard={false}
         size="lg"
@@ -163,6 +189,44 @@ const Cards: FC = () => {
             }}
           >
             Sil
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal
+        className="modal-header"
+        show={modal2}
+        onHide={() => setModal2(false)}
+        onClick={(e: { stopPropagation: () => any }) => e.stopPropagation()}
+        backdrop="static"
+        keyboard={false}
+        size="lg"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Səbəti Boşaltmaq!</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>Səbəti boşaltmaq istədiyinizə əminsiniz?</Modal.Body>
+
+        <Modal.Footer>
+          <Button
+            rel="noreferrer"
+            variant="danger"
+            disabled
+            onClick={() => setModal2(false)}
+          >
+            Geri
+          </Button>
+          <Button
+            rel="noreferrer"
+            variant="primary"
+            disabled
+            onClick={() => {
+              dispatch(emptyCard());
+              setModal(false);
+            }}
+          >
+            Təmizlə
           </Button>
         </Modal.Footer>
       </Modal>

@@ -3,6 +3,7 @@ import { ICards } from "../modules/types/card";
 import {
   addProductToBasket,
   deleteItemFromCart,
+  emptyCard,
   fetchCards,
   updateItemInCart,
 } from "./actions/cardActions";
@@ -53,6 +54,14 @@ export const cardSlice = createSlice({
         items: payload.cart,
         updateLoading: false,
       });
+    });
+
+    /* Deleting All Items From Card */
+    builder.addCase(emptyCard.pending, (state) => {
+      return (state = { ...state, loading: true });
+    });
+    builder.addCase(emptyCard.fulfilled, (state, { payload }) => {
+      return (state = { ...state, loading: false, items: payload.cart });
     });
   },
 });

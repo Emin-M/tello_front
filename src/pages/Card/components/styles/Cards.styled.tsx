@@ -73,10 +73,10 @@ export const SingleCard = styled.div`
 
     p {
       margin-right: 20px;
-    }
 
-    span {
-      margin-right: 10px;
+      span {
+        margin-right: 10px;
+      }
     }
   }
 
@@ -133,17 +133,56 @@ export const SingleCard = styled.div`
       p {
         margin-right: 10px;
         margin-bottom: 10px;
-      }
 
-      span {
-        margin-right: 5px;
+        span:nth-child(1) {
+          display: none;
+        }
+
+        span {
+          margin-right: 5px;
+        }
       }
     }
 
     .quantity {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       position: absolute;
-      bottom: 30px;
+      bottom: 20px;
       right: 24px;
+      height: 40px;
+      width: 125px;
+    }
+  }
+`;
+
+export const CardRight = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  button {
+    margin-top: 20px;
+    outline: none;
+    border: 1px solid #2dd06e;
+    border-radius: 8px;
+    width: 100%;
+    height: 48px;
+    background: #ffffff;
+    transition: all 0.3s;
+    font-size: 20px;
+
+    &:hover {
+      background: #2dd06e;
+      color: #ffffff;
+    }
+  }
+
+  @media (max-width: 850px) {
+    button {
+      margin-top: 0;
+      margin-bottom: 30px;
     }
   }
 `;
@@ -153,7 +192,7 @@ export const CardTotal = styled.div`
   justify-content: center;
   flex-direction: column;
   align-self: flex-start;
-  flex: 1;
+  width: 100%;
   background: #ffffff;
   padding: 32px 24px;
   border-radius: 16px;
@@ -186,6 +225,6 @@ export const CardTotal = styled.div`
 
   @media (max-width: 850px) {
     width: 100%;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
   }
 `;
