@@ -84,9 +84,11 @@ const Cards: FC = () => {
                   onClick={(e) => {
                     updateCard("-", item.id, item.quantity);
                     setIdForDel(item.id);
-                    setNameForDel(item.variant?.description);
                     setUpdateId(item.id);
                     e.stopPropagation();
+                    item.variant
+                      ? setNameForDel(item.variant?.description)
+                      : setNameForDel(item.name);
                   }}
                 >
                   <img src={minus} alt="minus" />
@@ -114,8 +116,10 @@ const Cards: FC = () => {
                 onClick={(e) => {
                   setModal(true);
                   setIdForDel(item.id);
-                  setNameForDel(item.name);
                   e.stopPropagation();
+                  item.variant
+                    ? setNameForDel(item.variant?.description)
+                    : setNameForDel(item.name);
                 }}
               >
                 <img src={del} alt="delete" />

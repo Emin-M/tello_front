@@ -21,7 +21,7 @@ const ProductsBottom: FC = () => {
   let paramsArray = params?.[0]?.split(",");
 
   /* Filtering Products */
-  let [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
+  let filteredProducts: IProduct[] = [];
 
   const filterProductsByBrands = () => {
     paramsArray?.length > 0
