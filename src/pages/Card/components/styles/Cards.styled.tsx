@@ -163,6 +163,7 @@ export const CardRight = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+  min-width: 250px;
 
   button {
     margin-top: 20px;

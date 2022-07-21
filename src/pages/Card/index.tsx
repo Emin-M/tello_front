@@ -20,28 +20,20 @@ const Card: FC = () => {
           <div
             style={{
               display: "flex",
-              gap: "20px",
+              flexDirection: "column",
               overflowX: "hidden",
             }}
           >
-            <div>
-              <Skeleton
-                animation="wave"
-                width={1000}
-                height={150}
-                variant="text"
-              />
-              <Skeleton
-                animation="wave"
-                width={1000}
-                height={150}
-                variant="text"
-              />
-            </div>
             <Skeleton
               animation="wave"
-              width={400}
-              height={300}
+              width={1500}
+              height={150}
+              variant="text"
+            />
+            <Skeleton
+              animation="wave"
+              width={1500}
+              height={150}
               variant="text"
             />
           </div>
