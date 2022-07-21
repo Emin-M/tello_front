@@ -82,6 +82,8 @@ export const SingleCard = styled.div`
 
   .quantity {
     display: flex;
+    align-items: center;
+    height: 40px;
     flex: 1;
     margin-right: 10px;
 
