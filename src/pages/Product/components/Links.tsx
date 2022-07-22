@@ -25,7 +25,7 @@ const Links: FC = () => {
           {loading ? (
             <Skeleton variant="text" animation="wave" width={100} height={30} />
           ) : (
-            singleProduct?.name
+            singleProduct?.sku
           )}
         </p>
       </li>
