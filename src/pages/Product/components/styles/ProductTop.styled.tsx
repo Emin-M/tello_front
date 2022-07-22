@@ -131,7 +131,6 @@ export const ProductFilter = styled.div`
       height: 40px;
       border-radius: 50%;
       cursor: pointer;
-      /* padding: 8px; */
 
       span {
         display: block;
@@ -142,7 +141,6 @@ export const ProductFilter = styled.div`
     }
 
     .active {
-      /* transform: scale(1.2); */
       border: 1px solid #2dd06e;
     }
   }
@@ -153,14 +151,15 @@ export const ProductFilter = styled.div`
 
     li {
       padding: 10px 14px;
-      background: #4f4f4f;
+      background: #f2f2f2;
       border-radius: 8px;
-      color: #ffffff;
+      color: #4f4f4f;
       cursor: pointer;
     }
 
     .active {
-      background: #828282 !important;
+      background: #4f4f4f !important;
+      color: #ffffff;
     }
   }
 

@@ -110,44 +110,44 @@ const ProductsContainer = ({ setShowFilter, filteredProducts }: IProps) => {
               display: "flex",
               justifyContent: "space-between",
               flexWrap: "wrap",
-              gap: "22px",
+              rowGap: "22px",
               width: "100%",
             }}
           >
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={300}
+              width={280}
               height={380}
             />
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={300}
+              width={280}
               height={380}
             />
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={300}
+              width={280}
               height={380}
             />
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={300}
+              width={280}
               height={380}
             />
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={300}
+              width={280}
               height={380}
             />
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={300}
+              width={280}
               height={380}
             />
           </div>
