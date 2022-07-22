@@ -24,7 +24,7 @@ const ProductTop: FC = () => {
   const { singleProduct, productVariants, loading } = useSelector(
     (state: RootState) => state.products
   );
-  const [mainImage, setMainImage] = useState<string>();
+  const [mainImage, setMainImage] = useState<string>("");
   const [imageOrder, setImageOrder] = useState<number>(0);
   const [orderCount, setOrderCount] = useState<number>(1);
   const dispatch = useDispatch<AppDispatch>();
@@ -39,7 +39,7 @@ const ProductTop: FC = () => {
     setProduct(null);
     setOption_1("");
     setOption_2("");
-  }, [loading]);
+  }, []);
 
   /* Setting Default Options */
   useEffect(() => {
@@ -47,14 +47,15 @@ const ProductTop: FC = () => {
       setOption_1(singleProduct?.variant_groups?.[0]?.options?.[0].name);
       setOption_2(singleProduct?.variant_groups?.[1]?.options?.[0].name);
     }
-  }, [productVariants]);
+  }, [singleProduct]);
 
   /* Selecting Product Option */
   useEffect(() => {
     productVariants?.map((productVariant) => {
       let variantSkuArray = productVariant?.sku?.split(",");
+
       if (
-        variantSkuArray?.includes(option_1?.toUpperCase()) &&
+        variantSkuArray?.includes(option_1) &&
         variantSkuArray?.includes(option_2)
       ) {
         setProduct(productVariant);
@@ -226,6 +227,7 @@ const ProductTop: FC = () => {
                 <ul>
                   {variant.options?.map((option: any) => (
                     <li
+                      className={`${option_1 === option.name ? "active" : ""}`}
                       key={option.name}
                       onClick={() => setOption_1(option.name)}
                     >
@@ -237,10 +239,12 @@ const ProductTop: FC = () => {
                 <ul>
                   {variant.options.map((option: any) => (
                     <li
+                      className={`${option_2 === option.name ? "active" : ""}`}
                       key={option.name}
                       onClick={() => setOption_2(option.name)}
-                      style={{ background: option.name }}
-                    ></li>
+                    >
+                      <span style={{ background: option.name }}></span>
+                    </li>
                   ))}
                 </ul>
               )}

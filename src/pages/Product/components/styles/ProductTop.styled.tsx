@@ -124,10 +124,26 @@ export const ProductFilter = styled.div`
     padding: 25px 0;
 
     li {
-      width: 32px;
-      height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       cursor: pointer;
+      /* padding: 8px; */
+
+      span {
+        display: block;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+      }
+    }
+
+    .active {
+      /* transform: scale(1.2); */
+      border: 1px solid #2dd06e;
     }
   }
 
@@ -141,6 +157,10 @@ export const ProductFilter = styled.div`
       border-radius: 8px;
       color: #ffffff;
       cursor: pointer;
+    }
+
+    .active {
+      background: #828282 !important;
     }
   }
 
