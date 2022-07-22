@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import { filterProducts } from "../../redux/actions/productActions";
+import { fetchProducts } from "../../redux/actions/productActions";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 
@@ -18,25 +18,35 @@ const Products = () => {
 
   /* Url */
   const [searchParams, setSearchParams] = useSearchParams();
+  let paramsBrand = searchParams.getAll("brand");
   let paramsSort = searchParams.getAll("sort");
+  let page = searchParams.getAll("page");
 
   useEffect(() => {
+    let params = { query: paramsBrand?.[0], page: page?.[0] };
+
     if (id && paramsSort?.[0]) {
       dispatch(
-        filterProducts({
+        fetchProducts({
+          limit: 6,
           sortBy: "price",
           direction: paramsSort?.[0],
           category: [id],
+          query: params.query,
+          page: params.page,
         })
       );
     } else if (id && !paramsSort?.[0]) {
       dispatch(
-        filterProducts({
+        fetchProducts({
+          limit: 6,
+          query: params.query,
+          page: params.page,
           category: [id],
         })
       );
     }
-  }, [paramsSort?.[0], id]);
+  }, [searchParams, id]);
 
   return (
     <StyledProductsContainer>

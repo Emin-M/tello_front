@@ -16,7 +16,7 @@ interface Props {
 }
 
 const CardContainer = ({ title, link }: Props) => {
-  const { allProducts, loading } = useSelector(
+  const { products, loading } = useSelector(
     (state: RootState) => state.products
   );
 
@@ -64,7 +64,7 @@ const CardContainer = ({ title, link }: Props) => {
               />
             </div>
           ) : (
-            allProducts
+            products
               ?.slice(0, 4)
               .map((product: IProduct) => (
                 <Card key={product.id} product={product} />

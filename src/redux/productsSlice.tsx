@@ -4,13 +4,11 @@ import {
   fetchProductById,
   fetchProducts,
   fetchProductVariants,
-  filterProducts,
 } from "./actions/productActions";
 
 const initialState: IProducts = {
   loading: false,
-  allProducts: [],
-  categoryProducts: [],
+  products: [],
   singleProduct: null,
   productVariants: [],
 };
@@ -20,7 +18,7 @@ export const productsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    /* Fetching All Products */
+    /* Fetching Products */
     builder.addCase(fetchProducts.pending, (state) => {
       return (state = { ...state, loading: true });
     });
@@ -28,19 +26,7 @@ export const productsSlice = createSlice({
       return (state = {
         ...state,
         loading: false,
-        allProducts: action.payload.data,
-      });
-    });
-
-    /* Filtering Products */
-    builder.addCase(filterProducts.pending, (state) => {
-      return (state = { ...state, loading: true });
-    });
-    builder.addCase(filterProducts.fulfilled, (state, action) => {
-      return (state = {
-        ...state,
-        loading: false,
-        categoryProducts: action.payload?.data,
+        products: action.payload.data || [],
       });
     });
 

@@ -31,7 +31,7 @@ import homeImg from "../../assets/images/home/homeImg.png";
 const Home: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchProducts({ limit: 20 }));
   }, []);
 
   /* Sliders Settings */

@@ -25,11 +25,12 @@ import filter from "../../../assets/svg/filter.svg";
 
 interface IProps {
   setShowFilter: (value: boolean | ((prevVar: boolean) => boolean)) => void;
-  filteredProducts: IProduct[];
 }
 
-const ProductsContainer = ({ setShowFilter, filteredProducts }: IProps) => {
-  const { loading } = useSelector((state: RootState) => state.products);
+const ProductsContainer = ({ setShowFilter }: IProps) => {
+  const { products, loading } = useSelector(
+    (state: RootState) => state.products
+  );
   const { id } = useParams();
   const [selectValue, setSelectValue] = useState<string>("new");
 
@@ -78,8 +79,8 @@ const ProductsContainer = ({ setShowFilter, filteredProducts }: IProps) => {
         <p>
           {loading ? (
             <Skeleton animation="wave" width={200} height={40} variant="text" />
-          ) : filteredProducts.length > 0 ? (
-            filteredProducts.length + " məhsul tapıldı"
+          ) : products.length > 0 ? (
+            products.length + " məhsul tapıldı"
           ) : (
             "0 məhsul tapıldı"
           )}
@@ -99,7 +100,7 @@ const ProductsContainer = ({ setShowFilter, filteredProducts }: IProps) => {
       </div>
       <Cards
         style={
-          filteredProducts.length > 2
+          products?.length > 2
             ? { justifyContent: "space-between" }
             : { justifyContent: "flex-start", gap: "20px" }
         }
@@ -117,42 +118,42 @@ const ProductsContainer = ({ setShowFilter, filteredProducts }: IProps) => {
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={280}
+              width={330}
               height={380}
             />
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={280}
+              width={330}
               height={380}
             />
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={280}
+              width={330}
               height={380}
             />
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={280}
+              width={330}
               height={380}
             />
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={280}
+              width={330}
               height={380}
             />
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={280}
+              width={330}
               height={380}
             />
           </div>
         ) : (
-          filteredProducts?.map((product: IProduct) => (
+          products?.map((product: IProduct) => (
             <Card key={product?.id} product={product} />
           ))
         )}

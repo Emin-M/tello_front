@@ -120,8 +120,7 @@ export interface IProduct {
 export interface IProducts {
   loading: boolean;
   // error: string;
-  allProducts: IProduct[];
-  categoryProducts: IProduct[];
+  products: IProduct[];
   singleProduct: IProduct | null;
   productVariants: ProductVariants[];
 }

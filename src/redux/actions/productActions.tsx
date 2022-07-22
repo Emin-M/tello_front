@@ -3,26 +3,20 @@ import api from "../../api/api";
 
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
-  async () => {
-    try {
-      const response = await api.get("/products");
-      return response.data;
-    } catch (error: any) {
-      console.log(error);
-    }
-  }
-);
-
-export const filterProducts = createAsyncThunk(
-  "products/filterProducts",
   async ({
+    limit,
     sortBy,
     direction,
     category,
+    query,
+    page,
   }: {
+    limit?: number;
     sortBy?: string;
     direction?: string;
     category?: string[];
+    query?: string;
+    page?: string;
   }) => {
     try {
       const response = await api.get("/products", {
@@ -30,6 +24,9 @@ export const filterProducts = createAsyncThunk(
           category_slug: category,
           sortBy: sortBy,
           sortDirection: direction,
+          limit: limit,
+          query: query,
+          page: page,
         },
       });
       return response.data;
