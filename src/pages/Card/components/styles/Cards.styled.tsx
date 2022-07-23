@@ -10,7 +10,7 @@ export const CardsStyled = styled.div`
   }
 
   @media (max-width: 850px) {
-    flex-direction: column;
+    flex-direction: column-reverse;
 
     > div:nth-child(1) {
       padding-top: 0;

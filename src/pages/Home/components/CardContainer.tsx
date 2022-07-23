@@ -41,26 +41,30 @@ const CardContainer = ({ title, link }: Props) => {
               <Skeleton
                 variant="rectangular"
                 animation="wave"
-                width={350}
-                height={305}
+                width="25%"
+                height={300}
+                className="skeleton_home"
               />
               <Skeleton
                 variant="rectangular"
                 animation="wave"
-                width={350}
-                height={305}
+                width="25%"
+                height={300}
+                className="skeleton_home skeleton_home_res"
               />
               <Skeleton
                 variant="rectangular"
                 animation="wave"
-                width={350}
-                height={305}
+                width="25%"
+                height={300}
+                className="skeleton_home  skeleton_home_res"
               />
               <Skeleton
                 variant="rectangular"
                 animation="wave"
-                width={350}
-                height={305}
+                width="25%"
+                height={300}
+                className="skeleton_home skeleton_home_res"
               />
             </div>
           ) : (

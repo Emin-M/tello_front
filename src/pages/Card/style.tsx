@@ -21,4 +21,8 @@ export const CardTop = styled.div`
     line-height: 28px;
     color: #4f4f4f;
   }
+
+  @media (max-width: 850px) {
+    padding: 20px 0;
+  }
 `;

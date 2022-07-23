@@ -118,38 +118,44 @@ const ProductsContainer = ({ setShowFilter }: IProps) => {
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={330}
-              height={380}
+              width="30%"
+              height="300px"
+              className="skeleton"
             />
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={330}
-              height={380}
+              width="30%"
+              height="300px"
+              className="skeleton"
             />
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={330}
-              height={380}
+              width="30%"
+              height="300px"
+              className="skeleton"
             />
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={330}
-              height={380}
+              width="30%"
+              height="300px"
+              className="skeleton"
             />
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={330}
-              height={380}
+              width="30%"
+              height="300px"
+              className="skeleton"
             />
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={330}
-              height={380}
+              width="30%"
+              height="300px"
+              className="skeleton"
             />
           </div>
         ) : (

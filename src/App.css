@@ -36,3 +36,18 @@ h1,
 .css-1elwnq4-MuiPaper-root-MuiAccordion-root.Mui-expanded {
     margin: 0 !important;
 }
+
+/* Skeleton */
+@media (max-width: 650px) {
+    .skeleton {
+        width: 100% !important;
+    }
+
+    .skeleton_home {
+        width: 100% !important;
+    }
+
+    .skeleton_home_res {
+        display: none !important;
+    }
+}
