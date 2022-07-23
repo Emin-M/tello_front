@@ -105,12 +105,10 @@ const Navbar = () => {
   }, [searchResults]);
 
   /* Setting recentSearches To LocalStorage */
-
-  // SaveToLocalStorage
   useEffect(() => {
     const localTerms = localStorage.getItem("terms") || "";
-    const parsedLocalTerms = JSON.parse(localTerms);
-    setRecentSearchs(parsedLocalTerms);
+    const parsedLocalTerms = localTerms && JSON.parse(localTerms);
+    parsedLocalTerms?.length > 0 && setRecentSearchs(parsedLocalTerms);
   }, []);
 
   useEffect(() => {
@@ -169,15 +167,15 @@ const Navbar = () => {
                 }}
               />
               {showSearch &&
-                searchResult.length === 0 &&
-                (debouncedTerm?.length === 0 && searchResult.length === 0 ? (
+                searchResult?.length === 0 &&
+                (debouncedTerm?.length === 0 && searchResult?.length === 0 ? (
                   <NavbarInputSearch onClick={(e) => e.stopPropagation()}>
                     <div>
                       <h2>Son axtarışlar</h2>
                       <p onClick={() => setRecentSearchs([])}>Təmizlə</p>
                     </div>
                     <div>
-                      {recentSearchs.map((recentSearch) => (
+                      {recentSearchs?.map((recentSearch) => (
                         <div
                           key={Math.random()}
                           onClick={() => setTerm(recentSearch)}
