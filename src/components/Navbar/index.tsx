@@ -91,6 +91,32 @@ const Navbar = () => {
     element.classList.remove("active");
   };
 
+  /* Search Part */
+  const [showSearch, setShowSearch] = useState<boolean>(false);
+  const [recentSearchs, setRecentSearchs] = useState<string[]>([]);
+  const [term, setTerm] = useState<string>("");
+  const [debouncedTerm, setDebouncedTerm] = useState<string>("");
+
+  useEffect(() => {
+    const termId = setTimeout(() => {
+      setDebouncedTerm(term);
+    }, 1000);
+
+    return () => clearInterval(termId);
+  }, [term]);
+
+  useEffect(() => {
+    if (debouncedTerm.length > 0) {
+      !recentSearchs.includes(debouncedTerm) &&
+        setRecentSearchs([...recentSearchs, debouncedTerm]);
+    }
+  }, [debouncedTerm]);
+
+  window.addEventListener("click", () => {
+    setShowSearch(false);
+    setTerm("");
+  });
+
   return (
     <NavbarContainer>
       <Container>
@@ -115,19 +141,55 @@ const Navbar = () => {
           </NavbarLogo>
           <NavbarSearch>
             <NavbarInput>
-              <img src={search} alt="search" />
-              <input type="text" placeholder="Axtarış..." />
-              <NavbarInputSearch>
-                <div>
-                  <h2>Son axtarışlar</h2>
-                  <p>Təmizlə</p>
-                </div>
-                <div>
-                  <Link to="/">IPhone</Link>
-                  <Link to="/">Samsung TV</Link>
-                  <Link to="/">Asus ROG Phone</Link>
-                </div>
-              </NavbarInputSearch>
+              <div>
+                <img src={search} alt="search" />
+              </div>
+              <input
+                onChange={(e) => setTerm(e.target.value)}
+                type="text"
+                value={term}
+                placeholder="Axtarış..."
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowSearch(true);
+                }}
+              />
+              {showSearch && true && (
+                <NavbarInputSearch onClick={(e) => e.stopPropagation()}>
+                  <div>
+                    <h2>Son axtarışlar</h2>
+                    <p onClick={() => setRecentSearchs([])}>Təmizlə</p>
+                  </div>
+                  <div>
+                    {recentSearchs.map((recentSearch) => (
+                      <div
+                        key={Math.random()}
+                        onClick={() => setTerm(recentSearch)}
+                      >
+                        <p>{recentSearch}</p>
+                      </div>
+                    ))}
+                  </div>
+                </NavbarInputSearch>
+              )}
+              {showSearch && false && (
+                <NavbarInputSearch onClick={(e) => e.stopPropagation()}>
+                  <div>
+                    <h2>Nəticələr</h2>
+                    <p onClick={() => console.log("clear results")}>Təmizlə</p>
+                  </div>
+                  <div>
+                    {recentSearchs.map((recentSearch) => (
+                      <div
+                        key={Math.random()}
+                        onClick={() => setTerm(recentSearch)}
+                      >
+                        <p>{recentSearch}</p>
+                      </div>
+                    ))}
+                  </div>
+                </NavbarInputSearch>
+              )}
             </NavbarInput>
           </NavbarSearch>
           <NavbarRight>

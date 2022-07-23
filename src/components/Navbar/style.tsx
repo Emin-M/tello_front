@@ -72,6 +72,10 @@ export const NavbarInput = styled.div`
   border-radius: 8px;
   padding-left: 16px;
 
+  img {
+    cursor: pointer;
+  }
+
   input {
     border: none;
     outline: none;
@@ -80,10 +84,10 @@ export const NavbarInput = styled.div`
     padding: 0 20px;
     background: inherit;
 
-    &:focus ~ div {
+    /* &:focus ~ div {
       display: block;
       opacity: 1;
-    }
+    } */
 
     &::placeholder {
       font-size: 15px;
@@ -103,8 +107,6 @@ export const NavbarInputSearch = styled.div`
   border: 1px solid #f5f5f5;
   border-top: none;
   border-radius: 0 0 8px;
-  display: none;
-  opacity: 0;
   background: #ffffff;
   z-index: 1;
 
@@ -139,13 +141,14 @@ export const NavbarInputSearch = styled.div`
     gap: 22px;
     flex-wrap: wrap;
 
-    a {
+    p {
       font-size: 16px;
       line-height: 20px;
       color: #4f4f4f;
       padding: 3px 9px;
       background: #edf1f7;
       border-radius: 4px;
+      cursor: pointer;
     }
   }
 `;
