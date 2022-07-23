@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { IProduct } from "../../../modules/types/products";
@@ -63,12 +63,21 @@ const ProductsContainer = ({ setShowFilter }: IProps) => {
     setSelectValue(value);
   };
 
+  const onChangeMobile = (event: ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+    setSelectValue(value);
+  };
+
   return (
     <StyledProductsContainer>
       <StyledFilters>
         <div>
           <img src={swap} alt="swap" />
-          <p>Sıralama</p>
+          <select onChange={(e) => onChangeMobile(e)} value={selectValue}>
+            <option value="new">Sıralama</option>
+            <option value="asc">Ucuzdan bahaya</option>
+            <option value="desc">Bahadan ucuza</option>
+          </select>
         </div>
         <div onClick={() => setShowFilter(true)}>
           <img src={filter} alt="filter" />

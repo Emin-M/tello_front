@@ -41,6 +41,12 @@ export const StyledFilters = styled.div`
     background: #edf1f7;
   }
 
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+  }
+
   img {
     margin-right: 8px;
   }
