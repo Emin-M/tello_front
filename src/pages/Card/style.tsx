@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const CardContainer = styled.div`
   display: flex;
-  margin-top: 128px;
+  margin-top: 105px;
   min-height: calc(100vh - 128px);
   background: #faf9f9;
 

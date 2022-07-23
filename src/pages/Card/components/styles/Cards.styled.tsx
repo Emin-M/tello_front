@@ -88,15 +88,19 @@ export const SingleCard = styled.div`
     margin-right: 10px;
 
     img {
+      width: 17px;
+      height: 17px;
       cursor: pointer;
     }
 
     span {
-      font-weight: 600;
-      font-size: 18px;
-      line-height: 22px;
-      color: #1d2123;
-      margin: 0 35px;
+      p {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 22px;
+        color: #1d2123;
+        margin: 0 35px;
+      }
     }
   }
 
@@ -175,6 +179,7 @@ export const CardRight = styled.div`
     background: #ffffff;
     transition: all 0.3s;
     font-size: 20px;
+    cursor: pointer;
 
     &:hover {
       background: #2dd06e;

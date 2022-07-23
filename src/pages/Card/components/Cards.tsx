@@ -14,12 +14,38 @@ import {
   emptyCard,
   updateItemInCart,
 } from "../../../redux/actions/cardActions";
-import { Button, Modal, Spinner } from "react-bootstrap";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  CircularProgress,
+  Modal,
+  Typography,
+} from "@mui/material";
 
 /* Images */
 import minus from "../../../assets/svg/minus.svg";
 import plus from "../../../assets/svg/plus.svg";
 import del from "../../../assets/svg/delete.svg";
+
+/* Modal Styles */
+const style = {
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
+  borderRadius: "5px",
+  boxShadow: 54,
+  p: 4,
+};
+
+const styleButtonGroup = {
+  display: "flex",
+  justifyContent: "flex-end",
+  width: "100%",
+  marginTop: "20px",
+};
 
 const Cards: FC = () => {
   const { items, updateLoading } = useSelector(
@@ -95,11 +121,12 @@ const Cards: FC = () => {
                 </div>
                 <span>
                   {updateLoading && updateId === item.id ? (
-                    <Spinner animation="border" role="status">
-                      <span className="visually-hidden">Loading...</span>
-                    </Spinner>
+                    <CircularProgress
+                      color="inherit"
+                      sx={{ margin: "0 20px" }}
+                    />
                   ) : (
-                    item.quantity
+                    <p>{item.quantity}</p>
                   )}
                 </span>
                 <div
@@ -155,84 +182,90 @@ const Cards: FC = () => {
         </CardRight>
       </CardsStyled>
       <Modal
-        className="modal-header"
-        show={modal}
-        onHide={() => setModal(false)}
+        open={modal2}
+        onClose={() => setModal2(false)}
         onClick={(e: { stopPropagation: () => any }) => e.stopPropagation()}
-        backdrop="static"
-        keyboard={false}
-        size="lg"
-        centered
+        aria-labelledby="keep-mounted-modal-title"
+        aria-describedby="keep-mounted-modal-description"
       >
-        <Modal.Header closeButton>
-          <Modal.Title>
-            Silmək: <b>{nameForDel}</b>
-          </Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>
-          Silmək istədiyinizə əminsiniz?: <b>{nameForDel}</b>
-        </Modal.Body>
-
-        <Modal.Footer>
-          <Button
-            rel="noreferrer"
-            variant="danger"
-            disabled
-            onClick={() => setModal(false)}
+        <Box sx={style}>
+          <Typography
+            sx={{ pb: 2, borderBottom: "1px solid black" }}
+            id="keep-mounted-modal-title"
+            variant="h5"
+            component="h2"
           >
-            Geri
-          </Button>
-          <Button
-            rel="noreferrer"
-            variant="primary"
-            disabled
-            onClick={() => {
-              dispatch(deleteItemFromCart(idForDel));
-              setModal(false);
-            }}
+            Səbəti Boşaltmaq!
+          </Typography>
+          <Typography
+            id="keep-mounted-modal-description"
+            variant="h6"
+            sx={{ mt: 2 }}
           >
-            Sil
-          </Button>
-        </Modal.Footer>
+            Səbəti boşaltmaq istədiyinizə əminsiniz?
+          </Typography>
+          <ButtonGroup
+            sx={styleButtonGroup}
+            disableElevation
+            variant="contained"
+          >
+            <Button color="secondary" onClick={() => setModal2(false)}>
+              Geri
+            </Button>
+            <Button
+              color="success"
+              onClick={() => {
+                dispatch(emptyCard());
+                setModal(false);
+              }}
+            >
+              Sil
+            </Button>
+          </ButtonGroup>
+        </Box>
       </Modal>
       <Modal
-        className="modal-header"
-        show={modal2}
-        onHide={() => setModal2(false)}
+        open={modal}
+        onClose={() => setModal(false)}
         onClick={(e: { stopPropagation: () => any }) => e.stopPropagation()}
-        backdrop="static"
-        keyboard={false}
-        size="lg"
-        centered
+        aria-labelledby="keep-mounted-modal-title"
+        aria-describedby="keep-mounted-modal-description"
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Səbəti Boşaltmaq!</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>Səbəti boşaltmaq istədiyinizə əminsiniz?</Modal.Body>
-
-        <Modal.Footer>
-          <Button
-            rel="noreferrer"
-            variant="danger"
-            disabled
-            onClick={() => setModal2(false)}
+        <Box sx={style}>
+          <Typography
+            sx={{ pb: 2, borderBottom: "1px solid black" }}
+            id="keep-mounted-modal-title"
+            variant="h6"
+            component="h2"
           >
-            Geri
-          </Button>
-          <Button
-            rel="noreferrer"
-            variant="primary"
-            disabled
-            onClick={() => {
-              dispatch(emptyCard());
-              setModal(false);
-            }}
+            Silmək: <b>{nameForDel}</b>
+          </Typography>
+          <Typography
+            id="keep-mounted-modal-description"
+            variant="h6"
+            sx={{ mt: 2 }}
           >
-            Təmizlə
-          </Button>
-        </Modal.Footer>
+            Silmək istədiyinizə əminsiniz?: <b>{nameForDel}</b>
+          </Typography>
+          <ButtonGroup
+            sx={styleButtonGroup}
+            disableElevation
+            variant="contained"
+          >
+            <Button color="primary" onClick={() => setModal(false)}>
+              Geri
+            </Button>
+            <Button
+              color="success"
+              onClick={() => {
+                dispatch(deleteItemFromCart(idForDel));
+                setModal(false);
+              }}
+            >
+              Sil
+            </Button>
+          </ButtonGroup>
+        </Box>
       </Modal>
     </>
   );

@@ -100,7 +100,6 @@ export const NavbarInputSearch = styled.div`
   top: 100%;
   left: 0;
   transition: all 0.3s;
-  /* margin-top: 5px; */
   padding: 25px;
   padding-top: 0;
   width: 100%;
@@ -253,7 +252,7 @@ export const NavbarBottom = styled.ul`
       font-size: 18px;
       line-height: 20px;
       color: #4f4f4f;
-      height: 45px;
+      height: 41px;
       display: inline-block;
 
       &:hover {
