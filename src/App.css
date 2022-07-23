@@ -17,6 +17,13 @@
     margin: 0 !important;
 }
 
+/* Material Modal Responsive */
+@media (max-width: 850px) {
+    .css-3iuf51 {
+        width: 90%;
+    }
+}
+
 /* Skeleton */
 @media (max-width: 650px) {
     .skeleton {
