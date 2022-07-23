@@ -28,8 +28,8 @@ export const ProductImg = styled.div`
   }
 
   img:nth-child(odd) {
-    width: 14px;
-    height: 28px;
+    width: 10px;
+    height: 18px;
     cursor: pointer;
   }
 

@@ -36,6 +36,22 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
+export const fetchSearchResults = createAsyncThunk(
+  "products/fetchSearchResults",
+  async (query?: string) => {
+    try {
+      const response = await api.get("/products", {
+        params: {
+          query: query,
+        },
+      });
+      return response.data;
+    } catch (error: any) {
+      console.log(error);
+    }
+  }
+);
+
 export const fetchProductById = createAsyncThunk(
   "products/fetchProductById",
   async (id: string) => {

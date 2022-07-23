@@ -100,26 +100,44 @@ export const NavbarInputSearch = styled.div`
   top: 100%;
   left: 0;
   transition: all 0.3s;
-  margin-top: 2px;
+  /* margin-top: 5px; */
   padding: 25px;
+  padding-top: 0;
   width: 100%;
   background: #ffffff;
   border: 1px solid #f5f5f5;
   border-top: none;
-  border-radius: 0 0 8px;
+  border-radius: 8px;
   background: #ffffff;
   z-index: 1;
+  max-height: 300px;
+
+  & {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-y: scroll;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   &:hover {
     display: block;
     opacity: 1;
   }
 
+  /* For Searches Part */
   > div:nth-child(1) {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 18px;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: #ffffff;
+    padding: 25px 0 10px 0;
 
     h2 {
       font-weight: 500;
@@ -149,6 +167,35 @@ export const NavbarInputSearch = styled.div`
       background: #edf1f7;
       border-radius: 4px;
       cursor: pointer;
+    }
+  }
+
+  /* For Results Part */
+  a {
+    display: flex;
+    margin-top: 26px;
+
+    img {
+      width: 64px;
+      height: 64px;
+    }
+
+    > div:nth-child(2) {
+      margin-left: 20px;
+    }
+
+    h2 {
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 24px;
+      color: #333333;
+    }
+
+    p {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      color: #192038;
     }
   }
 `;

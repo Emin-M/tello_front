@@ -1,10 +1,12 @@
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Button from "../ReusuableComponents/Button";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
 import { ICategory } from "../../modules/types/categories";
 import { Skeleton } from "@mui/material";
+import { fetchSearchResults } from "../../redux/actions/productActions";
+import { IProduct } from "../../modules/types/products";
 
 /* Styles */
 import "./style";
@@ -36,24 +38,14 @@ const Navbar = () => {
   const { categories, loading } = useSelector(
     (state: RootState) => state.categories
   );
+  const { searchResults, searchLoading } = useSelector(
+    (state: RootState) => state.products
+  );
+  const dispatch = useDispatch<AppDispatch>();
   const { items } = useSelector((state: RootState) => state.card);
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
+  const [showSubState, setShowSubState] = useState<string>("");
   const location = useLocation();
-  const itemEls = useRef(new Array());
-
-  useEffect(() => {
-    setShowSidebar(false);
-  }, [location]);
-
-  const boxMouseOverHandler = (event: MouseEvent<HTMLLIElement>) => {
-    const box: HTMLLIElement = event.currentTarget;
-    box.style.color = "#2dd06e";
-  };
-
-  const boxMouseOutHandler = (event: React.MouseEvent<HTMLLIElement>) => {
-    const box: HTMLLIElement = event.currentTarget;
-    box.style.color = "#4f4f4f";
-  };
 
   const boxMouseOverHandlerDiv = (event: MouseEvent<HTMLDivElement>) => {
     const element = event.currentTarget.parentElement as HTMLLIElement;
@@ -69,34 +61,22 @@ const Navbar = () => {
     child.style.borderBottom = "none";
   };
 
-  const showSub = (category: ICategory, event: MouseEvent<HTMLLIElement>) => {
-    let showSubCategory = false;
-    category.children[0] ? (showSubCategory = true) : (showSubCategory = false);
-
-    /* clearing all "active" classes */
-    itemEls.current.map((itemEl) => {
-      itemEl.classList.remove("active");
-    });
-
-    /* adding active class to the clicked item */
-    const element = event.currentTarget as HTMLLIElement;
-    const child = element.lastChild as HTMLDivElement;
-    showSubCategory && child.classList.add("active");
+  const showSub = (category: ICategory) => {
+    category.children[0] && setShowSubState(category.name);
   };
 
-  const hideSub = (event: MouseEvent<HTMLDivElement>) => {
-    event.stopPropagation();
-    const element = event.currentTarget.parentElement
-      ?.parentElement as HTMLDivElement;
-    element.classList.remove("active");
+  const hideSub = () => {
+    setShowSubState("");
   };
 
   /* Search Part */
+  const [searchResult, setSearcResult] = useState<IProduct[]>([]);
   const [showSearch, setShowSearch] = useState<boolean>(false);
   const [recentSearchs, setRecentSearchs] = useState<string[]>([]);
   const [term, setTerm] = useState<string>("");
   const [debouncedTerm, setDebouncedTerm] = useState<string>("");
 
+  /* Handling Input Changes */
   useEffect(() => {
     const termId = setTimeout(() => {
       setDebouncedTerm(term);
@@ -106,16 +86,50 @@ const Navbar = () => {
   }, [term]);
 
   useEffect(() => {
+    setSearcResult([]);
     if (debouncedTerm.length > 0) {
+      dispatch(fetchSearchResults(debouncedTerm));
       !recentSearchs.includes(debouncedTerm) &&
-        setRecentSearchs([...recentSearchs, debouncedTerm]);
+        setRecentSearchs([debouncedTerm, ...recentSearchs]);
+    }
+
+    if (recentSearchs.length > 5) {
+      setRecentSearchs(recentSearchs.slice(0, 5));
     }
   }, [debouncedTerm]);
 
+  useEffect(() => {
+    searchResults?.length > 0
+      ? setSearcResult(searchResults)
+      : setSearcResult([]);
+  }, [searchResults]);
+
+  /* Setting recentSearches To LocalStorage */
+
+  // SaveToLocalStorage
+  useEffect(() => {
+    const localTerms = localStorage.getItem("terms") || "";
+    const parsedLocalTerms = JSON.parse(localTerms);
+    setRecentSearchs(parsedLocalTerms);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("terms", JSON.stringify(recentSearchs));
+  }, [recentSearchs]);
+
+  /* General */
   window.addEventListener("click", () => {
     setShowSearch(false);
     setTerm("");
   });
+
+  useEffect(() => {
+    setShowSidebar(false);
+    hideSub();
+    setTerm("");
+    setShowSearch(false);
+    setSearcResult([]);
+  }, [location]);
 
   return (
     <NavbarContainer>
@@ -154,40 +168,115 @@ const Navbar = () => {
                   setShowSearch(true);
                 }}
               />
-              {showSearch && true && (
-                <NavbarInputSearch onClick={(e) => e.stopPropagation()}>
-                  <div>
-                    <h2>Son axtarışlar</h2>
-                    <p onClick={() => setRecentSearchs([])}>Təmizlə</p>
-                  </div>
-                  <div>
-                    {recentSearchs.map((recentSearch) => (
-                      <div
-                        key={Math.random()}
-                        onClick={() => setTerm(recentSearch)}
+              {showSearch &&
+                searchResult.length === 0 &&
+                (debouncedTerm?.length === 0 && searchResult.length === 0 ? (
+                  <NavbarInputSearch onClick={(e) => e.stopPropagation()}>
+                    <div>
+                      <h2>Son axtarışlar</h2>
+                      <p onClick={() => setRecentSearchs([])}>Təmizlə</p>
+                    </div>
+                    <div>
+                      {recentSearchs.map((recentSearch) => (
+                        <div
+                          key={Math.random()}
+                          onClick={() => setTerm(recentSearch)}
+                        >
+                          <p>{recentSearch}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </NavbarInputSearch>
+                ) : (
+                  <NavbarInputSearch onClick={(e) => e.stopPropagation()}>
+                    <div>
+                      <h2>Nəticələr</h2>
+                      <p
+                        onClick={() => {
+                          setSearcResult([]);
+                          setTerm("");
+                        }}
                       >
-                        <p>{recentSearch}</p>
+                        Təmizlə
+                      </p>
+                    </div>
+                    {searchLoading ? (
+                      <div style={{ display: "flex" }}>
+                        <Skeleton
+                          variant="rectangular"
+                          animation="wave"
+                          width="84px"
+                          height="84px"
+                        />
+                        <div style={{ width: "60%" }}>
+                          <Skeleton
+                            variant="text"
+                            animation="wave"
+                            width="100%"
+                            height="40px"
+                          />
+                          <Skeleton
+                            variant="text"
+                            animation="wave"
+                            width="100%"
+                            height="40px"
+                          />
+                        </div>
                       </div>
-                    ))}
-                  </div>
-                </NavbarInputSearch>
-              )}
-              {showSearch && false && (
+                    ) : (
+                      <p>Məhsul Tapılmadı</p>
+                    )}
+                  </NavbarInputSearch>
+                ))}
+              {showSearch && searchResult.length > 0 && (
                 <NavbarInputSearch onClick={(e) => e.stopPropagation()}>
                   <div>
                     <h2>Nəticələr</h2>
-                    <p onClick={() => console.log("clear results")}>Təmizlə</p>
+                    <p
+                      onClick={() => {
+                        setSearcResult([]);
+                        setTerm("");
+                      }}
+                    >
+                      Təmizlə
+                    </p>
                   </div>
-                  <div>
-                    {recentSearchs.map((recentSearch) => (
-                      <div
-                        key={Math.random()}
-                        onClick={() => setTerm(recentSearch)}
-                      >
-                        <p>{recentSearch}</p>
+                  {!searchLoading ? (
+                    searchResult.map((result) => (
+                      <Link to={`product/params/${result.id}`} key={result.id}>
+                        <div>
+                          <img src={result.image.url} alt="" />
+                        </div>
+                        <div>
+                          <h2>{result.sku}</h2>
+                          <p>Qiymət: {result.price.formatted_with_code}</p>
+                        </div>
+                      </Link>
+                    ))
+                  ) : (
+                    <div style={{ display: "flex" }}>
+                      <Skeleton
+                        variant="rectangular"
+                        animation="wave"
+                        width="84px"
+                        height="84px"
+                      />
+                      <div style={{ width: "60%" }}>
+                        <Skeleton
+                          variant="text"
+                          animation="wave"
+                          width="100%"
+                          height="40px"
+                        />
+                        <Skeleton
+                          variant="text"
+                          animation="wave"
+                          width="100%"
+                          height="40px"
+                        />
                       </div>
-                    ))}
-                  </div>
+                    </div>
+                  )}
                 </NavbarInputSearch>
               )}
             </NavbarInput>
@@ -222,10 +311,7 @@ const Navbar = () => {
         ) : (
           <NavbarBottom style={showSidebar ? { left: "0" } : { left: "-100%" }}>
             {categories?.[0]?.children.map((category: ICategory) => (
-              <li
-                key={category.id}
-                onClick={(event) => showSub(category, event)}
-              >
+              <li key={category.id} onClick={() => showSub(category)}>
                 <Link to={`products/${category.slug}`}>
                   {category.name.charAt(0).toUpperCase() +
                     category.name.slice(1)}
@@ -236,12 +322,17 @@ const Navbar = () => {
                 <BottomDropdown
                   onMouseOver={boxMouseOverHandlerDiv}
                   onMouseOut={boxMouseOutHandlerDiv}
-                  ref={(element) => {
-                    element && itemEls.current.push(element);
-                  }}
+                  className={`${
+                    showSubState === category.name ? "active" : ""
+                  }`}
                 >
                   <Container>
-                    <div onClick={(event) => hideSub(event)}>
+                    <div
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        hideSub();
+                      }}
+                    >
                       <img src={arrowLeft} alt="arrowLeft" />
                     </div>
                     <ul>

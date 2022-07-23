@@ -119,8 +119,10 @@ export interface IProduct {
 
 export interface IProducts {
   loading: boolean;
+  searchLoading: boolean;
   // error: string;
   products: IProduct[];
+  searchResults: IProduct[];
   singleProduct: IProduct | null;
   productVariants: ProductVariants[];
 }

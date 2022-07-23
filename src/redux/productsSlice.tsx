@@ -4,11 +4,14 @@ import {
   fetchProductById,
   fetchProducts,
   fetchProductVariants,
+  fetchSearchResults,
 } from "./actions/productActions";
 
 const initialState: IProducts = {
   loading: false,
+  searchLoading: false,
   products: [],
+  searchResults: [],
   singleProduct: null,
   productVariants: [],
 };
@@ -27,6 +30,18 @@ export const productsSlice = createSlice({
         ...state,
         loading: false,
         products: action.payload.data || [],
+      });
+    });
+
+    /* Fetching Search Results */
+    builder.addCase(fetchSearchResults.pending, (state) => {
+      return (state = { ...state, searchLoading: true });
+    });
+    builder.addCase(fetchSearchResults.fulfilled, (state, action) => {
+      return (state = {
+        ...state,
+        searchLoading: false,
+        searchResults: action.payload.data || [],
       });
     });
 
