@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { StyledLinks } from "./styles/Links.styled";
 
 /* Images */
@@ -14,11 +14,15 @@ const Links: FC = () => {
   return (
     <StyledLinks>
       <li>
-        Ana səhifə <img src={arrowRight} alt="arrowRight" />
+        <Link to="/">
+          Ana səhifə <img src={arrowRight} alt="arrowRight" />
+        </Link>
       </li>
       <li>
-        {id && id?.charAt(0).toUpperCase() + id?.slice(1)}
-        <img src={arrowRight} alt="arrowRight" />
+        <Link to="/products/telefonlar">
+          {id && id?.charAt(0).toUpperCase() + id?.slice(1)}
+          <img src={arrowRight} alt="arrowRight" />
+        </Link>
       </li>
       <li>
         <p>{params.length > 0 ? params : "Hamısı"}</p>

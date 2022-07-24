@@ -281,7 +281,7 @@ const Navbar = () => {
           </NavbarSearch>
           <NavbarRight>
             <div>
-              <Link to="/account">
+              <Link to="/login">
                 <img src={person} alt="person" />
               </Link>
             </div>

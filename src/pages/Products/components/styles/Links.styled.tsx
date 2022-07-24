@@ -12,6 +12,10 @@ export const StyledLinks = styled.ul`
     line-height: 20px;
     color: #4f4f4f;
 
+    a {
+      color: #4f4f4f;
+    }
+
     img {
       margin: 0 10px;
     }

@@ -7,6 +7,7 @@ import { fetchCards } from "./redux/actions/cardActions";
 
 /* Styles */
 import GlobalStyles from "./components/ReusuableComponents/styles/GlobalStyled";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
@@ -19,7 +20,8 @@ import Product from "./pages/Product";
 import Params from "./pages/Product/components/Params";
 import Comments from "./pages/Product/components/Comments";
 import Card from "./pages/Card";
-import { ToastContainer } from "react-toastify";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -56,7 +58,8 @@ const App = () => {
           </Route>
         </Route>
         <Route path="/card" element={<Card />} />
-        <Route path="login" element={<div>Login</div>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
       <Footer />
     </div>

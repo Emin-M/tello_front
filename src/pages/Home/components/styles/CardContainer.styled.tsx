@@ -19,14 +19,14 @@ export const CardTop = styled.div`
 
   h2 {
     font-weight: 500;
-    font-size: 20px;
+    font-size: 22px;
     line-height: 28px;
     color: #333333;
   }
 
   a {
     font-weight: 500;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 16px;
     color: #333333;
     cursor: pointer;
