@@ -15,6 +15,8 @@ export const StyledLogin = styled.div`
   }
 
   @media (max-width: 850px) {
+   padding: 50px 0 100px 0;
+
     > div {
       flex-direction: column;
     }
