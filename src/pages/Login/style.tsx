@@ -4,9 +4,9 @@ export const StyledLogin = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
   min-height: calc(100vh - 128px);
   margin-top: 128px;
+  padding: 100px 0;
 
   > div {
     display: flex;
@@ -140,7 +140,7 @@ export const LoginMainBottom = styled.form`
 
   a {
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 16px;
     text-align: right;
     color: #2d9cdb;
@@ -180,6 +180,19 @@ export const LoginSvg = styled.div`
     justify-content: center;
     gap: 5px;
     margin-top: 36px;
+  }
+
+  p {
+    font-size: 15px;
+    line-height: 20px;
+    color: #4f4f4f;
+  }
+
+  a {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+    color: #2d9cdb;
   }
 
   @media (max-width: 850px) {

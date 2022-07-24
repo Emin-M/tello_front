@@ -202,6 +202,19 @@ export const SignupSvg = styled.div`
     margin-top: 36px;
   }
 
+  p {
+    font-size: 15px;
+    line-height: 20px;
+    color: #4f4f4f;
+  }
+
+  a {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+    color: #2d9cdb;
+  }
+
   @media (max-width: 850px) {
     width: 100%;
 
