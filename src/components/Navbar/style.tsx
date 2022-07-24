@@ -83,6 +83,7 @@ export const NavbarInput = styled.div`
     width: 100%;
     padding: 0 20px;
     background: inherit;
+    font-size: 16px;
 
     /* &:focus ~ div {
       display: block;

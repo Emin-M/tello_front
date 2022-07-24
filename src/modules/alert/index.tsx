@@ -15,7 +15,7 @@ export const alertSuccess = (title: string) => {
 
 export const alertError = (title: string) => {
   toast.error(title, {
-    position: "bottom-right",
+    position: "top-center",
     autoClose: 2000,
     theme: "dark",
     hideProgressBar: false,

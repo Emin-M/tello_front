@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { StyledCard } from "./styles/Card.styled";
 import heart from "../../assets/images/icons/heart.png";

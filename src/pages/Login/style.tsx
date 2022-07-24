@@ -125,8 +125,8 @@ export const LoginMainBottom = styled.form`
   input {
     border: none;
     outline: none;
-    width: 312px;
-    height: 48px;
+    width: 400px;
+    height: 60px;
     background: #f2f2f2;
     border-radius: 8px;
     padding: 0 16px;
@@ -138,18 +138,8 @@ export const LoginMainBottom = styled.form`
     color: #828282;
   }
 
-  a {
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 16px;
-    text-align: right;
-    color: #2d9cdb;
-    width: 100%;
-    margin-top: 8px;
-  }
-
   button {
-    margin-top: 48px;
+    margin-top: 60px;
     width: 100%;
     cursor: pointer;
   }

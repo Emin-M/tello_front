@@ -113,6 +113,11 @@ export const SignupMainBottom = styled.form`
       height: 24px;
       cursor: pointer;
     }
+
+    .error {
+      margin-top: 5px;
+      color: #ff0000;
+    }
   }
 
   .checkbox {
@@ -126,6 +131,12 @@ export const SignupMainBottom = styled.form`
       width: auto;
       margin: 0;
     }
+
+    p {
+      position: absolute;
+      top: 120%;
+      left: 0;
+    }
   }
 
   label {
@@ -138,11 +149,12 @@ export const SignupMainBottom = styled.form`
   input {
     border: none;
     outline: none;
-    width: 312px;
-    height: 48px;
+    width: 400px;
+    height: 60px;
     background: #f2f2f2;
     border-radius: 8px;
     padding: 0 16px;
+    font-size: 16px;
   }
 
   input[type="checkbox"] {
@@ -172,6 +184,7 @@ export const SignupMainBottom = styled.form`
   button {
     margin-top: 48px;
     width: 100%;
+    cursor: pointer;
   }
 
   @media (max-width: 850px) {

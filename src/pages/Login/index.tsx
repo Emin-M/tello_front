@@ -15,12 +15,9 @@ import {
 import loginsvg from "../../assets/svg/login.png";
 import facebook from "../../assets/images/icons/facebook.png";
 import google from "../../assets/images/icons/google.png";
-import eye from "../../assets/images/icons/eye.png";
 import Button from "../../components/ReusuableComponents/Button";
 
 const Login: FC = () => {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-
   return (
     <StyledLogin>
       <Container>
@@ -44,18 +41,6 @@ const Login: FC = () => {
               <label htmlFor="email">E-mail</label>
               <input type="email" id="email" placeholder="nümunə@gmail.com" />
             </div>
-            <div>
-              <label htmlFor="password">Şifrə</label>
-              <input
-                type={`${showPassword ? "text" : "password"}`}
-                id="password"
-                placeholder="Şifrənizi daxil edin"
-              />
-              <div onClick={() => setShowPassword(!showPassword)}>
-                <img src={eye} alt="eye" />
-              </div>
-            </div>
-            <Link to="/">Şifrəni unutmusunuz?</Link>
             <Button title="Daxil ol" bg="#2dd06e" color="#ffffff" />
           </LoginMainBottom>
         </LoginMain>
