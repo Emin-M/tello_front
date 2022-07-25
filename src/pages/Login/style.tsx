@@ -15,11 +15,43 @@ export const StyledLogin = styled.div`
   }
 
   @media (max-width: 850px) {
-   padding: 50px 0 100px 0;
+    padding: 50px 0 100px 0;
 
     > div {
       flex-direction: column;
     }
+  }
+`;
+
+export const LoggedIn = styled.div`
+  text-align: center;
+
+  h2 {
+    max-width: 385px;
+    margin-top: 48px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    text-align: center;
+    color: #4f4f4f;
+  }
+`;
+
+export const StyledExchangeToken = styled.div`
+  /* text-align: center; */
+  margin-top: 128px;
+  min-height: calc(100vh - 128px);
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 50px;
+  }
+
+  h2 {
+    margin-top: 50px;
   }
 `;
 
@@ -115,6 +147,11 @@ export const LoginMainBottom = styled.form`
       height: 24px;
       cursor: pointer;
     }
+
+    .error {
+      margin-top: 5px;
+      color: #ff0000;
+    }
   }
 
   label {
@@ -125,6 +162,7 @@ export const LoginMainBottom = styled.form`
   }
 
   input {
+    font-size: 16px;
     border: none;
     outline: none;
     width: 400px;
@@ -141,6 +179,7 @@ export const LoginMainBottom = styled.form`
   }
 
   button {
+    font-size: 16px;
     margin-top: 60px;
     width: 100%;
     cursor: pointer;

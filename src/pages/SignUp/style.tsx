@@ -15,7 +15,7 @@ export const StyledSignup = styled.div`
   }
 
   @media (max-width: 850px) {
-   padding: 50px 0 100px 0;
+    padding: 50px 0 100px 0;
 
     > div {
       flex-direction: column;
@@ -184,6 +184,7 @@ export const SignupMainBottom = styled.form`
   }
 
   button {
+    font-size: 16px;
     margin-top: 48px;
     width: 100%;
     cursor: pointer;

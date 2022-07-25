@@ -147,7 +147,7 @@ const SignUp: FC = () => {
               <span>ilə razıyam*</span>
               <p className="error">{errors.checkbox?.message}</p>
             </div>
-            <Button title="Daxil ol" bg="#2dd06e" color="#ffffff" />
+            <Button title="Qeydiyyat" bg="#2dd06e" color="#ffffff" />
           </SignupMainBottom>
         </SignupMain>
         <SignupSvg>
