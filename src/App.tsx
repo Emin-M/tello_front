@@ -51,15 +51,31 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />}>
+        <Route path="/products">
           <Route path=":id" element={<Products />} />
         </Route>
-        <Route path="/product" element={<Product />}>
-          <Route path="params" element={<Params />}>
-            <Route path=":id" element={<Product />} />
+        <Route path="/product">
+          <Route path="params">
+            <Route
+              path=":id"
+              element={
+                <>
+                  <Product />
+                  <Params />
+                </>
+              }
+            />
           </Route>
-          <Route path="comments" element={<Comments />}>
-            <Route path=":id" element={<Comments />} />
+          <Route path="comments">
+            <Route
+              path=":id"
+              element={
+                <>
+                  <Product />
+                  <Comments />
+                </>
+              }
+            />
           </Route>
         </Route>
         <Route path="/card" element={<Card />} />

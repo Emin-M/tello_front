@@ -85,11 +85,6 @@ export const NavbarInput = styled.div`
     background: inherit;
     font-size: 16px;
 
-    /* &:focus ~ div {
-      display: block;
-      opacity: 1;
-    } */
-
     &::placeholder {
       font-size: 15px;
     }

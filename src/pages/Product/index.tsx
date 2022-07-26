@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Outlet, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   fetchProductById,
   fetchProductVariants,
@@ -25,7 +25,6 @@ const Product = () => {
       <Container>
         <Links />
         <ProductTop />
-        <Outlet />
       </Container>
     </ProductContainer>
   );

@@ -59,6 +59,6 @@ export interface ICard {
 export interface ICards {
   loading: boolean;
   updateLoading: boolean;
-  // error: string;
+  error: string;
   items: ICard | null;
 }

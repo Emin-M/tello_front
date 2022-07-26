@@ -17,6 +17,6 @@ export interface ICategory {
 
 export interface ICategories {
   loading: boolean;
-  // error: string;
+  error: string;
   categories: ICategory[];
 }

@@ -11,6 +11,7 @@ import {
 const initialState: ICards = {
   loading: false,
   updateLoading: false,
+  error: "",
   items: null,
 };
 
@@ -27,6 +28,13 @@ export const cardSlice = createSlice({
       localStorage.setItem("cartId", payload.id);
       return (state = { ...state, loading: false, items: payload });
     });
+    builder.addCase(fetchCards.rejected, (state) => {
+      return (state = {
+        ...state,
+        loading: false,
+        error: "Error fetching card",
+      });
+    });
 
     /* Adding Item To Card */
     builder.addCase(addProductToBasket.pending, (state) => {
@@ -35,6 +43,13 @@ export const cardSlice = createSlice({
     builder.addCase(addProductToBasket.fulfilled, (state, { payload }) => {
       return (state = { ...state, loading: false, items: payload?.cart });
     });
+    builder.addCase(addProductToBasket.rejected, (state) => {
+      return (state = {
+        ...state,
+        loading: false,
+        error: "Error adding item to card",
+      });
+    });
 
     /* Deleting Item From Card */
     builder.addCase(deleteItemFromCart.pending, (state) => {
@@ -42,6 +57,13 @@ export const cardSlice = createSlice({
     });
     builder.addCase(deleteItemFromCart.fulfilled, (state, { payload }) => {
       return (state = { ...state, loading: false, items: payload.cart });
+    });
+    builder.addCase(deleteItemFromCart.rejected, (state) => {
+      return (state = {
+        ...state,
+        loading: false,
+        error: "Error fdeleting card item",
+      });
     });
 
     /* Update Item In Card */
@@ -55,6 +77,13 @@ export const cardSlice = createSlice({
         updateLoading: false,
       });
     });
+    builder.addCase(updateItemInCart.rejected, (state) => {
+      return (state = {
+        ...state,
+        updateLoading: false,
+        error: "Error updating card item",
+      });
+    });
 
     /* Deleting All Items From Card */
     builder.addCase(emptyCard.pending, (state) => {
@@ -62,6 +91,13 @@ export const cardSlice = createSlice({
     });
     builder.addCase(emptyCard.fulfilled, (state, { payload }) => {
       return (state = { ...state, loading: false, items: payload.cart });
+    });
+    builder.addCase(emptyCard.rejected, (state) => {
+      return (state = {
+        ...state,
+        loading: false,
+        error: "Error clearing card",
+      });
     });
   },
 });

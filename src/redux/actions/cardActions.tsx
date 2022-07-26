@@ -33,7 +33,7 @@ export const addProductToBasket = createAsyncThunk(
       alertSuccess("Məhsul səbətə əlavə olundu!");
       return response.data;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 );
@@ -47,7 +47,7 @@ export const deleteItemFromCart = createAsyncThunk(
       alertSuccess("Məhsul silindi!");
       return response.data;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 );
@@ -63,7 +63,7 @@ export const updateItemInCart = createAsyncThunk(
       alertSuccess("Məhsul yeniləndi!");
       return response.data;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 );
@@ -75,6 +75,6 @@ export const emptyCard = createAsyncThunk("card/emptyCard", async () => {
     alertSuccess("Səbət boşaldıldı!");
     return response.data;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 });

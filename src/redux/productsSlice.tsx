@@ -10,6 +10,7 @@ import {
 const initialState: IProducts = {
   loading: false,
   searchLoading: false,
+  error: "",
   products: [],
   searchResults: [],
   singleProduct: null,
@@ -32,6 +33,13 @@ export const productsSlice = createSlice({
         products: action.payload.data || [],
       });
     });
+    builder.addCase(fetchProducts.rejected, (state) => {
+      return (state = {
+        ...state,
+        loading: false,
+        error: "Error fetching data",
+      });
+    });
 
     /* Fetching Search Results */
     builder.addCase(fetchSearchResults.pending, (state) => {
@@ -44,16 +52,43 @@ export const productsSlice = createSlice({
         searchResults: action.payload.data || [],
       });
     });
+    builder.addCase(fetchSearchResults.rejected, (state) => {
+      return (state = {
+        ...state,
+        searchLoading: false,
+        error: "Error fetching search results",
+      });
+    });
 
     /* Fetching Single Product */
     builder.addCase(fetchProductById.pending, (state) => {
       return (state = { ...state, loading: true });
     });
-    builder.addCase(fetchProductById.fulfilled, (state, action) => {
+    builder.addCase(fetchProductById.fulfilled, (state, { payload }) => {
       return (state = {
         ...state,
         loading: false,
-        singleProduct: action.payload,
+        singleProduct: payload,
+      });
+      // if (payload?.id) {
+      //   return (state = {
+      //     ...state,
+      //     loading: false,
+      //     singleProduct: payload,
+      //   });
+      // } else {
+      //   return (state = {
+      //     ...state,
+      //     loading: false,
+      //     singleProduct: null,
+      //   });
+      // }
+    });
+    builder.addCase(fetchProductById.rejected, (state) => {
+      return (state = {
+        ...state,
+        loading: false,
+        error: "Error fetching product",
       });
     });
 
@@ -61,11 +96,31 @@ export const productsSlice = createSlice({
     builder.addCase(fetchProductVariants.pending, (state) => {
       return (state = { ...state, loading: true });
     });
-    builder.addCase(fetchProductVariants.fulfilled, (state, action) => {
+    builder.addCase(fetchProductVariants.fulfilled, (state, { payload }) => {
       return (state = {
         ...state,
         loading: false,
-        productVariants: action.payload,
+        productVariants: payload,
+      });
+      // if (payload?.id) {
+      //   return (state = {
+      //     ...state,
+      //     loading: false,
+      //     productVariants: payload,
+      //   });
+      // } else {
+      //   return (state = {
+      //     ...state,
+      //     loading: false,
+      //     singleProduct: null,
+      //   });
+      // }
+    });
+    builder.addCase(fetchProductVariants.rejected, (state) => {
+      return (state = {
+        ...state,
+        loading: false,
+        error: "Error fetching product variants",
       });
     });
   },

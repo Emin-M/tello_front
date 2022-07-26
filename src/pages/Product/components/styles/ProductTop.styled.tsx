@@ -220,3 +220,17 @@ export const ProductFilter = styled.div`
     }
   }
 `;
+
+export const ProductNotFound = styled.div`
+  display: flex;
+  justify-content: center;
+  min-height: calc(100vh - 128px);
+  margin-top: 128px;
+
+  h2 {
+    font-size: 18px;
+    line-height: 26px;
+    color: #bdbdbd;
+    padding-top: 100px;
+  }
+`;

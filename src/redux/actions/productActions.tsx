@@ -31,7 +31,7 @@ export const fetchProducts = createAsyncThunk(
       });
       return response.data;
     } catch (error: any) {
-      console.log(error);
+      return error;
     }
   }
 );
@@ -47,7 +47,7 @@ export const fetchSearchResults = createAsyncThunk(
       });
       return response.data;
     } catch (error: any) {
-      console.log(error);
+      return error;
     }
   }
 );
@@ -59,7 +59,7 @@ export const fetchProductById = createAsyncThunk(
       const response = await api.get(`/products/${id}`);
       return response.data;
     } catch (error: any) {
-      console.log(error);
+      return error;
     }
   }
 );
@@ -71,7 +71,7 @@ export const fetchProductVariants = createAsyncThunk(
       const response = await api.get(`/products/${id}/variants`);
       return response?.data?.data;
     } catch (error: any) {
-      console.log(error);
+      return error;
     }
   }
 );
