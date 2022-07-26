@@ -38,7 +38,6 @@ export const LoggedIn = styled.div`
 `;
 
 export const StyledExchangeToken = styled.div`
-  /* text-align: center; */
   margin-top: 128px;
   min-height: calc(100vh - 128px);
 
@@ -180,7 +179,7 @@ export const LoginMainBottom = styled.form`
 
   button {
     font-size: 16px;
-    margin-top: 60px;
+    margin-top: 30px;
     width: 100%;
     cursor: pointer;
   }

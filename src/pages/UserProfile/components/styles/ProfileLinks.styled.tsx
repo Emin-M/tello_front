@@ -7,7 +7,8 @@ export const StyledProfileLinks = styled.div`
   background: #ffffff;
   border-radius: 8px;
   padding: 32px 24px;
-  min-height: calc(100vh - 208px);
+  min-height: calc(100vh - 300px);
+  height: 0px !important;
 
   h2 {
     font-weight: 600;
@@ -30,7 +31,7 @@ export const StyledProfileLinks = styled.div`
   }
 
   a {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 24px;
     color: #4f4f4f;
     transition: all 0.3s;
@@ -38,5 +39,9 @@ export const StyledProfileLinks = styled.div`
     &:hover {
       color: #2dd06e;
     }
+  }
+
+  @media (max-width: 850px) {
+    min-height: auto;
   }
 `;

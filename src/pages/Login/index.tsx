@@ -96,7 +96,7 @@ const Login: FC = () => {
             </LoginMainTop>
             <LoginMainBottom onSubmit={handleSubmit(onSubmit)}>
               <div>
-                <label htmlFor="email">E-mail</label>
+                <label htmlFor="email">E-mail*</label>
                 <input
                   type="email"
                   id="email"

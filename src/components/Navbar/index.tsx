@@ -281,7 +281,7 @@ const Navbar = () => {
           </NavbarSearch>
           <NavbarRight>
             <div>
-              <Link to="/userprofile">
+              <Link to="/userprofile/orders">
                 <img src={person} alt="person" />
               </Link>
             </div>

@@ -23,7 +23,7 @@ const ExchangeToken = () => {
       setIsLoggedIn(false);
       !localStorage.getItem("customerId") &&
         localStorage.setItem("customerId", response?.data?.customer_id);
-      navigate("/userprofile");
+      navigate("/userprofile/orders");
     } catch (error) {
       setIsLoggedIn(false);
     }

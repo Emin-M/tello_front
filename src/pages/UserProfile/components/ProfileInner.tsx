@@ -1,10 +1,10 @@
-import Orders from "./Orders";
+import { Outlet } from "react-router-dom";
 import { StyledProfileInner } from "./styles/ProfileInner.styled";
 
 const ProfileInner = () => {
   return (
     <StyledProfileInner>
-      <Orders />
+      <Outlet />
     </StyledProfileInner>
   );
 };

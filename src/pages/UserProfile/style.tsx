@@ -12,4 +12,10 @@ export const StyledProfile = styled.div`
     gap: 32px;
     position: relative;
   }
+
+  @media (max-width: 850px) {
+    > div {
+      flex-direction: column;
+    }
+  }
 `;
