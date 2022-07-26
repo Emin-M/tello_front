@@ -74,10 +74,7 @@ const Login: FC = () => {
         <Container>
           <LoggedIn>
             <img src={password_forget} alt="password_forget" />
-            <h2>
-              E - poçt ünvanınızı yoxlayın. Göndərilmiş linkə keçid edib
-              şifrənizi yeniləyin!
-            </h2>
+            <h2>E - poçt ünvanınızı yoxlayın, göndərilmiş linkə keçid edin.</h2>
           </LoggedIn>
         </Container>
       ) : (
@@ -115,7 +112,7 @@ const Login: FC = () => {
             <img src={loginsvg} />
             <div>
               <p>Hesabınız yoxdur? </p>
-              <Link to="/signup">Qeydiyyat dan keçin</Link>
+              <Link to="/signup">Qeydiyyatdan keçin</Link>
             </div>
           </LoginSvg>
         </Container>

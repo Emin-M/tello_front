@@ -1,10 +1,15 @@
 import { Container } from "../../components/ReusuableComponents/styles/Container.styled";
+import ProfileLinks from "./components/ProfileLinks";
+import ProfileInner from "./components/ProfileInner";
 import { StyledProfile } from "./style";
 
 const UserProfile = () => {
   return (
     <StyledProfile>
-      <Container>UserProfile</Container>
+      <Container>
+        <ProfileLinks />
+        <ProfileInner />
+      </Container>
     </StyledProfile>
   );
 };

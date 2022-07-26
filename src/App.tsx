@@ -24,6 +24,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import UserProfile from "./pages/UserProfile";
 import ExchangeToken from "./pages/Login/ExchangeToken";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -63,7 +64,15 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/userprofile/:token" element={<ExchangeToken />} />
-        <Route path="/userprofile" element={<UserProfile />} />
+        {/* <Route path="/userprofile" element={<UserProfile />} /> */}
+        <Route
+          path="/userprofile"
+          element={
+            <ProtectedRoute>
+              <UserProfile />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
       <Footer />
     </div>
