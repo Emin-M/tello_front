@@ -236,7 +236,7 @@ const ProductTop: FC = () => {
           singleProduct?.variant_groups?.map((variant) => (
             <div key={variant.name}>
               <p>{variant.name.toUpperCase()}:</p>
-              {variant.name !== "color" ? (
+              {variant.name !== "rəng" ? (
                 <ul>
                   {variant.options?.map((option: any) => (
                     <li
