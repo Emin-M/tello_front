@@ -27,6 +27,7 @@ import ExchangeToken from "./pages/Login/ExchangeToken";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Orders from "./pages/UserProfile/components/Orders";
 import PersonalData from "./pages/UserProfile/components/PersonalData";
+import AuthRoute from "./components/AuthRoute";
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -79,8 +80,22 @@ const App = () => {
           </Route>
         </Route>
         <Route path="/card" element={<Card />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="/login"
+          element={
+            <AuthRoute>
+              <Login />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <AuthRoute>
+              <SignUp />
+            </AuthRoute>
+          }
+        />
         <Route path="/userprofile/:token" element={<ExchangeToken />} />
         <Route
           path="/userprofile"
