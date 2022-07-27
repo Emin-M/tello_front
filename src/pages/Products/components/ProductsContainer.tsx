@@ -83,7 +83,7 @@ const ProductsContainer = ({ setShowFilter }: IProps) => {
           {loading === "pending" ? (
             <Skeleton animation="wave" width={200} height={40} variant="text" />
           ) : products.length > 0 ? (
-            products.length + " məhsul tapıldı"
+            totalResult + " məhsul tapıldı"
           ) : (
             "0 məhsul tapıldı"
           )}
