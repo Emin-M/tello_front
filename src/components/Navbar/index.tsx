@@ -200,7 +200,7 @@ const Navbar = () => {
                         Təmizlə
                       </p>
                     </div>
-                    {searchLoading ? (
+                    {searchLoading === "pending" ? (
                       <div style={{ display: "flex" }}>
                         <Skeleton
                           variant="rectangular"
@@ -241,7 +241,7 @@ const Navbar = () => {
                       Təmizlə
                     </p>
                   </div>
-                  {!searchLoading ? (
+                  {searchLoading !== "pending" ? (
                     searchResult.map((result) => (
                       <Link to={`product/params/${result.id}`} key={result.id}>
                         <div>
@@ -300,7 +300,7 @@ const Navbar = () => {
             </div>
           </NavbarRight>
         </NavbarTop>
-        {loading ? (
+        {loading === "pending" ? (
           <NavbarBottom>
             <Skeleton animation="wave" width={100} height={30} variant="text" />
             <Skeleton animation="wave" width={100} height={30} variant="text" />

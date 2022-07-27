@@ -71,7 +71,7 @@ const PersonalData = () => {
       <Top>
         <h2>Şəxsi məlumatlar</h2>
       </Top>
-      {loading ? (
+      {loading === "pending" ? (
         <Loading />
       ) : (
         <StyledPersonalDataForm onSubmit={handleSubmit(onSubmit)}>

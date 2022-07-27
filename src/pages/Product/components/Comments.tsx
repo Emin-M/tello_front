@@ -24,7 +24,10 @@ const Comments: FC = () => {
   );
   const { id } = useParams();
 
-  if (!loading && singleProduct === null) {
+  if (
+    (loading === "failed" && singleProduct === null) ||
+    (loading === "succeeded" && singleProduct === null)
+  ) {
     return <></>;
   }
 

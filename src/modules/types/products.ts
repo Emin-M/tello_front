@@ -118,8 +118,8 @@ export interface IProduct {
 }
 
 export interface IProducts {
-  loading: boolean;
-  searchLoading: boolean;
+  loading: "idle" | "pending" | "succeeded" | "failed";
+  searchLoading: "idle" | "pending" | "succeeded" | "failed";
   error: string;
   products: IProduct[];
   searchResults: IProduct[];

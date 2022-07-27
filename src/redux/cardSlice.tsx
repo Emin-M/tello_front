@@ -9,8 +9,8 @@ import {
 } from "./actions/cardActions";
 
 const initialState: ICards = {
-  loading: false,
-  updateLoading: false,
+  loading: "idle",
+  updateLoading: "idle",
   error: "",
   items: null,
 };
@@ -22,80 +22,80 @@ export const cardSlice = createSlice({
   extraReducers: (builder) => {
     /* Fetching Card Products */
     builder.addCase(fetchCards.pending, (state) => {
-      return (state = { ...state, loading: true });
+      return (state = { ...state, loading: "pending" });
     });
     builder.addCase(fetchCards.fulfilled, (state, { payload }) => {
       localStorage.setItem("cartId", payload.id);
-      return (state = { ...state, loading: false, items: payload });
+      return (state = { ...state, loading: "succeeded", items: payload });
     });
     builder.addCase(fetchCards.rejected, (state) => {
       return (state = {
         ...state,
-        loading: false,
+        loading: "failed",
         error: "Error fetching card",
       });
     });
 
     /* Adding Item To Card */
     builder.addCase(addProductToBasket.pending, (state) => {
-      return (state = { ...state, loading: true });
+      return (state = { ...state, loading: "pending" });
     });
     builder.addCase(addProductToBasket.fulfilled, (state, { payload }) => {
-      return (state = { ...state, loading: false, items: payload?.cart });
+      return (state = { ...state, loading: "succeeded", items: payload?.cart });
     });
     builder.addCase(addProductToBasket.rejected, (state) => {
       return (state = {
         ...state,
-        loading: false,
+        loading: "failed",
         error: "Error adding item to card",
       });
     });
 
     /* Deleting Item From Card */
     builder.addCase(deleteItemFromCart.pending, (state) => {
-      return (state = { ...state, loading: true });
+      return (state = { ...state, loading: "pending" });
     });
     builder.addCase(deleteItemFromCart.fulfilled, (state, { payload }) => {
-      return (state = { ...state, loading: false, items: payload.cart });
+      return (state = { ...state, loading: "succeeded", items: payload.cart });
     });
     builder.addCase(deleteItemFromCart.rejected, (state) => {
       return (state = {
         ...state,
-        loading: false,
+        loading: "failed",
         error: "Error fdeleting card item",
       });
     });
 
     /* Update Item In Card */
     builder.addCase(updateItemInCart.pending, (state) => {
-      return (state = { ...state, updateLoading: true });
+      return (state = { ...state, updateLoading: "pending" });
     });
     builder.addCase(updateItemInCart.fulfilled, (state, { payload }) => {
       return (state = {
         ...state,
+        updateLoading: "succeeded",
         items: payload.cart,
-        updateLoading: false,
       });
     });
     builder.addCase(updateItemInCart.rejected, (state) => {
       return (state = {
         ...state,
-        updateLoading: false,
+        updateLoading: "failed",
         error: "Error updating card item",
       });
     });
 
     /* Deleting All Items From Card */
     builder.addCase(emptyCard.pending, (state) => {
-      return (state = { ...state, loading: true });
+      return (state = { ...state, loading: "pending" });
     });
     builder.addCase(emptyCard.fulfilled, (state, { payload }) => {
-      return (state = { ...state, loading: false, items: payload.cart });
+      return (state = { ...state, loading: "succeeded", items: payload.cart });
     });
     builder.addCase(emptyCard.rejected, (state) => {
       return (state = {
         ...state,
-        loading: false,
+        loading: "failed",
         error: "Error clearing card",
       });
     });

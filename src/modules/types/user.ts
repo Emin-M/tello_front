@@ -22,6 +22,6 @@ export interface ICreateUser {
 }
 
 export interface IUser {
-  loading: boolean;
+  loading: "idle" | "pending" | "succeeded" | "failed";
   user: IUserData | null;
 }

@@ -120,7 +120,7 @@ const Cards: FC = () => {
                   <img src={minus} alt="minus" />
                 </div>
                 <span>
-                  {updateLoading && updateId === item.id ? (
+                  {updateLoading === "pending" && updateId === item.id ? (
                     <CircularProgress
                       color="inherit"
                       sx={{ margin: "0 20px" }}

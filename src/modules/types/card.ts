@@ -57,8 +57,8 @@ export interface ICard {
 }
 
 export interface ICards {
-  loading: boolean;
-  updateLoading: boolean;
+  loading: "idle" | "pending" | "succeeded" | "failed";
+  updateLoading: "idle" | "pending" | "succeeded" | "failed";
   error: string;
   items: ICard | null;
 }

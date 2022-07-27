@@ -16,7 +16,7 @@ const Card: FC = () => {
         <CardTop>
           <h2>Səbət ({items?.total_items || "0"} məhsul)</h2>
         </CardTop>
-        {loading ? (
+        {loading === "pending" ? (
           <div
             style={{
               display: "flex",

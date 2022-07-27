@@ -77,7 +77,7 @@ const Filters = ({ showFilter, setShowFilter }: IProps) => {
         </AccordionSummary>
         <AccordionDetails>
           <FormGroup>
-            {loading ? (
+            {loading === "pending" ? (
               <>
                 <Skeleton
                   animation="wave"

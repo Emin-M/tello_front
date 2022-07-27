@@ -22,7 +22,7 @@ const Links: FC = () => {
       </li>
       <li>
         <p>
-          {loading ? (
+          {loading === "pending" ? (
             <Skeleton variant="text" animation="wave" width={100} height={30} />
           ) : (
             singleProduct?.sku

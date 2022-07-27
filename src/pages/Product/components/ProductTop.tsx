@@ -119,7 +119,10 @@ const ProductTop: FC = () => {
     setOrderCount(1);
   };
 
-  if (!loading && singleProduct === null) {
+  if (
+    (loading === "failed" && singleProduct === null) ||
+    (loading === "succeeded" && singleProduct === null)
+  ) {
     return (
       <ProductNotFound>
         <h2>Məhsul Tapılmadı</h2>
@@ -131,7 +134,7 @@ const ProductTop: FC = () => {
     <ProductTopContainer>
       <ProductImg>
         <img src={leftArrow} onClick={() => imageChange("-")} alt="leftArrow" />
-        {loading ? (
+        {loading === "pending" ? (
           <Skeleton
             variant="rectangular"
             width={250}
@@ -147,7 +150,7 @@ const ProductTop: FC = () => {
           alt="rightArrow"
         />
         <div>
-          {loading ? (
+          {loading === "pending" ? (
             <>
               <Skeleton
                 variant="rectangular"
@@ -209,7 +212,7 @@ const ProductTop: FC = () => {
         </div>
       </ProductImg>
       <ProductFilter>
-        {loading ? (
+        {loading === "pending" ? (
           <Skeleton variant="text" animation="wave" width={200} height={30} />
         ) : (
           <h2>
@@ -224,7 +227,7 @@ const ProductTop: FC = () => {
               : singleProduct?.price.formatted_with_code}
           </span>
         </p>
-        {loading ? (
+        {loading === "pending" ? (
           <>
             <Skeleton variant="text" animation="wave" width={200} height={30} />
             <Skeleton variant="text" animation="wave" width={200} height={30} />

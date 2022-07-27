@@ -86,7 +86,7 @@ const ProductsContainer = ({ setShowFilter }: IProps) => {
       </StyledFilters>
       <div>
         <p>
-          {loading ? (
+          {loading === "pending" ? (
             <Skeleton animation="wave" width={200} height={40} variant="text" />
           ) : products.length > 0 ? (
             products.length + " məhsul tapıldı"
@@ -114,7 +114,7 @@ const ProductsContainer = ({ setShowFilter }: IProps) => {
             : { justifyContent: "flex-start", gap: "20px" }
         }
       >
-        {loading ? (
+        {loading === "pending" ? (
           <div
             style={{
               display: "flex",

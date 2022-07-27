@@ -57,12 +57,11 @@ export const ProductImg = styled.div`
       width: 100px !important;
       height: 100px !important;
       cursor: pointer;
-      padding: 20px;
+      padding: 5px;
       border-radius: 8px;
     }
 
     .active {
-      padding: 5px;
       border: 1px solid #2dd06e;
     }
   }

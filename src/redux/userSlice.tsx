@@ -3,7 +3,7 @@ import { IUser } from "../modules/types/user";
 import { getUser, updateUser } from "./actions/userActions";
 
 const initialState: IUser = {
-  loading: false,
+  loading: "idle",
   user: null,
 };
 
@@ -14,24 +14,24 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     /* Creating User */
     builder.addCase(getUser.pending, (state) => {
-      return (state = { ...state, loading: true });
+      return (state = { ...state, loading: "pending" });
     });
     builder.addCase(getUser.fulfilled, (state, { payload }) => {
-      return (state = { ...state, loading: false, user: payload });
+      return (state = { ...state, loading: "succeeded", user: payload });
     });
     builder.addCase(getUser.rejected, (state) => {
-      return (state = { ...state, loading: false });
+      return (state = { ...state, loading: "failed" });
     });
 
     /* Updating User */
     builder.addCase(updateUser.pending, (state) => {
-      return (state = { ...state, loading: true });
+      return (state = { ...state, loading: "pending" });
     });
     builder.addCase(updateUser.fulfilled, (state, { payload }) => {
-      return (state = { ...state, loading: false, user: payload });
+      return (state = { ...state, loading: "succeeded", user: payload });
     });
     builder.addCase(updateUser.rejected, (state) => {
-      return (state = { ...state, loading: false });
+      return (state = { ...state, loading: "failed" });
     });
   },
 });
