@@ -24,9 +24,9 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import UserProfile from "./pages/UserProfile";
 import ExchangeToken from "./pages/Login/ExchangeToken";
-import ProtectedRoute from "./components/ProtectedRoute";
 import Orders from "./pages/UserProfile/components/Orders";
 import PersonalData from "./pages/UserProfile/components/PersonalData";
+import ProtectedRoute from "./components/ProtectedRoute";
 import AuthRoute from "./components/AuthRoute";
 
 const App = () => {

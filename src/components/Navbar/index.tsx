@@ -122,11 +122,13 @@ const Navbar = () => {
   });
 
   useEffect(() => {
-    setShowSidebar(false);
-    hideSub();
-    setTerm("");
-    setShowSearch(false);
-    setSearcResult([]);
+    setTimeout(() => {
+      setShowSidebar(false);
+      hideSub();
+      setTerm("");
+      setShowSearch(false);
+      setSearcResult([]);
+    }, 0);
   }, [location]);
 
   return (
