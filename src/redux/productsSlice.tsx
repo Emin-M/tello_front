@@ -14,7 +14,7 @@ const initialState: IProducts = {
   products: [],
   searchResults: [],
   singleProduct: null,
-  productVariants: [],
+  productVariants: null,
 };
 
 export const productsSlice = createSlice({
@@ -68,21 +68,8 @@ export const productsSlice = createSlice({
       return (state = {
         ...state,
         loading: false,
-        singleProduct: payload,
+        singleProduct: payload?.id ? payload : null,
       });
-      // if (payload?.id) {
-      //   return (state = {
-      //     ...state,
-      //     loading: false,
-      //     singleProduct: payload,
-      //   });
-      // } else {
-      //   return (state = {
-      //     ...state,
-      //     loading: false,
-      //     singleProduct: null,
-      //   });
-      // }
     });
     builder.addCase(fetchProductById.rejected, (state) => {
       return (state = {
@@ -100,21 +87,8 @@ export const productsSlice = createSlice({
       return (state = {
         ...state,
         loading: false,
-        productVariants: payload,
+        productVariants: payload?.id ? payload : null,
       });
-      // if (payload?.id) {
-      //   return (state = {
-      //     ...state,
-      //     loading: false,
-      //     productVariants: payload,
-      //   });
-      // } else {
-      //   return (state = {
-      //     ...state,
-      //     loading: false,
-      //     singleProduct: null,
-      //   });
-      // }
     });
     builder.addCase(fetchProductVariants.rejected, (state) => {
       return (state = {

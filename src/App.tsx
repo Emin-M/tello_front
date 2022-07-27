@@ -28,6 +28,7 @@ import Orders from "./pages/UserProfile/components/Orders";
 import PersonalData from "./pages/UserProfile/components/PersonalData";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthRoute from "./components/AuthRoute";
+import Error from "./pages/Error";
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -53,10 +54,13 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products">
+          <Route index element={<Error />} />
           <Route path=":id" element={<Products />} />
         </Route>
         <Route path="/product">
+          <Route index element={<Error />} />
           <Route path="params">
+            <Route index element={<Error />} />
             <Route
               path=":id"
               element={
@@ -68,6 +72,7 @@ const App = () => {
             />
           </Route>
           <Route path="comments">
+            <Route index element={<Error />} />
             <Route
               path=":id"
               element={
@@ -108,6 +113,7 @@ const App = () => {
           <Route path="orders" element={<Orders />} />
           <Route path="personaldata" element={<PersonalData />} />
         </Route>
+        <Route path="*" element={<Error />} />
       </Routes>
       <Footer />
     </div>

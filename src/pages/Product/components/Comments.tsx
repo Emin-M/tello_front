@@ -15,9 +15,18 @@ import {
 import star_full from "../../../assets/images/icons/star_full.png";
 import star from "../../../assets/images/icons/star.png";
 import Button from "../../../components/ReusuableComponents/Button";
+import { RootState } from "../../../redux/store";
+import { useSelector } from "react-redux";
 
 const Comments: FC = () => {
+  const { singleProduct, loading } = useSelector(
+    (state: RootState) => state.products
+  );
   const { id } = useParams();
+
+  if (!loading && singleProduct === null) {
+    return <></>;
+  }
 
   return (
     <CommentsContainer>

@@ -20,7 +20,7 @@ const ProfileLinks: FC = () => {
         <li>
           <img src={basket} alt="basket" />
           <Link
-            to="orders"
+            to="/userprofile/orders"
             style={
               pathname.slice(-1) === "s"
                 ? { color: "#2dd06e" }
@@ -33,7 +33,7 @@ const ProfileLinks: FC = () => {
         <li>
           <img src={person} alt="person" />
           <Link
-            to="personaldata"
+            to="/userprofile/personaldata"
             style={
               pathname.slice(-1) === "a"
                 ? { color: "#2dd06e" }

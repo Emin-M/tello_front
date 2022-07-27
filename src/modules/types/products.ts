@@ -124,5 +124,5 @@ export interface IProducts {
   products: IProduct[];
   searchResults: IProduct[];
   singleProduct: IProduct | null;
-  productVariants: ProductVariants[];
+  productVariants: ProductVariants[] | null;
 }

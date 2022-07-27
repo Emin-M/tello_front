@@ -74,7 +74,7 @@ const ProductsContainer = ({ setShowFilter }: IProps) => {
         <div>
           <img src={swap} alt="swap" />
           <select onChange={(e) => onChangeMobile(e)} value={selectValue}>
-            <option value="new">Sıralama</option>
+            <option value="new">Ən yenilər</option>
             <option value="asc">Ucuzdan bahaya</option>
             <option value="desc">Bahadan ucuza</option>
           </select>

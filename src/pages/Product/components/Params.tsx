@@ -1,6 +1,8 @@
 import { FC } from "react";
+import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { Container } from "../../../components/ReusuableComponents/styles/Container.styled";
+import { RootState } from "../../../redux/store";
 import {
   BottomLeft,
   BottomRight,
@@ -10,7 +12,14 @@ import {
 } from "./styles/Params.styled";
 
 const Params: FC = () => {
+  const { singleProduct, loading } = useSelector(
+    (state: RootState) => state.products
+  );
   const { id } = useParams();
+
+  if (!loading && singleProduct === null) {
+    return <></>;
+  }
 
   return (
     <ParamsContainer>
