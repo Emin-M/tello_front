@@ -4,6 +4,7 @@ import { RootState } from "../../../redux/store";
 import { IProduct } from "../../../modules/types/products";
 import Card from "../../../components/ReusuableComponents/Card";
 import { useParams, useSearchParams } from "react-router-dom";
+import Pagination from "../../../components/ReusuableComponents/Pagination";
 
 /* Styles */
 import {
@@ -28,7 +29,7 @@ interface IProps {
 }
 
 const ProductsContainer = ({ setShowFilter }: IProps) => {
-  const { products, loading } = useSelector(
+  const { products, totalResult, loading } = useSelector(
     (state: RootState) => state.products
   );
   const { id } = useParams();
@@ -36,9 +37,7 @@ const ProductsContainer = ({ setShowFilter }: IProps) => {
 
   /* Url */
   const [searchParams, setSearchParams] = useSearchParams();
-  let paramsBrand = searchParams.getAll("brand");
   let paramsSort = searchParams.getAll("sort");
-  let paramsArray = paramsBrand?.[0]?.split(",");
 
   useEffect(() => {
     paramsSort?.[0]?.length > 0 && setSelectValue(paramsSort?.[0]);
@@ -46,15 +45,10 @@ const ProductsContainer = ({ setShowFilter }: IProps) => {
 
   /* Changing URL When Filter Products */
   useEffect(() => {
-    if (paramsArray?.length > 0 && selectValue !== "new") {
-      setSearchParams(`brand=${paramsArray}&sort=${selectValue}`);
-    } else if (paramsArray?.length > 0 && selectValue === "new") {
-      setSearchParams(`brand=${paramsArray}`);
-    } else if (selectValue !== "new") {
-      setSearchParams(`sort=${selectValue}`);
-    } else if (selectValue === "new") {
-      setSearchParams("");
-    }
+    searchParams.delete("page");
+    searchParams.set("sort", selectValue);
+    selectValue === "new" && searchParams.delete("sort");
+    setSearchParams(searchParams);
   }, [selectValue, id]);
 
   /* Changing Select */
@@ -173,6 +167,9 @@ const ProductsContainer = ({ setShowFilter }: IProps) => {
           ))
         )}
       </Cards>
+      {totalResult > 6 && (
+        <Pagination count={totalResult} color="primary" size="large" />
+      )}
     </StyledProductsContainer>
   );
 };

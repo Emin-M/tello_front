@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { fetchProducts } from "../../redux/actions/productActions";
 import { useDispatch } from "react-redux";
@@ -20,7 +20,7 @@ const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   let paramsBrand = searchParams.getAll("brand");
   let paramsSort = searchParams.getAll("sort");
-  let page = searchParams.getAll("page");
+  let page = searchParams.get("page");
 
   useEffect(() => {
     let params = { query: paramsBrand?.[0], page: page?.[0] };
@@ -46,6 +46,8 @@ const Products = () => {
         })
       );
     }
+
+    // setSearchParams({ brand: paramsBrand, sort: paramsSort });
   }, [searchParams, id]);
 
   return (

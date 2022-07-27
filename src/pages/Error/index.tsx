@@ -8,7 +8,7 @@ const Error = () => {
     <StyledError>
       <Container>
         <p>
-          Narahtçılığa görə üzr istəyirik. Siz mövcud olmayan və ya silinmiş
+          Narahatçılığa görə üzr istəyirik. Siz mövcud olmayan və ya silinmiş
           səhifəyə daxil olmaq istəyirsiniz.
         </p>
         <h2>Oops... Səhifə tapılmadı :(</h2>

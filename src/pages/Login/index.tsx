@@ -73,6 +73,10 @@ const Login: FC = () => {
   const location: any = useLocation();
   useEffect(() => {
     !isLogin && alertSuccess(location?.state?.signupMessage, "top-center");
+    !isLogin &&
+      reset({
+        email: location?.state?.email,
+      });
   }, []);
 
   return (

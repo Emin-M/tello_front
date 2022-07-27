@@ -12,6 +12,7 @@ const initialState: IProducts = {
   searchLoading: "idle",
   error: "",
   products: [],
+  totalResult: 0,
   searchResults: [],
   singleProduct: null,
   productVariants: null,
@@ -26,11 +27,12 @@ export const productsSlice = createSlice({
     builder.addCase(fetchProducts.pending, (state) => {
       return (state = { ...state, loading: "pending" });
     });
-    builder.addCase(fetchProducts.fulfilled, (state, action) => {
+    builder.addCase(fetchProducts.fulfilled, (state, { payload }) => {
       return (state = {
         ...state,
         loading: "succeeded",
-        products: action.payload.data || [],
+        totalResult: payload.meta.pagination.total,
+        products: payload.data || [],
       });
     });
     builder.addCase(fetchProducts.rejected, (state) => {

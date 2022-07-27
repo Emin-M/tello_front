@@ -30,7 +30,7 @@ const CardContainer = ({ title, link }: Props) => {
           </Link>
         </CardTop>
         <CardBottom>
-          {loading ? (
+          {loading === "pending" ? (
             <div
               style={{
                 display: "flex",

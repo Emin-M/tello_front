@@ -19,7 +19,7 @@ const Links: FC = () => {
         </Link>
       </li>
       <li>
-        <Link to="/products/telefonlar">
+        <Link to={`/products/${id}`}>
           {id && id?.charAt(0).toUpperCase() + id?.slice(1)}
           <img src={arrowRight} alt="arrowRight" />
         </Link>

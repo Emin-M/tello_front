@@ -76,7 +76,10 @@ const SignUp: FC = () => {
       if (response.data.id) {
         reset();
         navigate("/login", {
-          state: { signupMessage: "Siz uğurla qeydiyyatdan keçdiniz" },
+          state: {
+            signupMessage: "Siz uğurla qeydiyyatdan keçdiniz",
+            email: response?.data?.email,
+          },
         });
       }
     } catch (error: any) {

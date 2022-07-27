@@ -122,6 +122,7 @@ export interface IProducts {
   searchLoading: "idle" | "pending" | "succeeded" | "failed";
   error: string;
   products: IProduct[];
+  totalResult: number;
   searchResults: IProduct[];
   singleProduct: IProduct | null;
   productVariants: ProductVariants[] | null;

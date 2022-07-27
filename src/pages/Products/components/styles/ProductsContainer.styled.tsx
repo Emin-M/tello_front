@@ -14,6 +14,23 @@ export const StyledProductsContainer = styled.div`
     margin-bottom: 20px;
   }
 
+  /* Pagination */
+  nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+
+    button {
+      font-size: 20px;
+      margin-right: 20px;
+    }
+
+    svg {
+      font-size: 30px;
+    }
+  }
+
   @media (max-width: 650px) {
     > div:nth-child(2) > div {
       display: none;
