@@ -190,6 +190,7 @@ const ProductTop: FC = () => {
                   setImageOrder(index);
                 }}
                 alt={image.filename}
+                className={`${mainImage === image.url && "active"}`}
               />
             ))
           ) : (

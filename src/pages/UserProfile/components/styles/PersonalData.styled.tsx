@@ -52,14 +52,30 @@ export const StyledPersonalDataForm = styled.form`
   }
 
   button {
+    outline: none;
+    border: 1px solid #2dd06e;
+    border-radius: 8px;
+    height: 48px;
     width: 50%;
     margin-top: 32px;
     font-size: 16px;
+    color: #ffffff;
+    background: #2dd06e;
     cursor: pointer;
     transition: all 0.3s;
 
     &:hover {
       background: #333333 !important;
+    }
+
+    &:disabled {
+      background: #e5e5e5;
+      border: none;
+      pointer-events: none;
+    }
+
+    img {
+      margin-right: 10px;
     }
   }
 

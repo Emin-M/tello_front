@@ -1,10 +1,11 @@
-import { FC, useState } from "react";
-import { Link } from "react-router-dom";
+import { FC, useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Button from "../../components/ReusuableComponents/Button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import api from "../../api/api";
+import { alertSuccess } from "../../modules/alert";
 
 /* Styles */
 import { Container } from "../../components/ReusuableComponents/styles/Container.styled";
@@ -67,6 +68,12 @@ const Login: FC = () => {
       console.log(error);
     }
   };
+
+  /* Alert About Signned Up */
+  const location: any = useLocation();
+  useEffect(() => {
+    !isLogin && alertSuccess(location?.state?.signupMessage, "top-center");
+  }, []);
 
   return (
     <StyledLogin>

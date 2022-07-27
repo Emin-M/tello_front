@@ -87,7 +87,7 @@ export const productsSlice = createSlice({
       return (state = {
         ...state,
         loading: false,
-        productVariants: payload?.id ? payload : null,
+        productVariants: payload?.[0]?.id ? payload : null,
       });
     });
     builder.addCase(fetchProductVariants.rejected, (state) => {

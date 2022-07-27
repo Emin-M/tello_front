@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IUser } from "../modules/types/user";
-// import { createUser } from "./actions/userActions";
+import { getUser, updateUser } from "./actions/userActions";
 
 const initialState: IUser = {
   loading: false,
@@ -13,15 +13,26 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     /* Creating User */
-    // builder.addCase(createUser.pending, (state) => {
-    //   return (state = { ...state, loading: true });
-    // });
-    // builder.addCase(createUser.fulfilled, (state, { payload }) => {
-    //   return (state = { ...state, loading: false, user: payload });
-    // });
-    // builder.addCase(createUser.rejected, (state) => {
-    //   return (state = { ...state, loading: false });
-    // });
+    builder.addCase(getUser.pending, (state) => {
+      return (state = { ...state, loading: true });
+    });
+    builder.addCase(getUser.fulfilled, (state, { payload }) => {
+      return (state = { ...state, loading: false, user: payload });
+    });
+    builder.addCase(getUser.rejected, (state) => {
+      return (state = { ...state, loading: false });
+    });
+
+    /* Updating User */
+    builder.addCase(updateUser.pending, (state) => {
+      return (state = { ...state, loading: true });
+    });
+    builder.addCase(updateUser.fulfilled, (state, { payload }) => {
+      return (state = { ...state, loading: false, user: payload });
+    });
+    builder.addCase(updateUser.rejected, (state) => {
+      return (state = { ...state, loading: false });
+    });
   },
 });
 

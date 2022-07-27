@@ -36,7 +36,10 @@ const schema = yup
   .object({
     firstname: yup.string().required("Ad tələb olunur"),
     lastname: yup.string().required("Soyad tələb olunur"),
-    email: yup.string().email().required("Email tələb olunur"),
+    email: yup
+      .string()
+      .email("Email nümunədə göstərilən formatda olmalıdır")
+      .required("Email tələb olunur"),
     phone: yup.string(),
     checkbox: yup
       .boolean()
@@ -72,11 +75,13 @@ const SignUp: FC = () => {
       const response = await api.post("/customers", user);
       if (response.data.id) {
         reset();
-        navigate("/login");
+        navigate("/login", {
+          state: { signupMessage: "Siz uğurla qeydiyyatdan keçdiniz" },
+        });
       }
     } catch (error: any) {
       const { email } = error?.response?.data?.error?.errors;
-      alertError(email[0]);
+      email?.[0] && alertError("Email adresi isdifadə olunub");
     }
   };
 

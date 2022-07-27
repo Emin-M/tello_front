@@ -4,12 +4,13 @@ interface IProps {
   title: string;
   bg: string;
   color: string;
+  icon?: string;
 }
 
-const Button = ({ title, bg, color }: IProps) => {
+const Button = ({ title, bg, color, icon }: IProps) => {
   return (
     <StyledButton style={{ color: color, background: bg }}>
-      {title}
+      {icon && <img src={icon} alt="edit" />} {title}
     </StyledButton>
   );
 };

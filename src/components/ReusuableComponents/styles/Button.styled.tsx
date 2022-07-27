@@ -7,6 +7,10 @@ export const StyledButton = styled.button`
   width: 156px;
   height: 48px;
 
+  img {
+    margin-right: 10px;
+  }
+
   @media (max-width: 350px) {
     width: 106px;
   }
