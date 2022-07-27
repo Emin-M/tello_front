@@ -45,7 +45,6 @@ const ProductsContainer = ({ setShowFilter }: IProps) => {
 
   /* Changing URL When Filter Products */
   useEffect(() => {
-    searchParams.delete("page");
     searchParams.set("sort", selectValue);
     selectValue === "new" && searchParams.delete("sort");
     setSearchParams(searchParams);
@@ -55,11 +54,13 @@ const ProductsContainer = ({ setShowFilter }: IProps) => {
   const onChange = (event: SelectChangeEvent) => {
     const value = event.target.value;
     setSelectValue(value);
+    searchParams.delete("page");
   };
 
   const onChangeMobile = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
     setSelectValue(value);
+    searchParams.delete("page");
   };
 
   return (

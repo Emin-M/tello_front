@@ -23,7 +23,7 @@ const Products = () => {
   let page = searchParams.get("page");
 
   useEffect(() => {
-    let params = { query: paramsBrand?.[0], page: page?.[0] };
+    let params = { query: paramsBrand?.[0], page: page ? page : "1" };
 
     if (id && paramsSort?.[0]) {
       dispatch(
@@ -46,8 +46,6 @@ const Products = () => {
         })
       );
     }
-
-    // setSearchParams({ brand: paramsBrand, sort: paramsSort });
   }, [searchParams, id]);
 
   return (
