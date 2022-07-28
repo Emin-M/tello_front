@@ -120,8 +120,12 @@ const ProductTop: FC = () => {
   };
 
   if (
-    (loading === "failed" && singleProduct === null) ||
-    (loading === "succeeded" && singleProduct === null)
+    (loading === "failed" &&
+      singleProduct === null &&
+      productVariants === null) ||
+    (loading === "succeeded" &&
+      singleProduct === null &&
+      productVariants === null)
   ) {
     return (
       <ProductNotFound>
@@ -213,20 +217,30 @@ const ProductTop: FC = () => {
       </ProductImg>
       <ProductFilter>
         {loading === "pending" ? (
-          <Skeleton variant="text" animation="wave" width={200} height={30} />
+          <Skeleton variant="text" animation="wave" width={200} height={40} />
         ) : (
           <h2>
             {productVariants ? product?.description : singleProduct?.name}
           </h2>
         )}
-        <p>
-          {/* <del>200</del> */}
-          <span>
-            {productVariants
-              ? product?.price?.formatted_with_code
-              : singleProduct?.price.formatted_with_code}
-          </span>
-        </p>
+        {loading === "pending" ? (
+          <Skeleton
+            variant="text"
+            style={{ margin: "20px 0" }}
+            animation="wave"
+            width={100}
+            height={30}
+          />
+        ) : (
+          <p>
+            {/* <del>200</del> */}
+            <span>
+              {productVariants
+                ? product?.price?.formatted_with_code
+                : singleProduct?.price.formatted_with_code}
+            </span>
+          </p>
+        )}
         {loading === "pending" ? (
           <>
             <Skeleton variant="text" animation="wave" width={200} height={30} />
@@ -264,28 +278,48 @@ const ProductTop: FC = () => {
             </div>
           ))
         )}
-        <div className="quantity">
-          <p style={{ marginRight: "30px" }}>MIQDAR:</p>
-          <div
-            onClick={() => {
-              orderCount > 1 && setOrderCount(orderCount - 1);
-            }}
-          >
-            <img src={minus} alt="minus" />
+        {loading === "pending" ? (
+          <Skeleton
+            variant="text"
+            style={{ marginTop: "20px" }}
+            animation="wave"
+            width={200}
+            height={30}
+          />
+        ) : (
+          <div className="quantity">
+            <p style={{ marginRight: "30px" }}>MIQDAR:</p>
+            <div
+              onClick={() => {
+                orderCount > 1 && setOrderCount(orderCount - 1);
+              }}
+            >
+              <img src={minus} alt="minus" />
+            </div>
+            <span>{orderCount}</span>
+            <div
+              onClick={() => {
+                setOrderCount(orderCount + 1);
+              }}
+            >
+              <img src={plus} alt="plus" />
+            </div>
           </div>
-          <span>{orderCount}</span>
-          <div
-            onClick={() => {
-              setOrderCount(orderCount + 1);
-            }}
-          >
-            <img src={plus} alt="plus" />
-          </div>
-        </div>
-        <button onClick={() => addingToBasket()}>
-          <img src={basket} alt="basket" />
-          <p>Səbətə at</p>
-        </button>
+        )}
+        {loading === "pending" ? (
+          <Skeleton
+            variant="text"
+            style={{ marginTop: "20px" }}
+            animation="wave"
+            width={200}
+            height={100}
+          />
+        ) : (
+          <button onClick={() => addingToBasket()}>
+            <img src={basket} alt="basket" />
+            <p>Səbətə at</p>
+          </button>
+        )}
       </ProductFilter>
     </ProductTopContainer>
   );

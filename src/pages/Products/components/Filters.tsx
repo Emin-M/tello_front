@@ -1,3 +1,4 @@
+import React from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
@@ -50,19 +51,30 @@ const Filters = ({ showFilter, setShowFilter }: IProps) => {
     setSearchParams(searchParams);
   };
 
+  /* Accordion Open Handle */
+  const [expanded, setExpanded] = React.useState<string | false>("panel1");
+
+  const handleAccordionChange =
+    (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
+      setExpanded(newExpanded ? panel : false);
+    };
+
   return (
     <StyledFilters style={showFilter ? { left: "0" } : { left: "-100%" }}>
       <FilterMobileTop>
         <img src={close} alt="close" onClick={() => setShowFilter(false)} />
         <p>Filterləmələr</p>
       </FilterMobileTop>
-      <Accordion expanded>
+      <Accordion
+        expanded={expanded === "panel1"}
+        onChange={handleAccordionChange("panel1")}
+      >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <h3>Brand</h3>
+          <h3>Brend</h3>
         </AccordionSummary>
         <AccordionDetails>
           <FormGroup>
@@ -119,7 +131,7 @@ const Filters = ({ showFilter, setShowFilter }: IProps) => {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <h3>Storage</h3>
+          <h3>Qiymət</h3>
         </AccordionSummary>
         <AccordionDetails>
           <FormGroup>
