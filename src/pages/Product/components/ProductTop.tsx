@@ -5,6 +5,7 @@ import { Skeleton } from "@mui/material";
 import { addProductToBasket } from "../../../redux/actions/cardActions";
 import { useParams } from "react-router-dom";
 import { ProductVariants } from "../../../modules/types/products";
+import ReletedProducts from "./ReletedProducts";
 
 /* Images */
 import leftArrow from "../../../assets/images/icons/arrowLeft.png";
@@ -135,193 +136,214 @@ const ProductTop: FC = () => {
   }
 
   return (
-    <ProductTopContainer>
-      <ProductImg>
-        <img src={leftArrow} onClick={() => imageChange("-")} alt="leftArrow" />
-        {loading === "pending" ? (
-          <Skeleton
-            variant="rectangular"
-            width={250}
-            height={300}
-            animation="wave"
+    <>
+      <ProductTopContainer>
+        <ProductImg>
+          <img
+            src={leftArrow}
+            onClick={() => imageChange("-")}
+            alt="leftArrow"
           />
-        ) : (
-          <img src={mainImage} alt={singleProduct?.name} />
-        )}
-        <img
-          src={rightArrow}
-          onClick={() => imageChange("+")}
-          alt="rightArrow"
-        />
-        <div>
+          {loading === "pending" ? (
+            <Skeleton
+              variant="rectangular"
+              width={250}
+              height={300}
+              animation="wave"
+            />
+          ) : (
+            <img src={mainImage} alt={singleProduct?.name} />
+          )}
+          <img
+            src={rightArrow}
+            onClick={() => imageChange("+")}
+            alt="rightArrow"
+          />
+          <div>
+            {loading === "pending" ? (
+              <>
+                <Skeleton
+                  variant="rectangular"
+                  width={100}
+                  height={100}
+                  animation="wave"
+                />
+                <Skeleton
+                  variant="rectangular"
+                  width={100}
+                  height={100}
+                  animation="wave"
+                />
+                <Skeleton
+                  variant="rectangular"
+                  width={100}
+                  height={100}
+                  animation="wave"
+                />
+                <Skeleton
+                  variant="rectangular"
+                  width={100}
+                  height={100}
+                  animation="wave"
+                />
+                <Skeleton
+                  variant="rectangular"
+                  width={100}
+                  height={100}
+                  animation="wave"
+                />
+              </>
+            ) : productVariants ? (
+              product?.assets?.map((image, index) => (
+                <img
+                  src={image.url}
+                  key={image.id}
+                  onClick={() => {
+                    setMainImage(image.url);
+                    setImageOrder(index);
+                  }}
+                  alt={image.filename}
+                  className={`${mainImage === image.url && "active"}`}
+                />
+              ))
+            ) : (
+              singleProduct?.assets?.map((image, index) => (
+                <img
+                  src={image.url}
+                  key={image.id}
+                  onClick={() => {
+                    setMainImage(image.url);
+                    setImageOrder(index);
+                  }}
+                  alt={image.filename}
+                />
+              ))
+            )}
+          </div>
+        </ProductImg>
+        <ProductFilter>
+          {loading === "pending" ? (
+            <Skeleton variant="text" animation="wave" width={200} height={40} />
+          ) : (
+            <h2>
+              {productVariants ? product?.description : singleProduct?.name}
+            </h2>
+          )}
+          {loading === "pending" ? (
+            <Skeleton
+              variant="text"
+              style={{ margin: "20px 0" }}
+              animation="wave"
+              width={100}
+              height={30}
+            />
+          ) : (
+            <p>
+              {/* <del>200</del> */}
+              <span>
+                {productVariants
+                  ? product?.price?.formatted_with_code
+                  : singleProduct?.price.formatted_with_code}
+              </span>
+            </p>
+          )}
           {loading === "pending" ? (
             <>
               <Skeleton
-                variant="rectangular"
-                width={100}
-                height={100}
+                variant="text"
                 animation="wave"
+                width={200}
+                height={30}
               />
               <Skeleton
-                variant="rectangular"
-                width={100}
-                height={100}
+                variant="text"
                 animation="wave"
-              />
-              <Skeleton
-                variant="rectangular"
-                width={100}
-                height={100}
-                animation="wave"
-              />
-              <Skeleton
-                variant="rectangular"
-                width={100}
-                height={100}
-                animation="wave"
-              />
-              <Skeleton
-                variant="rectangular"
-                width={100}
-                height={100}
-                animation="wave"
+                width={200}
+                height={30}
               />
             </>
-          ) : productVariants ? (
-            product?.assets?.map((image, index) => (
-              <img
-                src={image.url}
-                key={image.id}
-                onClick={() => {
-                  setMainImage(image.url);
-                  setImageOrder(index);
-                }}
-                alt={image.filename}
-                className={`${mainImage === image.url && "active"}`}
-              />
-            ))
           ) : (
-            singleProduct?.assets?.map((image, index) => (
-              <img
-                src={image.url}
-                key={image.id}
-                onClick={() => {
-                  setMainImage(image.url);
-                  setImageOrder(index);
-                }}
-                alt={image.filename}
-              />
+            singleProduct?.variant_groups?.map((variant) => (
+              <div key={variant.name}>
+                <p>{variant.name.toUpperCase()}:</p>
+                {variant.name !== "rəng" ? (
+                  <ul>
+                    {variant.options?.map((option: any) => (
+                      <li
+                        className={`${
+                          option_1 === option.name ? "active" : ""
+                        }`}
+                        key={option.name}
+                        onClick={() => setOption_1(option.name)}
+                      >
+                        {option.name}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <ul>
+                    {variant.options.map((option: any) => (
+                      <li
+                        className={`${
+                          option_2 === option.name ? "active" : ""
+                        }`}
+                        key={option.name}
+                        onClick={() => setOption_2(option.name)}
+                      >
+                        <span style={{ background: option.name }}></span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             ))
           )}
-        </div>
-      </ProductImg>
-      <ProductFilter>
-        {loading === "pending" ? (
-          <Skeleton variant="text" animation="wave" width={200} height={40} />
-        ) : (
-          <h2>
-            {productVariants ? product?.description : singleProduct?.name}
-          </h2>
-        )}
-        {loading === "pending" ? (
-          <Skeleton
-            variant="text"
-            style={{ margin: "20px 0" }}
-            animation="wave"
-            width={100}
-            height={30}
-          />
-        ) : (
-          <p>
-            {/* <del>200</del> */}
-            <span>
-              {productVariants
-                ? product?.price?.formatted_with_code
-                : singleProduct?.price.formatted_with_code}
-            </span>
-          </p>
-        )}
-        {loading === "pending" ? (
-          <>
-            <Skeleton variant="text" animation="wave" width={200} height={30} />
-            <Skeleton variant="text" animation="wave" width={200} height={30} />
-          </>
-        ) : (
-          singleProduct?.variant_groups?.map((variant) => (
-            <div key={variant.name}>
-              <p>{variant.name.toUpperCase()}:</p>
-              {variant.name !== "rəng" ? (
-                <ul>
-                  {variant.options?.map((option: any) => (
-                    <li
-                      className={`${option_1 === option.name ? "active" : ""}`}
-                      key={option.name}
-                      onClick={() => setOption_1(option.name)}
-                    >
-                      {option.name}
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <ul>
-                  {variant.options.map((option: any) => (
-                    <li
-                      className={`${option_2 === option.name ? "active" : ""}`}
-                      key={option.name}
-                      onClick={() => setOption_2(option.name)}
-                    >
-                      <span style={{ background: option.name }}></span>
-                    </li>
-                  ))}
-                </ul>
-              )}
+          {loading === "pending" ? (
+            <Skeleton
+              variant="text"
+              style={{ marginTop: "20px" }}
+              animation="wave"
+              width={200}
+              height={30}
+            />
+          ) : (
+            <div className="quantity">
+              <p style={{ marginRight: "30px" }}>MIQDAR:</p>
+              <div
+                onClick={() => {
+                  orderCount > 1 && setOrderCount(orderCount - 1);
+                }}
+              >
+                <img src={minus} alt="minus" />
+              </div>
+              <span>{orderCount}</span>
+              <div
+                onClick={() => {
+                  setOrderCount(orderCount + 1);
+                }}
+              >
+                <img src={plus} alt="plus" />
+              </div>
             </div>
-          ))
-        )}
-        {loading === "pending" ? (
-          <Skeleton
-            variant="text"
-            style={{ marginTop: "20px" }}
-            animation="wave"
-            width={200}
-            height={30}
-          />
-        ) : (
-          <div className="quantity">
-            <p style={{ marginRight: "30px" }}>MIQDAR:</p>
-            <div
-              onClick={() => {
-                orderCount > 1 && setOrderCount(orderCount - 1);
-              }}
-            >
-              <img src={minus} alt="minus" />
-            </div>
-            <span>{orderCount}</span>
-            <div
-              onClick={() => {
-                setOrderCount(orderCount + 1);
-              }}
-            >
-              <img src={plus} alt="plus" />
-            </div>
-          </div>
-        )}
-        {loading === "pending" ? (
-          <Skeleton
-            variant="text"
-            style={{ marginTop: "20px" }}
-            animation="wave"
-            width={200}
-            height={100}
-          />
-        ) : (
-          <button onClick={() => addingToBasket()}>
-            <img src={basket} alt="basket" />
-            <p>Səbətə at</p>
-          </button>
-        )}
-      </ProductFilter>
-    </ProductTopContainer>
+          )}
+          {loading === "pending" ? (
+            <Skeleton
+              variant="text"
+              style={{ marginTop: "20px" }}
+              animation="wave"
+              width={200}
+              height={100}
+            />
+          ) : (
+            <button onClick={() => addingToBasket()}>
+              <img src={basket} alt="basket" />
+              <p>Səbətə at</p>
+            </button>
+          )}
+        </ProductFilter>
+      </ProductTopContainer>
+      <ReletedProducts />
+    </>
   );
 };
 
