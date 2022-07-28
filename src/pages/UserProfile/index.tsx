@@ -6,6 +6,7 @@ import { StyledProfile } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { getUser } from "../../redux/actions/userActions";
+import { fetchCards } from "../../redux/actions/cardActions";
 
 const UserProfile = () => {
   const { user, loading } = useSelector((state: RootState) => state.user);
@@ -16,9 +17,13 @@ const UserProfile = () => {
   }, []);
 
   useEffect(() => {
-    if (loading === "succeeded" || loading === "failed") {
-      !user?.firstname && localStorage.removeItem("customerId");
+    if (user?.code === "ERR_BAD_REQUEST") {
+      localStorage.removeItem("customerId");
+    } else {
+      user?.external_id && localStorage.setItem("cartId", user?.external_id);
     }
+
+    loading === "succeeded" && dispatch(fetchCards());
   }, [loading]);
 
   return (

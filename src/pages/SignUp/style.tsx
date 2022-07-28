@@ -165,6 +165,7 @@ export const SignupMainBottom = styled.form`
     height: 24px;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
+    cursor: pointer;
   }
 
   input::placeholder {

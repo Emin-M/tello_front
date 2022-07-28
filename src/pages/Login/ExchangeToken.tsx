@@ -21,9 +21,10 @@ const ExchangeToken = () => {
         token: token,
       });
       setIsLoggedIn(false);
+      /* setting customerId to LS */
       !localStorage.getItem("customerId") &&
         localStorage.setItem("customerId", response?.data?.customer_id);
-      navigate("/userprofile/orders");
+      navigate("/userprofile/personaldata");
     } catch (error) {
       setIsLoggedIn(false);
     }

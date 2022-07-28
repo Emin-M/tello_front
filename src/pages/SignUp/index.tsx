@@ -1,12 +1,12 @@
-import { FC } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { FC, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Container } from "../../components/ReusuableComponents/styles/Container.styled";
 import Button from "../../components/ReusuableComponents/Button";
 import { ICreateUser } from "../../modules/types/user";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { alertError } from "../../modules/alert";
+import { alertError, alertSuccess } from "../../modules/alert";
 import api from "../../api/api";
 
 /* Styles */
@@ -61,11 +61,13 @@ const SignUp: FC = () => {
 
   /* On Form Submit */
   const onSubmit = (data: IFormInputs) => {
+    const basketId = localStorage.getItem("cartId");
     const user = {
       email: data.email,
-      phone: data.phone,
+      phone: data.phone || undefined,
       firstname: data.firstname,
       lastname: data.lastname,
+      external_id: basketId || undefined,
     };
     createUser(user);
   };
@@ -77,7 +79,7 @@ const SignUp: FC = () => {
         reset();
         navigate("/login", {
           state: {
-            signupMessage: "Siz uğurla qeydiyyatdan keçdiniz",
+            message: "Siz uğurla qeydiyyatdan keçdiniz",
             email: response?.data?.email,
           },
         });
@@ -87,6 +89,12 @@ const SignUp: FC = () => {
       email?.[0] && alertError("Email adresi isdifadə olunub");
     }
   };
+
+  /* Alert About Deleting User */
+  const location: any = useLocation();
+  useEffect(() => {
+    alertSuccess(location?.state?.message, "top-center");
+  }, []);
 
   return (
     <StyledSignup>

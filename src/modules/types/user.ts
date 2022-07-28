@@ -18,10 +18,10 @@ export interface ICreateUser {
   firstname: string;
   lastname: string;
   email: string;
-  phone: number;
+  phone: number | undefined;
 }
 
 export interface IUser {
   loading: "idle" | "pending" | "succeeded" | "failed";
-  user: IUserData | null;
+  user: IUserData | any;
 }

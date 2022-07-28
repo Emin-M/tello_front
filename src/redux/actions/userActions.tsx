@@ -38,3 +38,12 @@ export const updateUser = createAsyncThunk(
     }
   }
 );
+
+export const deleteUser = createAsyncThunk("card/deleteUser", async () => {
+  const id = localStorage.getItem("customerId");
+  try {
+    await api.get(`/customers/${id}`);
+  } catch (error) {
+    return error;
+  }
+});

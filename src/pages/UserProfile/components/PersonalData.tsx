@@ -56,14 +56,12 @@ const PersonalData = () => {
   };
 
   useEffect(() => {
-    if (user?.email && user.firstname && user.lastname && user.phone) {
-      reset({
-        firstname: user.firstname,
-        lastname: user.lastname,
-        email: user.email,
-        phone: user.phone,
-      });
-    }
+    reset({
+      firstname: user?.firstname,
+      lastname: user?.lastname,
+      email: user?.email,
+      phone: user?.phone,
+    });
   }, [user]);
 
   return (

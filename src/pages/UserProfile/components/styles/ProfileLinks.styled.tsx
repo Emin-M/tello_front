@@ -10,6 +10,16 @@ export const StyledProfileLinks = styled.div`
   min-height: calc(100vh - 300px);
   height: 0px !important;
 
+  div {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  button {
+    transform: translateY(-20px);
+    cursor: pointer;
+  }
+
   h2 {
     font-weight: 600;
     font-size: 20px;
@@ -37,7 +47,7 @@ export const StyledProfileLinks = styled.div`
     transition: all 0.3s;
 
     &:hover {
-      color: #2dd06e;
+      color: #2dd06e !important;
     }
   }
 
