@@ -16,7 +16,7 @@ export const StyledProfileLinks = styled.div`
   }
 
   button {
-    transform: translateY(-20px);
+    transform: translate(20px, -20px);
     cursor: pointer;
   }
 

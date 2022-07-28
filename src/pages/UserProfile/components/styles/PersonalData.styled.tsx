@@ -10,6 +10,7 @@ export const StyledPersonalDataForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 32px;
   background: #ffffff;
   border-radius: 8px;
   padding: 32px;
@@ -80,7 +81,10 @@ export const StyledPersonalDataForm = styled.form`
   }
 
   @media (max-width: 850px) {
+    gap: 10px;
+
     .group {
+      gap: 10px;
       flex-direction: column;
     }
 
