@@ -2,7 +2,15 @@ import React, { FC, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { StyledProfileLinks } from "./styles/ProfileLinks.styled";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { Button, Menu, MenuItem } from "@mui/material";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Menu,
+  MenuItem,
+  Modal,
+  Typography,
+} from "@mui/material";
 import api from "../../../api/api";
 
 /* Images */
@@ -10,7 +18,27 @@ import basket from "../../../assets/images/icons/basket.png";
 import person from "../../../assets/images/icons/person.png";
 import log_out from "../../../assets/svg/log-out.svg";
 
+/* Modal Styles */
+const style = {
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
+  borderRadius: "5px",
+  boxShadow: 54,
+  p: 4,
+};
+
+const styleButtonGroup = {
+  display: "flex",
+  justifyContent: "flex-end",
+  width: "100%",
+  marginTop: "20px",
+};
+
 const ProfileLinks: FC = () => {
+  const [modal, setModal] = useState<boolean>(false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -74,7 +102,7 @@ const ProfileLinks: FC = () => {
             onClick={(e) => {
               e.stopPropagation();
               handleClose();
-              deleteUser();
+              setModal(true);
             }}
           >
             Hesabı sil
@@ -113,6 +141,49 @@ const ProfileLinks: FC = () => {
           <Link to="/userprofile">Çıxış</Link>
         </li>
       </ul>
+      <Modal
+        open={modal}
+        onClose={() => setModal(false)}
+        onClick={(e: { stopPropagation: () => any }) => e.stopPropagation()}
+        aria-labelledby="keep-mounted-modal-title"
+        aria-describedby="keep-mounted-modal-description"
+      >
+        <Box sx={style}>
+          <Typography
+            sx={{ pb: 2, borderBottom: "1px solid black" }}
+            id="keep-mounted-modal-title"
+            variant="h5"
+            component="h2"
+          >
+            Hesabı Silmək!
+          </Typography>
+          <Typography
+            id="keep-mounted-modal-description"
+            variant="h6"
+            sx={{ mt: 2 }}
+          >
+            Hesabı Silmək istədiyinizə əminsiniz?
+          </Typography>
+          <ButtonGroup
+            sx={styleButtonGroup}
+            disableElevation
+            variant="contained"
+          >
+            <Button color="secondary" onClick={() => setModal(false)}>
+              Geri
+            </Button>
+            <Button
+              color="success"
+              onClick={() => {
+                setModal(false);
+                deleteUser();
+              }}
+            >
+              Sil
+            </Button>
+          </ButtonGroup>
+        </Box>
+      </Modal>
     </StyledProfileLinks>
   );
 };
