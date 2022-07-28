@@ -53,6 +53,10 @@ const PersonalData = () => {
       lastname: data.lastname.length > 0 ? data.lastname : undefined,
     };
     dispatch(updateUser(user));
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   useEffect(() => {
