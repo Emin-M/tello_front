@@ -21,14 +21,14 @@ export const CardTop = styled.div`
     font-weight: 500;
     font-size: 22px;
     line-height: 28px;
-    color: #333333;
+    color: var(--gray-100);
   }
 
   a {
     font-weight: 500;
     font-size: 16px;
     line-height: 16px;
-    color: #333333;
+    color: var(--gray-100);
     cursor: pointer;
   }
 

@@ -16,4 +16,22 @@ export default createGlobalStyle`
    a {
     text-decoration: none;
    }
+
+   /* Variables */
+  :root {
+    /* Gray */
+  --gray-100: #333333;
+  --gray-75: #4f4f4f;
+  --gray-50: #828282;
+  --gray-25: #f2f2f2;
+
+  /* Primary */
+  --primary-100: #2dd06e;
+  --primary-50: rgba(0, 214, 143, 0.16);
+
+  /* Element Colors  */
+  --red: #db2c66;
+  --blue: #2d9cdb;
+  --white: #ffffff
+  }
 `;

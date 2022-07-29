@@ -43,7 +43,7 @@ export const SliderItem = styled.div`
   p {
     font-size: 16px;
     line-height: 24px;
-    color: #4f4f4f;
+    color: var(--gray-75);
   }
 
   @media (max-width: 850px) {
@@ -97,7 +97,7 @@ export const SecondSliderItem = styled.div`
   margin-right: 16px;
   width: 176px !important;
   height: 80px;
-  background: #ffffff;
+  background: var(--white);
   border-radius: 8px;
 
   img {

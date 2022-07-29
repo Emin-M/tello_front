@@ -35,14 +35,14 @@ export const Service = styled.div`
     font-size: 20px;
     line-height: 28px;
     text-align: center;
-    color: #333333;
+    color: var(--gray-100);
   }
 
   p {
     font-size: 16px;
     line-height: 24px;
     text-align: center;
-    color: #333333;
+    color: var(--gray-100);
   }
 
   @media (max-width: 850px) {

@@ -19,7 +19,7 @@ export const CardTop = styled.div`
     font-weight: 600;
     font-size: 20px;
     line-height: 28px;
-    color: #4f4f4f;
+    color: var(--gray-75);
   }
 
   @media (max-width: 850px) {

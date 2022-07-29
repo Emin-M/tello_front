@@ -5,7 +5,7 @@ export const EmptyCardStyled = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: #ffffff;
+  background: var(--white);
   height: 70%;
   border-radius: 8px;
   margin-top: 10px;
@@ -25,7 +25,7 @@ export const EmptyCardStyled = styled.div`
     cursor: pointer;
 
     &:hover {
-      background: #333333 !important;
+      background: var(--gray-100) !important;
     }
   }
 `;

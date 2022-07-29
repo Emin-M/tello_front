@@ -22,7 +22,7 @@ export const SingleCard = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: #ffffff;
+  background: var(--white);
   margin-bottom: 32px;
   margin-right: 32px;
   border-radius: 8px;
@@ -55,7 +55,7 @@ export const SingleCard = styled.div`
     font-weight: 600;
     font-size: 16px;
     line-height: 22px;
-    color: #333333;
+    color: var(--gray-100);
   }
 
   .about {
@@ -172,18 +172,18 @@ export const CardRight = styled.div`
   button {
     margin-top: 20px;
     outline: none;
-    border: 1px solid #2dd06e;
+    border: 1px solid var(--primary-100);
     border-radius: 8px;
     width: 100%;
     height: 48px;
-    background: #ffffff;
+    background: var(--white);
     transition: all 0.3s;
     font-size: 20px;
     cursor: pointer;
 
     &:hover {
-      background: #2dd06e;
-      color: #ffffff;
+      background: var(--primary-100);
+      color: var(--white);
     }
   }
 
@@ -203,7 +203,7 @@ export const CardTotal = styled.div`
   flex-direction: column;
   align-self: flex-start;
   width: 100%;
-  background: #ffffff;
+  background: var(--white);
   padding: 32px 24px;
   border-radius: 16px;
 
@@ -220,7 +220,7 @@ export const CardTotal = styled.div`
     justify-content: space-between;
     font-size: 16px;
     line-height: 24px;
-    color: #333333;
+    color: var(--gray-100);
     margin-bottom: 16px;
   }
 
