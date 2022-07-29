@@ -20,6 +20,11 @@ const CardContainer = ({ data, title, link }: Props) => {
   const { products, loading } = useSelector(
     (state: RootState) => state.products
   );
+  let target = "_self";
+
+  let width = window.innerWidth;
+  width > 700 && (target = "_blank");
+  console.log(target);
 
   return (
     <Container>
@@ -72,13 +77,13 @@ const CardContainer = ({ data, title, link }: Props) => {
             data
               ?.slice(0, 4)
               .map((product: IProduct) => (
-                <Card key={product.id} product={product} target="_blank" />
+                <Card key={product.id} product={product} target={target} />
               ))
           ) : (
             products
               ?.slice(0, 4)
               .map((product: IProduct) => (
-                <Card key={product.id} product={product} target="_blank" />
+                <Card key={product.id} product={product} target={target} />
               ))
           )}
         </CardBottom>
