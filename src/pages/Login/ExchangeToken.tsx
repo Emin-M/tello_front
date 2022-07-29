@@ -4,10 +4,14 @@ import { Container } from "../../components/ReusuableComponents/styles/Container
 import { StyledExchangeToken } from "./style";
 import { CircularProgress } from "@mui/material";
 import api from "../../api/api";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
+import { fetchCards } from "../../redux/actions/cardActions";
 
 const ExchangeToken = () => {
   const { token } = useParams();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,8 +29,14 @@ const ExchangeToken = () => {
       !localStorage.getItem("customerId") &&
         localStorage.setItem("customerId", response?.data?.customer_id);
       navigate("/userprofile/personaldata");
+      setTimeout(() => {
+        dispatch(fetchCards());
+      }, 2000);
     } catch (error) {
       setIsLoggedIn(false);
+      setTimeout(() => {
+        dispatch(fetchCards());
+      }, 2000);
     }
   };
 

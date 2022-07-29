@@ -63,6 +63,11 @@ const ProductsContainer = ({ setShowFilter }: IProps) => {
     searchParams.delete("page");
   };
 
+  /* Target for links */
+  let target = "_self";
+  let width = window.innerWidth;
+  width > 700 && (target = "_blank");
+
   return (
     <StyledProductsContainer>
       <StyledFilters>
@@ -164,7 +169,7 @@ const ProductsContainer = ({ setShowFilter }: IProps) => {
           </div>
         ) : (
           products?.map((product: IProduct) => (
-            <Card key={product?.id} product={product} target="_blank" />
+            <Card key={product?.id} product={product} target={target} />
           ))
         )}
       </Cards>

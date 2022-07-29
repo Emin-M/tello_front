@@ -17,6 +17,9 @@ import api from "../../../api/api";
 import basket from "../../../assets/images/icons/basket.png";
 import person from "../../../assets/images/icons/person.png";
 import log_out from "../../../assets/svg/log-out.svg";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../redux/store";
+import { fetchCards } from "../../../redux/actions/cardActions";
 
 /* Modal Styles */
 const style = {
@@ -38,6 +41,7 @@ const styleButtonGroup = {
 };
 
 const ProfileLinks: FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const [modal, setModal] = useState<boolean>(false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -47,6 +51,7 @@ const ProfileLinks: FC = () => {
     localStorage.removeItem("customerId");
     localStorage.removeItem("cartId");
     navigate("/login", { state: { message: "Hesabdan çıxdınız" } });
+    dispatch(fetchCards());
   };
 
   /* deleting user */

@@ -1,5 +1,5 @@
 import { MouseEvent, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "../ReusuableComponents/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
@@ -7,6 +7,7 @@ import { ICategory } from "../../modules/types/categories";
 import { Skeleton } from "@mui/material";
 import { fetchSearchResults } from "../../redux/actions/productActions";
 import { IProduct } from "../../modules/types/products";
+import { fetchCards } from "../../redux/actions/cardActions";
 
 /* Styles */
 import "./style";
@@ -48,6 +49,7 @@ const Navbar = () => {
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
   const [showSubState, setShowSubState] = useState<string>("");
   const location = useLocation();
+  const navigate = useNavigate();
 
   const boxMouseOverHandlerDiv = (event: MouseEvent<HTMLDivElement>) => {
     const element = event.currentTarget.parentElement as HTMLLIElement;
@@ -132,6 +134,14 @@ const Navbar = () => {
       setSearcResult([]);
     }, 0);
   }, [location]);
+
+  /* logging out user */
+  const logout = () => {
+    localStorage.removeItem("customerId");
+    localStorage.removeItem("cartId");
+    navigate("/login", { state: { message: "Hesabdan çıxdınız" } });
+    dispatch(fetchCards());
+  };
 
   return (
     <NavbarContainer>
@@ -297,8 +307,13 @@ const Navbar = () => {
                   <li>
                     <Link to="/userprofile/orders">Sifarişlərim</Link>
                   </li>
+                  <hr />
                   <li>
-                    <Link to="/userprofile/personaldata">Şəxsi məlumatlar</Link>
+                    <Link to="/userprofile/personaldata">Şəxsi məl...</Link>
+                  </li>
+                  <hr />
+                  <li onClick={() => logout()}>
+                    <p>Çıxış</p>
                   </li>
                 </ul>
               ) : (
@@ -307,6 +322,7 @@ const Navbar = () => {
                   <li>
                     <Link to="/login">Daxil ol</Link>
                   </li>
+                  <hr />
                   <li>
                     <Link to="/signup">Qeydiyyat</Link>
                   </li>

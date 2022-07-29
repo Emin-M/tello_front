@@ -222,18 +222,16 @@ export const NavbarRight = styled.div`
   }
 
   ul {
-    display: flex;
+    display: none;
+    justify-content: center;
     flex-direction: column;
-    position: relative;
-
     margin-top: 5px;
     position: absolute;
     top: 100%;
-    left: -30%;
+    left: -40%;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 8px;
     background: #ffffff;
-    display: none;
     transition: all 0.3s;
     border: 1px solid #e0e0e0;
 
@@ -249,18 +247,28 @@ export const NavbarRight = styled.div`
       &:hover {
         background: #169348;
 
-        > a {
+        > a,
+        > p {
           color: #ffffff;
         }
       }
     }
 
     a {
-      padding: 10px 35px;
+      padding: 10px 20px;
       display: block;
       font-size: 18px;
       line-height: 20px;
       color: #4f4f4f;
+    }
+
+    p {
+      padding: 10px 20px;
+      display: block;
+      font-size: 18px;
+      line-height: 20px;
+      color: #4f4f4f;
+      cursor: pointer;
     }
 
     > div {
@@ -268,7 +276,7 @@ export const NavbarRight = styled.div`
       height: 20px;
       position: absolute;
       top: -10px;
-      left: 21%;
+      left: 50%;
       transform: translateX(-50%) rotate(-45deg);
       background: #ffffff;
       box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 1.95px 1.95px 2.6px;
@@ -297,6 +305,22 @@ export const NavbarRight = styled.div`
 
   @media (max-width: 650px) {
     gap: 10px;
+
+    ul {
+      top: 100%;
+
+      a {
+        padding: 10px;
+        font-size: 16px;
+        line-height: 18px;
+      }
+
+      p {
+        padding: 10px;
+        font-size: 16px;
+        line-height: 18px;
+      }
+    }
   }
 `;
 

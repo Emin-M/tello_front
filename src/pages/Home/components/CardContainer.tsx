@@ -21,10 +21,8 @@ const CardContainer = ({ data, title, link }: Props) => {
     (state: RootState) => state.products
   );
   let target = "_self";
-
   let width = window.innerWidth;
   width > 700 && (target = "_blank");
-  console.log(target);
 
   return (
     <Container>
