@@ -1,5 +1,6 @@
 import React from "react";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { useParams, useSearchParams } from "react-router-dom";
@@ -70,7 +71,7 @@ const Filters = ({ showFilter, setShowFilter }: IProps) => {
         onChange={handleAccordionChange("panel1")}
       >
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={expanded !== "panel1" ? <AddIcon /> : <RemoveIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
@@ -125,9 +126,12 @@ const Filters = ({ showFilter, setShowFilter }: IProps) => {
           </FormGroup>
         </AccordionDetails>
       </Accordion>
-      <Accordion>
+      <Accordion
+        expanded={expanded === "panel2"}
+        onChange={handleAccordionChange("panel2")}
+      >
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={expanded !== "panel2" ? <AddIcon /> : <RemoveIcon />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >

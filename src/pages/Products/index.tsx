@@ -22,7 +22,17 @@ const Products = () => {
   let paramsSort = searchParams.getAll("sort");
   let page = searchParams.get("page");
 
+  /* Fetching Products With Debounce Algoritm */
   useEffect(() => {
+    const timerId = setTimeout(() => {
+      fetch();
+    }, 1000);
+    return () => {
+      clearInterval(timerId);
+    };
+  }, [searchParams, id]);
+
+  const fetch = () => {
     let params = { query: paramsBrand?.[0], page: page ? page : "1" };
 
     if (id && paramsSort?.[0]) {
@@ -46,7 +56,7 @@ const Products = () => {
         })
       );
     }
-  }, [searchParams, id]);
+  };
 
   return (
     <StyledProductsContainer>

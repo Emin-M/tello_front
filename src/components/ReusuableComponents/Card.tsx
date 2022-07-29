@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import { StyledCard } from "./styles/Card.styled";
 import heart from "../../assets/images/icons/heart.png";
 
-const Card = ({ product }: any) => {
+const Card = ({ product, target }: { product: any; target?: string }) => {
   return (
     <StyledCard>
-      <Link to={`/product/params/${product?.id}`}>
+      <Link to={`/product/params/${product?.id}`} target={target}>
         <div>
           <img src={heart} alt="heart" />
         </div>

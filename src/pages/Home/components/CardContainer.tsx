@@ -11,11 +11,12 @@ import arrowRight from "../../../assets/images/icons/arrowRight.png";
 import { Skeleton } from "@mui/material";
 
 interface Props {
+  data?: IProduct[];
   title: string;
   link: string;
 }
 
-const CardContainer = ({ title, link }: Props) => {
+const CardContainer = ({ data, title, link }: Props) => {
   const { products, loading } = useSelector(
     (state: RootState) => state.products
   );
@@ -67,11 +68,17 @@ const CardContainer = ({ title, link }: Props) => {
                 className="skeleton_home skeleton_home_res"
               />
             </div>
+          ) : data ? (
+            data
+              ?.slice(0, 4)
+              .map((product: IProduct) => (
+                <Card key={product.id} product={product} target="_blank" />
+              ))
           ) : (
             products
               ?.slice(0, 4)
               .map((product: IProduct) => (
-                <Card key={product.id} product={product} />
+                <Card key={product.id} product={product} target="_blank" />
               ))
           )}
         </CardBottom>

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { StyledLinks } from "./styles/Links.styled";
 import { Skeleton } from "@mui/material";
+import { Link } from "react-router-dom";
 
 /* Images */
 import arrowRight from "../../../assets/images/icons/arrowRight.png";
@@ -15,10 +16,12 @@ const Links: FC = () => {
   return (
     <StyledLinks>
       <li>
-        Ana səhifə <img src={arrowRight} alt="arrowRight" />
+        <Link to="/">
+          Ana səhifə <img src={arrowRight} alt="arrowRight" />
+        </Link>
       </li>
       <li>
-        Product <img src={arrowRight} alt="arrowRight" />
+        Məhsul <img src={arrowRight} alt="arrowRight" />
       </li>
       <li>
         <p>

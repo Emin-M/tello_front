@@ -164,7 +164,7 @@ const ProductsContainer = ({ setShowFilter }: IProps) => {
           </div>
         ) : (
           products?.map((product: IProduct) => (
-            <Card key={product?.id} product={product} />
+            <Card key={product?.id} product={product} target="_blank" />
           ))
         )}
       </Cards>

@@ -5,8 +5,9 @@ import Advertisement from "./components/Advertisement";
 import Products from "./components/Products";
 import Services from "./components/Services";
 import { fetchProducts } from "../../redux/actions/productActions";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
+import { IProduct } from "../../modules/types/products";
 
 /* Styles */
 import "slick-carousel/slick/slick.css";
@@ -29,6 +30,9 @@ import marka6 from "../../assets/images/home/marka6.png";
 import homeImg from "../../assets/images/home/homeImg.png";
 
 const Home: FC = () => {
+  const { products, loading } = useSelector(
+    (state: RootState) => state.products
+  );
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     dispatch(fetchProducts({ limit: 20 }));
@@ -84,6 +88,28 @@ const Home: FC = () => {
       },
     ],
   };
+
+  const [firstProductsGroup, setFirstProductsGroup] = useState<IProduct[]>([]);
+  const [secondProductsGroup, setSecondProductsGroup] = useState<IProduct[]>(
+    []
+  );
+
+  const sortData = (products: IProduct[]) => {
+    let firstProductsIdentificator = "noutbuklar";
+    let secondProductsIdentificator = "oyun-konsollar";
+    products.map((product) => {
+      product.categories.map((category) => {
+        category.name === firstProductsIdentificator &&
+          setFirstProductsGroup((prevs) => [...prevs, product]);
+        category.name === secondProductsIdentificator &&
+          setSecondProductsGroup((prevs) => [...prevs, product]);
+      });
+    });
+  };
+
+  useEffect(() => {
+    sortData(products);
+  }, [products]);
 
   return (
     <React.Fragment>
@@ -145,15 +171,20 @@ const Home: FC = () => {
       />
 
       {/* New */}
-      <CardContainer title="Yeni gələn məhsullar" link="products/telefonlar" />
+      <CardContainer
+        data={firstProductsGroup}
+        title="Yeni gələn Noutbuklar"
+        link="products/noutbuklar"
+      />
 
       {/* Advertisement */}
       <Advertisement />
 
       {/* Accessory */}
       <CardContainer
-        title="Yeni gələn aksessuarlar"
-        link="products/telefonlar"
+        data={secondProductsGroup}
+        title="Yeni gələn oyun konsolları"
+        link="products/oyun-konsollar"
       />
 
       {/* Products */}

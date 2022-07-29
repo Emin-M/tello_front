@@ -5,7 +5,8 @@ export const StyledLinks = styled.ul`
   align-items: center;
   padding: 26px 0;
 
-  li {
+  li,
+  a {
     display: flex;
     align-items: center;
     font-size: 16px;

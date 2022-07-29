@@ -5,7 +5,7 @@ export const StyledCard = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  max-height: 380px;
+  height: 380px;
   background: #ffffff;
   box-shadow: 0px 4px 8px rgba(164, 164, 164, 0.3);
   border-radius: 4px;

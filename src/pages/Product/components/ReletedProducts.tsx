@@ -41,7 +41,7 @@ const ReletedProducts = () => {
       ) : (
         <div>
           {singleProduct?.related_products.map((product) => (
-            <Card product={product} />
+            <Card key={product.id} product={product} />
           ))}
         </div>
       )}

@@ -42,6 +42,8 @@ const Navbar = () => {
     (state: RootState) => state.products
   );
   const dispatch = useDispatch<AppDispatch>();
+  const user = localStorage.getItem("customerId");
+  const isUserLogin = user ? true : false;
   const { items } = useSelector((state: RootState) => state.card);
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
   const [showSubState, setShowSubState] = useState<string>("");
@@ -284,19 +286,47 @@ const Navbar = () => {
           <NavbarRight>
             <div>
               <Link to="/userprofile/orders">
-                <img src={person} alt="person" />
+                <div>
+                  <img src={person} alt="person" />
+                </div>
+                {isUserLogin ? <p>Hesab</p> : <p>Daxil Ol</p>}
               </Link>
+              {isUserLogin ? (
+                <ul>
+                  <div></div>
+                  <li>
+                    <Link to="/userprofile/orders">Sifarişlərim</Link>
+                  </li>
+                  <li>
+                    <Link to="/userprofile/personaldata">Şəxsi məlumatlar</Link>
+                  </li>
+                </ul>
+              ) : (
+                <ul>
+                  <div></div>
+                  <li>
+                    <Link to="/login">Daxil ol</Link>
+                  </li>
+                  <li>
+                    <Link to="/signup">Qeydiyyat</Link>
+                  </li>
+                </ul>
+              )}
             </div>
-            <div>
+            {/* <div>
               <Link to="/favorites">
                 <img src={heart} alt="heart" />
               </Link>
-            </div>
+            </div> */}
             <div>
               <Link to="/card">
-                <img src={basket} alt="basket" />
+                <div>
+                  <img src={basket} alt="basket" />
+                </div>
               </Link>
-              <span>{items ? items?.total_unique_items : 0}</span>
+              {location.pathname !== "/card" && (
+                <span>{items ? items?.total_unique_items : 0}</span>
+              )}
             </div>
           </NavbarRight>
         </NavbarTop>

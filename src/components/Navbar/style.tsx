@@ -203,7 +203,78 @@ export const NavbarRight = styled.div`
   gap: 28px;
 
   > div {
-    transform: translateY(5px);
+    position: relative;
+
+    &:hover ul {
+      display: flex;
+    }
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 20px;
+    color: #4f4f4f;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    margin-top: 5px;
+    position: absolute;
+    top: 100%;
+    left: -30%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 8px;
+    background: #ffffff;
+    display: none;
+    transition: all 0.3s;
+    border: 1px solid #e0e0e0;
+
+    &:hover {
+      display: flex;
+    }
+
+    li {
+      border-radius: 8px;
+      transition: all 0.3s;
+      z-index: 1;
+
+      &:hover {
+        background: #169348;
+
+        > a {
+          color: #ffffff;
+        }
+      }
+    }
+
+    a {
+      padding: 10px 35px;
+      display: block;
+      font-size: 18px;
+      line-height: 20px;
+      color: #4f4f4f;
+    }
+
+    > div {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: -10px;
+      left: 21%;
+      transform: translateX(-50%) rotate(-45deg);
+      background: #ffffff;
+      box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 1.95px 1.95px 2.6px;
+      border-top: 1px solid #e0e0e0;
+      border-right: 1px solid #e0e0e0;
+    }
   }
 
   img {
