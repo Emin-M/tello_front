@@ -71,7 +71,7 @@ const PersonalData = () => {
 
   useEffect(() => {
     phone === user?.phone ? setDirty(false) : setDirty(true);
-  }, [phone]);
+  }, [phone, user]);
 
   return (
     <StyledPersonalData>
