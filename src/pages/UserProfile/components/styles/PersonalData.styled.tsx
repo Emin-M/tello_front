@@ -82,7 +82,7 @@ export const StyledPersonalDataForm = styled.form`
 
   @media (max-width: 850px) {
     gap: 10px;
-    padding: 32px 0;
+    padding: 32px 16px;
 
     .group {
       gap: 10px;
