@@ -55,7 +55,7 @@ export const SignupMainTop = styled.div`
   > div {
     display: flex;
     justify-content: space-between;
-    gap: 56px;
+    gap: 20px;
     margin-bottom: 32px;
 
     p {
