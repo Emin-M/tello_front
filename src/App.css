@@ -38,3 +38,13 @@
         display: none !important;
     }
 }
+
+/* Input Flag */
+.react-tel-input .selected-flag {
+    width: 60px !important;
+    padding: 0 0 0 18px !important;
+}
+
+.react-tel-input .form-control {
+    padding-left: 70px !important;
+}
