@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
 import {
@@ -11,6 +11,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { updateUser } from "../../../redux/actions/userActions";
 import Loading from "../../../components/ReusuableComponents/Loading";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 /* Images */
 import edit from "../../../assets/images/icons/edit.png";
@@ -20,15 +22,16 @@ interface IFormInputs {
   firstname: string;
   lastname: string;
   email: string;
-  phone: string;
 }
 
 const schema = yup
   .object({
-    firstname: yup.string(),
-    lastname: yup.string(),
-    email: yup.string().email("Email nümunədə göstərilən formatda olmalıdır"),
-    phone: yup.string(),
+    firstname: yup.string().required("Ad tələb olunur"),
+    lastname: yup.string().required("Soyad tələb olunur"),
+    email: yup
+      .string()
+      .email("Email nümunədə göstərilən formatda olmalıdır")
+      .required("Email tələb olunur"),
   })
   .required();
 
@@ -43,14 +46,16 @@ const PersonalData = () => {
   } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
   });
+  const [phone, setPhone] = useState<string>();
+  const [dirty, setDirty] = useState<boolean>(false);
 
   /* On Form Submit */
   const onSubmit = (data: IFormInputs) => {
     const user = {
-      email: data.email.length > 0 ? data.email : undefined,
-      phone: data.phone.toString().length > 0 ? data.phone : undefined,
-      firstname: data.firstname.length > 0 ? data.firstname : undefined,
-      lastname: data.lastname.length > 0 ? data.lastname : undefined,
+      email: data.email || undefined,
+      phone: phone || undefined,
+      firstname: data.firstname || undefined,
+      lastname: data.lastname || undefined,
     };
     dispatch(updateUser(user));
   };
@@ -60,9 +65,13 @@ const PersonalData = () => {
       firstname: user?.firstname,
       lastname: user?.lastname,
       email: user?.email,
-      phone: user?.phone,
     });
+    setPhone(user?.phone);
   }, [user]);
+
+  useEffect(() => {
+    phone === user?.phone ? setDirty(false) : setDirty(true);
+  }, [phone]);
 
   return (
     <StyledPersonalData>
@@ -83,6 +92,7 @@ const PersonalData = () => {
                 defaultValue={user?.firstname}
                 {...register("firstname")}
               />
+              <span className="error">{errors.firstname?.message}</span>
             </div>
             <div>
               <label htmlFor="lastname">Soyad</label>
@@ -93,6 +103,7 @@ const PersonalData = () => {
                 defaultValue={user?.lastname}
                 {...register("lastname")}
               />
+              <span className="error">{errors.lastname?.message}</span>
             </div>
           </div>
           <div className="group">
@@ -109,16 +120,14 @@ const PersonalData = () => {
             </div>
             <div>
               <label htmlFor="phone">Mobil nömrə</label>
-              <input
-                type="tel"
-                id="phone"
-                placeholder="000-000-00-00"
-                defaultValue={user?.phone}
-                {...register("phone")}
+              <PhoneInput
+                country={"az"}
+                value={phone}
+                onChange={(phone) => setPhone(phone)}
               />
             </div>
           </div>
-          <button type="submit" disabled={!isDirty}>
+          <button type="submit" disabled={!isDirty && !dirty}>
             <img src={edit} alt="edit" /> Məlumatları yenilə
           </button>
         </StyledPersonalDataForm>

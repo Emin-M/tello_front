@@ -107,14 +107,14 @@ export const SignupMainBottom = styled.form`
     margin-top: 24px;
     position: relative;
 
-    div {
+    /* div {
       position: absolute;
       top: 50%;
       right: 16px;
       width: 24px;
       height: 24px;
       cursor: pointer;
-    }
+    } */
 
     .error {
       margin-top: 5px;
@@ -149,23 +149,23 @@ export const SignupMainBottom = styled.form`
   }
 
   input {
-    border: none;
-    outline: none;
-    width: 400px;
-    height: 60px;
-    background: #f2f2f2;
-    border-radius: 8px;
+    border: none !important;
+    outline: none !important;
+    width: 400px !important;
+    height: 48px !important;
+    background: #f2f2f2 !important;
+    border-radius: 8px !important;
     padding: 0 16px;
-    font-size: 16px;
+    font-size: 16px !important;
   }
 
   input[type="checkbox"] {
-    outline: none;
-    width: 24px;
-    height: 24px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    cursor: pointer;
+    outline: none !important;
+    width: 24px !important;
+    height: 24px !important;
+    border: 1px solid #e0e0e0 !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
   }
 
   input::placeholder {

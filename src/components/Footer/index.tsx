@@ -27,10 +27,18 @@ const Footer: FC = () => {
           <FooterSocial>
             <img src={logo} alt="logo" />
             <div>
-              <img src={instagram} alt="instagram" />
-              <img src={facebook} alt="facebook" />
-              <img src={youtube} alt="youtube" />
-              <img src={twitter} alt="twitter" />
+              <div>
+                <img src={instagram} alt="instagram" />
+              </div>
+              <div>
+                <img src={facebook} alt="facebook" />
+              </div>
+              <div>
+                <img src={youtube} alt="youtube" />
+              </div>
+              <div>
+                <img src={twitter} alt="twitter" />
+              </div>
             </div>
           </FooterSocial>
           <FooterLinks>

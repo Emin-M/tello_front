@@ -42,14 +42,14 @@ export const StyledPersonalDataForm = styled.form`
   }
 
   input {
-    border: none;
-    outline: none;
-    width: 100%;
-    height: 60px;
-    background: #f2f2f2;
-    border-radius: 8px;
+    border: none !important;
+    outline: none !important;
+    width: 100% !important;
+    height: 48px !important;
+    background: #f2f2f2 !important;
+    border-radius: 8px !important;
     padding: 0 16px;
-    font-size: 16px;
+    font-size: 16px !important;
   }
 
   button {

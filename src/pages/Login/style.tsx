@@ -165,7 +165,7 @@ export const LoginMainBottom = styled.form`
     border: none;
     outline: none;
     width: 400px;
-    height: 60px;
+    height: 48px;
     background: #f2f2f2;
     border-radius: 8px;
     padding: 0 16px;

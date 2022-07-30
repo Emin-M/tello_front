@@ -38,6 +38,15 @@ export const FooterSocial = styled.div`
     justify-content: center;
     align-items: center;
     gap: 33px;
+
+    > div {
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        transform: translateY(-5px) scale(1.1);
+      }
+    }
   }
 
   > img {

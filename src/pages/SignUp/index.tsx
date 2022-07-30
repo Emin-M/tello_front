@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Container } from "../../components/ReusuableComponents/styles/Container.styled";
 import Button from "../../components/ReusuableComponents/Button";
@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { alertError, alertSuccess } from "../../modules/alert";
 import api from "../../api/api";
+import PhoneInput from "react-phone-input-2";
 
 /* Styles */
 import {
@@ -17,6 +18,7 @@ import {
   SignupSvg,
   StyledSignup,
 } from "./style";
+import "react-phone-input-2/lib/style.css";
 
 /* Images */
 import loginsvg from "../../assets/svg/login.png";
@@ -28,7 +30,6 @@ interface IFormInputs {
   firstname: string;
   lastname: string;
   email: string;
-  phone: number;
   checkbox: boolean;
 }
 
@@ -40,7 +41,6 @@ const schema = yup
       .string()
       .email("Email nümunədə göstərilən formatda olmalıdır")
       .required("Email tələb olunur"),
-    phone: yup.string(),
     checkbox: yup
       .boolean()
       .isTrue("Istifadəçi şərtləri qəbul edilməlidir")
@@ -58,13 +58,14 @@ const SignUp: FC = () => {
   } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
   });
+  const [phone, setPhone] = useState<string>();
 
   /* On Form Submit */
   const onSubmit = (data: IFormInputs) => {
     const basketId = localStorage.getItem("cartId");
     const user = {
       email: data.email,
-      phone: data.phone || undefined,
+      phone: phone || undefined,
       firstname: data.firstname,
       lastname: data.lastname,
       external_id: basketId || undefined,
@@ -147,15 +148,11 @@ const SignUp: FC = () => {
             </div>
             <div>
               <label htmlFor="phone">Mobil nömrə</label>
-              <input
-                type="tel"
-                id="phone"
-                placeholder="000-000-00-00"
-                {...register("phone")}
+              <PhoneInput
+                country={"az"}
+                value={phone}
+                onChange={(phone) => setPhone(phone)}
               />
-              <span className="error">
-                {errors.phone?.message?.slice(0, 30)}
-              </span>
             </div>
             <div className="checkbox">
               <input type="checkbox" {...register("checkbox")} />
