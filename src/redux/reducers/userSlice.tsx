@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IUser } from "../modules/types/user";
-import { getUser, updateUser } from "./actions/userActions";
+import { IUser } from "../../modules/types/user";
+import { getUser, updateUser } from "../actions/userActions";
 
 const initialState: IUser = {
   loading: "idle",

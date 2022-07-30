@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ICategories } from "../modules/types/categories";
-import { fetchCategories } from "./actions/categoryActions";
+import { ICategories } from "../../modules/types/categories";
+import { fetchCategories } from "../actions/categoryActions";
 
 const initialState: ICategories = {
   loading: "idle",

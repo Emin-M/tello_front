@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ICards } from "../modules/types/card";
+import { ICards } from "../../modules/types/card";
 import {
   addProductToBasket,
   deleteItemFromCart,
   emptyCard,
   fetchCards,
   updateItemInCart,
-} from "./actions/cardActions";
+} from "../actions/cardActions";
 
 const initialState: ICards = {
   loading: "idle",

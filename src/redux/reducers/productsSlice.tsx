@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IProducts } from "../modules/types/products";
+import { IProducts } from "../../modules/types/products";
 import {
   fetchProductById,
   fetchProducts,
   fetchProductVariants,
   fetchSearchResults,
-} from "./actions/productActions";
+} from "../actions/productActions";
 
 const initialState: IProducts = {
   loading: "idle",

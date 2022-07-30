@@ -1,8 +1,11 @@
 import { toast } from "react-toastify";
 
-export const alertSuccess = (title: string, position?: string) => {
+export const alertSuccess = (
+  title: string,
+  position?: "top-center" | "bottom-right"
+) => {
   toast.success(title, {
-    position: position === "top-center" ? "top-center" : "bottom-right",
+    position: position ? position : "bottom-right",
     autoClose: 2000,
     theme: "dark",
     hideProgressBar: false,

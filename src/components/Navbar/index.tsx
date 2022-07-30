@@ -8,6 +8,7 @@ import { Skeleton } from "@mui/material";
 import { fetchSearchResults } from "../../redux/actions/productActions";
 import { IProduct } from "../../modules/types/products";
 import { fetchCards } from "../../redux/actions/cardActions";
+import { alertSuccess } from "../../modules/alert";
 
 /* Styles */
 import "./style";
@@ -139,7 +140,8 @@ const Navbar = () => {
   const logout = () => {
     localStorage.removeItem("customerId");
     localStorage.removeItem("cartId");
-    navigate("/login", { state: { message: "Hesabdan çıxdınız" } });
+    // navigate("/login", { state: { message: "Hesabdan çıxdınız" } });
+    alertSuccess("Hesabdan çıxdınız", "top-center");
     dispatch(fetchCards());
   };
 
