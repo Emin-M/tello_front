@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import api from "../../api/api";
 import { alertSuccess } from "../../modules/alert";
+import jwt_decode from "jwt-decode";
 
 /* Styles */
 import { Container } from "../../components/ReusuableComponents/styles/Container.styled";
@@ -21,7 +22,6 @@ import {
 /* Images */
 import loginsvg from "../../assets/svg/login.png";
 import facebook from "../../assets/images/icons/facebook.png";
-import google from "../../assets/images/icons/google.png";
 import password_forget from "../../assets/images/password_forget.png";
 
 /* Creating Scema For Form Validation */
@@ -79,6 +79,35 @@ const Login: FC = () => {
       });
   }, []);
 
+  /* Google Auth */
+  const handleCallBackResponse = (response: any) => {
+    let decoded: any = jwt_decode(response.credential);
+
+    /* defining user */
+    const user = {
+      email: decoded?.email,
+      base_url: `http://${window.location.host}/userprofile`,
+    };
+    loginUser(user);
+  };
+
+  /* window Width */
+  let width = window.innerWidth;
+
+  useEffect(() => {
+    // global google
+    google.accounts.id.initialize({
+      client_id:
+        "803936656001-higbj76a4sarpaionf3ac2lvjp7dj2l6.apps.googleusercontent.com",
+      callback: handleCallBackResponse,
+    });
+    google.accounts.id.renderButton(document.getElementById("signInDiv")!, {
+      theme: "outline",
+      size: "large",
+      width: width > 700 ? 200 : 50,
+    });
+  }, []);
+
   return (
     <StyledLogin>
       {isLogin ? (
@@ -96,12 +125,9 @@ const Login: FC = () => {
               <div>
                 <p>
                   <img src={facebook} alt="facebook" />
-                  <span>Facebook ilə</span>
+                  <span>Facebook</span>
                 </p>
-                <p>
-                  <img src={google} alt="google" />
-                  <span>Google ilə</span>
-                </p>
+                <div id="signInDiv"></div>
               </div>
               <p>və ya</p>
             </LoginMainTop>

@@ -9,6 +9,7 @@ import * as yup from "yup";
 import { alertError, alertSuccess } from "../../modules/alert";
 import api from "../../api/api";
 import PhoneInput from "react-phone-input-2";
+import jwt_decode from "jwt-decode";
 
 /* Styles */
 import {
@@ -23,7 +24,6 @@ import "react-phone-input-2/lib/style.css";
 /* Images */
 import loginsvg from "../../assets/svg/login.png";
 import facebook from "../../assets/images/icons/facebook.png";
-import google from "../../assets/images/icons/google.png";
 
 /* Creating Scema For Form Validation */
 interface IFormInputs {
@@ -97,6 +97,39 @@ const SignUp: FC = () => {
     alertSuccess(location?.state?.message, "top-center");
   }, []);
 
+  /* Google Auth */
+  const handleCallBackResponse = (response: any) => {
+    let decoded: any = jwt_decode(response.credential);
+
+    /* defining user */
+    const basketId = localStorage.getItem("cartId");
+    const user = {
+      email: decoded.email,
+      phone: phone || undefined,
+      firstname: decoded.given_name,
+      lastname: decoded.family_name,
+      external_id: basketId || undefined,
+    };
+    createUser(user);
+  };
+
+  /* window Width */
+  let width = window.innerWidth;
+
+  useEffect(() => {
+    // global google
+    google.accounts.id.initialize({
+      client_id:
+        "803936656001-higbj76a4sarpaionf3ac2lvjp7dj2l6.apps.googleusercontent.com",
+      callback: handleCallBackResponse,
+    });
+    google.accounts.id.renderButton(document.getElementById("signUpDiv")!, {
+      theme: "outline",
+      size: "large",
+      width: width > 700 ? 200 : 50,
+    });
+  }, []);
+
   return (
     <StyledSignup>
       <Container>
@@ -106,12 +139,9 @@ const SignUp: FC = () => {
             <div>
               <p>
                 <img src={facebook} alt="facebook" />
-                <span>Facebook ilə</span>
+                <span>Facebook</span>
               </p>
-              <p>
-                <img src={google} alt="google" />
-                <span>Google ilə</span>
-              </p>
+              <div id="signUpDiv"></div>
             </div>
             <p>və ya</p>
           </SignupMainTop>
