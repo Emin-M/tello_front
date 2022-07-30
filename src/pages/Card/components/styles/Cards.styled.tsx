@@ -155,7 +155,7 @@ export const SingleCard = styled.div`
       align-items: center;
       justify-content: space-between;
       position: absolute;
-      bottom: 20px;
+      bottom: 15px;
       right: 24px;
       height: 40px;
       width: 125px;
@@ -206,6 +206,7 @@ export const CardTotal = styled.div`
   background: var(--white);
   padding: 32px 24px;
   border-radius: 16px;
+  margin-bottom: 20px;
 
   h2 {
     font-weight: 600;

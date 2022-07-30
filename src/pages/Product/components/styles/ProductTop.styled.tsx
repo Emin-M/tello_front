@@ -217,13 +217,6 @@ export const ProductFilter = styled.div`
   @media (max-width: 850px) {
     margin-top: 200px;
     padding: 0;
-
-    button {
-      position: absolute;
-      width: 50%;
-      top: 40px;
-      right: 0;
-    }
   }
 `;
 
