@@ -14,32 +14,15 @@ import {
   emptyCard,
   updateItemInCart,
 } from "../../../redux/actions/cardActions";
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  CircularProgress,
-  Modal,
-  Typography,
-} from "@mui/material";
+import { Button, ButtonGroup, CircularProgress } from "@mui/material";
 
 /* Images */
 import minus from "../../../assets/svg/minus.svg";
 import plus from "../../../assets/svg/plus.svg";
 import del from "../../../assets/svg/delete.svg";
+import SimpleModal from "../../../components/ReusuableComponents/Modal";
 
-/* Modal Styles */
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  bgcolor: "background.paper",
-  borderRadius: "5px",
-  boxShadow: 54,
-  p: 4,
-};
-
+/* Modal Button Styles */
 const styleButtonGroup = {
   display: "flex",
   justifyContent: "flex-end",
@@ -181,92 +164,48 @@ const Cards: FC = () => {
           <button>Səbəti təsdiqlə</button>
         </CardRight>
       </CardsStyled>
-      <Modal
-        open={modal2}
-        onClose={() => setModal2(false)}
-        onClick={(e: { stopPropagation: () => any }) => e.stopPropagation()}
-        aria-labelledby="keep-mounted-modal-title"
-        aria-describedby="keep-mounted-modal-description"
+      <SimpleModal
+        modalHeader={`Silmək: ${nameForDel}`}
+        modalTitle={`Silmək istədiyinizə əminsiniz?: ${nameForDel}`}
+        modal={modal}
+        setModal={setModal}
       >
-        <Box sx={style}>
-          <Typography
-            sx={{ pb: 2, borderBottom: "1px solid black" }}
-            id="keep-mounted-modal-title"
-            variant="h5"
-            component="h2"
+        <ButtonGroup sx={styleButtonGroup} disableElevation variant="contained">
+          <Button color="primary" onClick={() => setModal(false)}>
+            Geri
+          </Button>
+          <Button
+            color="success"
+            onClick={() => {
+              dispatch(deleteItemFromCart(idForDel));
+              setModal(false);
+            }}
           >
-            Səbəti Boşaltmaq!
-          </Typography>
-          <Typography
-            id="keep-mounted-modal-description"
-            variant="h6"
-            sx={{ mt: 2 }}
-          >
-            Səbəti boşaltmaq istədiyinizə əminsiniz?
-          </Typography>
-          <ButtonGroup
-            sx={styleButtonGroup}
-            disableElevation
-            variant="contained"
-          >
-            <Button color="secondary" onClick={() => setModal2(false)}>
-              Geri
-            </Button>
-            <Button
-              color="success"
-              onClick={() => {
-                dispatch(emptyCard());
-                setModal(false);
-              }}
-            >
-              Sil
-            </Button>
-          </ButtonGroup>
-        </Box>
-      </Modal>
-      <Modal
-        open={modal}
-        onClose={() => setModal(false)}
-        onClick={(e: { stopPropagation: () => any }) => e.stopPropagation()}
-        aria-labelledby="keep-mounted-modal-title"
-        aria-describedby="keep-mounted-modal-description"
+            Sil
+          </Button>
+        </ButtonGroup>
+      </SimpleModal>
+      <SimpleModal
+        modalHeader="Səbəti Boşaltmaq!"
+        modalTitle="Səbəti boşaltmaq istədiyinizə əminsiniz?"
+        modal={modal2}
+        setModal={setModal2}
       >
-        <Box sx={style}>
-          <Typography
-            sx={{ pb: 2, borderBottom: "1px solid black" }}
-            id="keep-mounted-modal-title"
-            variant="h6"
-            component="h2"
+        <ButtonGroup sx={styleButtonGroup} disableElevation variant="contained">
+          <Button color="secondary" onClick={() => setModal2(false)}>
+            Geri
+          </Button>
+          <Button
+            color="success"
+            onClick={() => {
+              dispatch(emptyCard());
+              setModal2(false);
+            }}
           >
-            Silmək: <b>{nameForDel}</b>
-          </Typography>
-          <Typography
-            id="keep-mounted-modal-description"
-            variant="h6"
-            sx={{ mt: 2 }}
-          >
-            Silmək istədiyinizə əminsiniz?: <b>{nameForDel}</b>
-          </Typography>
-          <ButtonGroup
-            sx={styleButtonGroup}
-            disableElevation
-            variant="contained"
-          >
-            <Button color="primary" onClick={() => setModal(false)}>
-              Geri
-            </Button>
-            <Button
-              color="success"
-              onClick={() => {
-                dispatch(deleteItemFromCart(idForDel));
-                setModal(false);
-              }}
-            >
-              Sil
-            </Button>
-          </ButtonGroup>
-        </Box>
-      </Modal>
+            Sil
+          </Button>
+        </ButtonGroup>
+      </SimpleModal>
     </>
   );
 };

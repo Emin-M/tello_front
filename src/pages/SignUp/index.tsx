@@ -124,7 +124,7 @@ const SignUp: FC = () => {
       callback: handleCallBackResponse,
     });
     google.accounts.id.renderButton(document.getElementById("signUpDiv")!, {
-      text: width > 700 ? "signin_with" : "signin",
+      text: width > 700 ? "signup_with" : "signin",
       theme: "outline",
       size: "large",
       width: width > 700 ? 200 : 150,

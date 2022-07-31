@@ -185,6 +185,10 @@ export const CardRight = styled.div`
       background: var(--primary-100);
       color: var(--white);
     }
+
+    &:last-child {
+      margin-bottom: 50px;
+    }
   }
 
   @media (max-width: 850px) {
@@ -206,7 +210,6 @@ export const CardTotal = styled.div`
   background: var(--white);
   padding: 32px 24px;
   border-radius: 16px;
-  margin-bottom: 20px;
 
   h2 {
     font-weight: 600;

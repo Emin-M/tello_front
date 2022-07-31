@@ -6,9 +6,9 @@ const Card = ({ product, target }: { product: any; target?: string }) => {
   return (
     <StyledCard>
       <Link to={`/product/params/${product?.id}`} target={target}>
-        <div>
+        {/* <div>
           <img src={heart} alt="heart" />
-        </div>
+        </div> */}
         <img src={product?.image?.url} alt={product?.name} />
         <h3>{product?.name}</h3>
         <p>

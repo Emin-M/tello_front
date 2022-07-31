@@ -2,15 +2,7 @@ import React, { FC, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { StyledProfileLinks } from "./styles/ProfileLinks.styled";
 import SettingsIcon from "@mui/icons-material/Settings";
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Menu,
-  MenuItem,
-  Modal,
-  Typography,
-} from "@mui/material";
+import { Button, ButtonGroup, Menu, MenuItem } from "@mui/material";
 import api from "../../../api/api";
 
 /* Images */
@@ -20,19 +12,9 @@ import log_out from "../../../assets/svg/log-out.svg";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
 import { fetchCards } from "../../../redux/actions/cardActions";
+import SimpleModal from "../../../components/ReusuableComponents/Modal";
 
 /* Modal Styles */
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  bgcolor: "background.paper",
-  borderRadius: "5px",
-  boxShadow: 54,
-  p: 4,
-};
-
 const styleButtonGroup = {
   display: "flex",
   justifyContent: "flex-end",
@@ -146,49 +128,27 @@ const ProfileLinks: FC = () => {
           <Link to="/userprofile">Çıxış</Link>
         </li>
       </ul>
-      <Modal
-        open={modal}
-        onClose={() => setModal(false)}
-        onClick={(e: { stopPropagation: () => any }) => e.stopPropagation()}
-        aria-labelledby="keep-mounted-modal-title"
-        aria-describedby="keep-mounted-modal-description"
+      <SimpleModal
+        modalHeader="Hesabı Silmək!"
+        modalTitle="Hesabı Silmək istədiyinizə əminsiniz?"
+        modal={modal}
+        setModal={setModal}
       >
-        <Box sx={style}>
-          <Typography
-            sx={{ pb: 2, borderBottom: "1px solid black" }}
-            id="keep-mounted-modal-title"
-            variant="h5"
-            component="h2"
+        <ButtonGroup sx={styleButtonGroup} disableElevation variant="contained">
+          <Button color="secondary" onClick={() => setModal(false)}>
+            Geri
+          </Button>
+          <Button
+            color="success"
+            onClick={() => {
+              setModal(false);
+              deleteUser();
+            }}
           >
-            Hesabı Silmək!
-          </Typography>
-          <Typography
-            id="keep-mounted-modal-description"
-            variant="h6"
-            sx={{ mt: 2 }}
-          >
-            Hesabı Silmək istədiyinizə əminsiniz?
-          </Typography>
-          <ButtonGroup
-            sx={styleButtonGroup}
-            disableElevation
-            variant="contained"
-          >
-            <Button color="secondary" onClick={() => setModal(false)}>
-              Geri
-            </Button>
-            <Button
-              color="success"
-              onClick={() => {
-                setModal(false);
-                deleteUser();
-              }}
-            >
-              Sil
-            </Button>
-          </ButtonGroup>
-        </Box>
-      </Modal>
+            Sil
+          </Button>
+        </ButtonGroup>
+      </SimpleModal>
     </StyledProfileLinks>
   );
 };

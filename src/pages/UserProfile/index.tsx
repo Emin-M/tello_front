@@ -19,6 +19,9 @@ const UserProfile = () => {
     if (user?.code === "ERR_BAD_REQUEST") {
       localStorage.removeItem("customerId");
     } else {
+      user?.external_id &&
+        localStorage.getItem("cartId") &&
+        localStorage.removeItem("cartId");
       user?.external_id && localStorage.setItem("cartId", user?.external_id);
     }
   }, [loading]);
