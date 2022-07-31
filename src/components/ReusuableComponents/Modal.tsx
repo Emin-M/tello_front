@@ -44,7 +44,6 @@ const SimpleModal = ({
           component="h2"
         >
           {modalHeader}
-          {/* Səbəti Boşaltmaq! */}
         </Typography>
         <Typography
           id="keep-mounted-modal-description"
@@ -52,7 +51,6 @@ const SimpleModal = ({
           sx={{ mt: 2 }}
         >
           {modalTitle}
-          {/* Səbəti boşaltmaq istədiyinizə əminsiniz? */}
         </Typography>
         {children}
       </Box>

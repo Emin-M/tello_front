@@ -23,6 +23,7 @@ import {
 import loginsvg from "../../assets/svg/login.png";
 import facebook from "../../assets/images/icons/facebook.png";
 import password_forget from "../../assets/images/password_forget.png";
+import { ICreateUser } from "../../modules/types/user";
 
 /* Creating Scema For Form Validation */
 interface IFormInputs {
@@ -69,6 +70,11 @@ const Login: FC = () => {
     }
   };
 
+  /* Create User Function */
+  const createUser = async (user: ICreateUser) => {
+    await api.post("/customers", user);
+  };
+
   /* Alert About Signned Up */
   const location: any = useLocation();
   useEffect(() => {
@@ -83,12 +89,25 @@ const Login: FC = () => {
   const handleCallBackResponse = (response: any) => {
     let decoded: any = jwt_decode(response.credential);
 
-    /* defining user */
+    /* defining user for creating */
+    const basketId = localStorage.getItem("cartId");
+    const userForCreate = {
+      email: decoded.email,
+      firstname: decoded.given_name,
+      lastname: decoded.family_name,
+      external_id: basketId || undefined,
+    };
+    createUser(userForCreate);
+
+    /* defining user for login */
     const user = {
       email: decoded?.email,
       base_url: `http://${window.location.host}/userprofile`,
     };
-    loginUser(user);
+    /* making login after user created */
+    setTimeout(() => {
+      loginUser(user);
+    }, 1000);
   };
 
   /* window Width */

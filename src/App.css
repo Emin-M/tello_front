@@ -1,5 +1,6 @@
 @import url("//db.onlinewebfonts.com/c/a575313c6dc4fd00c1a9506e1c3ea4fc?family=Euclid+Circular+A");
 
+/* Accordion */
 .MuiAccordion-gutters {
     box-shadow: none !important;
     border-radius: none !important;
@@ -19,8 +20,8 @@
 
 /* Material Modal Responsive */
 @media (max-width: 850px) {
-    .css-3iuf51 {
-        width: 90%;
+    .css-cwi4lb {
+        width: 90% !important;
     }
 }
 
@@ -41,10 +42,10 @@
 
 /* Input Flag */
 .react-tel-input .selected-flag {
-    width: 60px !important;
-    padding: 0 0 0 18px !important;
+    width: 50px !important;
+    padding: 0 0 0 14px !important;
 }
 
 .react-tel-input .form-control {
-    padding-left: 70px !important;
+    padding-left: 60px !important;
 }
