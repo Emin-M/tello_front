@@ -102,9 +102,10 @@ const Login: FC = () => {
       callback: handleCallBackResponse,
     });
     google.accounts.id.renderButton(document.getElementById("signInDiv")!, {
+      text: width > 700 ? "signin_with" : "signin",
       theme: "outline",
       size: "large",
-      width: width > 700 ? 200 : 50,
+      width: width > 700 ? 200 : 150,
     });
   }, []);
 
@@ -123,10 +124,10 @@ const Login: FC = () => {
             <LoginMainTop>
               <h2>Daxil ol</h2>
               <div>
-                <p>
+                <div>
                   <img src={facebook} alt="facebook" />
-                  <span>Facebook</span>
-                </p>
+                  <button>Facebook</button>
+                </div>
                 <div id="signInDiv"></div>
               </div>
               <p>və ya</p>

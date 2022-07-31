@@ -58,31 +58,24 @@ export const SignupMainTop = styled.div`
     gap: 20px;
     margin-bottom: 32px;
 
-    p {
+    > div:nth-child(1) {
       display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
+      width: 180px;
+      height: 40px;
+      background: #3e58a5;
+      border-radius: 3px;
+      cursor: not-allowed;
     }
 
-    p:nth-child(1) {
-      img {
-        background: #4267b2;
-      }
-    }
-
-    p:nth-child(2) {
-      img {
-        background: #db4437;
-      }
-    }
-
-    span {
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 16px;
-      color: #4f4f4f;
+    button {
+      height: 100%;
+      border: none;
+      outline: none;
+      background: #3e58a5;
+      color: #ffffff;
+      border-radius: 3px;
+      cursor: not-allowed;
+      margin-left: 20px;
     }
   }
 
@@ -91,6 +84,19 @@ export const SignupMainTop = styled.div`
     font-size: 16px;
     line-height: 18px;
     color: #bdbdbd;
+  }
+
+  @media (max-width: 650px) {
+    > div {
+      > div:nth-child(1) {
+        width: 140px;
+        opacity: 0.5;
+      }
+
+      button {
+        margin-left: 0px;
+      }
+    }
   }
 `;
 
@@ -106,15 +112,6 @@ export const SignupMainBottom = styled.form`
     flex-direction: column;
     margin-top: 24px;
     position: relative;
-
-    /* div {
-      position: absolute;
-      top: 50%;
-      right: 16px;
-      width: 24px;
-      height: 24px;
-      cursor: pointer;
-    } */
 
     .error {
       margin-top: 5px;
