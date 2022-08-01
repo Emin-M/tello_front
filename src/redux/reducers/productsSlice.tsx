@@ -31,7 +31,7 @@ export const productsSlice = createSlice({
       return (state = {
         ...state,
         loading: "succeeded",
-        totalResult: payload.meta.pagination.total,
+        totalResult: payload?.meta?.pagination?.total,
         products: payload.data || [],
       });
     });
