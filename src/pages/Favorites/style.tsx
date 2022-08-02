@@ -7,7 +7,12 @@ export const StyledFavorites = styled.div`
   > div > div:first-child {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-right: 20px;
+
+    button {
+      transform: translate(10px, -10px);
+    }
   }
 
   .favs {
