@@ -303,7 +303,7 @@ export const NavbarRight = styled.div`
     color: #ffffff;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     gap: 10px;
 
     p {
