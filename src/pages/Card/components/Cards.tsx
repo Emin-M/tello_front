@@ -8,12 +8,13 @@ import {
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
-import { ILineItem } from "../../../modules/types/card";
 import {
   deleteItemFromCart,
   emptyCard,
   updateItemInCart,
 } from "../../../redux/actions/cardActions";
+import { updateFavorite } from "../../../redux/reducers/favoritesSlice";
+import { IProduct } from "../../../modules/types/products";
 import { Button, ButtonGroup, CircularProgress } from "@mui/material";
 
 /* Images */
@@ -37,9 +38,11 @@ const Cards: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [modal, setModal] = useState<boolean>(false);
   const [modal2, setModal2] = useState<boolean>(false);
+  const [productForDel, setProductForDel] = useState<IProduct>();
   const [idForDel, setIdForDel] = useState<string>("");
   const [nameForDel, setNameForDel] = useState<string>("");
   const [updateId, setUpdateId] = useState<string>("");
+  const width = window.innerWidth;
 
   /* Updating Card */
   const updateCard = (sign: string, id: string, q: number) => {
@@ -66,7 +69,7 @@ const Cards: FC = () => {
     <>
       <CardsStyled>
         <div>
-          {items?.line_items.map((item: ILineItem) => (
+          {items?.line_items.map((item: any) => (
             <SingleCard key={item.id}>
               <div className="img">
                 <Link to={`/product/params/${item.product_id}`}>
@@ -92,6 +95,7 @@ const Cards: FC = () => {
                 <div
                   onClick={(e) => {
                     updateCard("-", item.id, item.quantity);
+                    setProductForDel(item);
                     setIdForDel(item.id);
                     setUpdateId(item.id);
                     e.stopPropagation();
@@ -126,6 +130,7 @@ const Cards: FC = () => {
                 onClick={(e) => {
                   setModal(true);
                   setIdForDel(item.id);
+                  setProductForDel(item);
                   e.stopPropagation();
                   item.variant
                     ? setNameForDel(item.variant?.description)
@@ -170,18 +175,41 @@ const Cards: FC = () => {
         modal={modal}
         setModal={setModal}
       >
-        <ButtonGroup sx={styleButtonGroup} disableElevation variant="contained">
-          <Button color="primary" onClick={() => setModal(false)}>
-            Geri
-          </Button>
+        <ButtonGroup
+          variant="contained"
+          aria-label="outlined primary button group"
+          style={{
+            display: width < 850 ? "block" : "flex",
+            width: "100%",
+            justifyContent: "space-between",
+            boxShadow: "none",
+            marginTop: "20px",
+          }}
+        >
+          <div>
+            <Button color="primary" onClick={() => setModal(false)}>
+              Geri
+            </Button>
+            <Button
+              color="warning"
+              onClick={() => {
+                dispatch(deleteItemFromCart(idForDel));
+                setModal(false);
+              }}
+            >
+              Sil
+            </Button>
+          </div>
           <Button
+            style={{ justifySelf: "flex-end" }}
             color="success"
             onClick={() => {
               dispatch(deleteItemFromCart(idForDel));
+              productForDel && dispatch(updateFavorite(productForDel));
               setModal(false);
             }}
           >
-            Sil
+            Sil və Favorilərə əlavə et
           </Button>
         </ButtonGroup>
       </SimpleModal>
@@ -196,13 +224,13 @@ const Cards: FC = () => {
             Geri
           </Button>
           <Button
-            color="success"
+            color="warning"
             onClick={() => {
               dispatch(emptyCard());
               setModal2(false);
             }}
           >
-            Sil
+            Boşalt
           </Button>
         </ButtonGroup>
       </SimpleModal>

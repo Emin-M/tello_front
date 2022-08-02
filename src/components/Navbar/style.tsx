@@ -306,11 +306,16 @@ export const NavbarRight = styled.div`
   @media (max-width: 650px) {
     gap: 10px;
 
+    p {
+      display: none;
+    }
+
     ul {
       top: 100%;
+      left: -200%;
 
       a {
-        padding: 10px;
+        padding: 10px 15px;
         font-size: 16px;
         line-height: 18px;
       }

@@ -30,6 +30,7 @@ import logo from "../../assets/svg/logo.svg";
 import search from "../../assets/images/icons/search.png";
 import person from "../../assets/images/icons/person.png";
 import heart from "../../assets/images/icons/heart.png";
+import heartFull from "../../assets/images/icons/heartFull.png";
 import basket from "../../assets/images/icons/basket.png";
 import resBtn from "../../assets/svg/responsive-button.svg";
 import closeBtn from "../../assets/svg/close.svg";
@@ -43,6 +44,7 @@ const Navbar = () => {
   const { searchResults, searchLoading } = useSelector(
     (state: RootState) => state.products
   );
+  const { favs } = useSelector((state: RootState) => state.favorites);
   const dispatch = useDispatch<AppDispatch>();
   const user = localStorage.getItem("customerId");
   const isUserLogin = user ? true : false;
@@ -331,11 +333,15 @@ const Navbar = () => {
                 </ul>
               )}
             </div>
-            {/* <div>
+            <div>
               <Link to="/favorites">
-                <img src={heart} alt="heart" />
+                {favs.length === 0 ? (
+                  <img src={heart} alt="heart" />
+                ) : (
+                  <img src={heartFull} alt="heartFull" />
+                )}
               </Link>
-            </div> */}
+            </div>
             <div>
               <Link to="/card">
                 <div>

@@ -19,6 +19,7 @@ import Products from "./pages/Products";
 import Product from "./pages/Product";
 import Params from "./pages/Product/components/Params";
 import Comments from "./pages/Product/components/Comments";
+import Favorites from "./pages/Favorites";
 import Card from "./pages/Card";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
@@ -84,6 +85,7 @@ const App = () => {
             />
           </Route>
         </Route>
+        <Route path="/favorites" element={<Favorites />} />
         <Route path="/card" element={<Card />} />
         <Route
           path="/login"
