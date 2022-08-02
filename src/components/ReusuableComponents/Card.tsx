@@ -14,6 +14,7 @@ const Card = ({ product, target }: { product: any; target?: string }) => {
   const { favs } = useSelector((state: RootState) => state.favorites);
   const dispatch = useDispatch<AppDispatch>();
   const [check, setCheck] = useState<boolean>(false);
+  const id = product?.product_id ? product?.product_id : product.id;
 
   useEffect(() => {
     favs?.find((fav: IProduct) => fav.id === product.id)
@@ -31,7 +32,7 @@ const Card = ({ product, target }: { product: any; target?: string }) => {
         )}
       </div>
 
-      <Link to={`/product/params/${product?.id}`} target={target}>
+      <Link to={`/product/params/${id}`} target={target}>
         <img src={product?.image?.url} alt={product?.name} />
         <h3>{product?.name}</h3>
         <p>
