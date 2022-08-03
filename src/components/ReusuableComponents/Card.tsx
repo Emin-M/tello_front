@@ -10,7 +10,15 @@ import { IProduct } from "../../modules/types/products";
 import heart from "../../assets/images/icons/heart.png";
 import heartFull from "../../assets/images/icons/heartFull.png";
 
-const Card = ({ product, target }: { product: any; target?: string }) => {
+const Card = ({
+  product,
+  sku,
+  target,
+}: {
+  product: any;
+  sku?: string;
+  target?: string;
+}) => {
   const { favs } = useSelector((state: RootState) => state.favorites);
   const dispatch = useDispatch<AppDispatch>();
   const [check, setCheck] = useState<boolean>(false);
@@ -34,7 +42,7 @@ const Card = ({ product, target }: { product: any; target?: string }) => {
 
       <Link to={`/product/params/${id}`} target={target}>
         <img src={product?.image?.url} alt={product?.name} />
-        <h3>{product?.name}</h3>
+        <h3>{sku ? sku : product?.name}</h3>
         <p>
           {/* <del>200</del> */}
           <span>{product?.price?.formatted_with_code}</span>

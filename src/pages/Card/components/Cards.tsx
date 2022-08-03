@@ -35,14 +35,21 @@ const Cards: FC = () => {
   const { items, updateLoading } = useSelector(
     (state: RootState) => state.card
   );
+  const { favs } = useSelector((state: RootState) => state.favorites);
   const dispatch = useDispatch<AppDispatch>();
   const [modal, setModal] = useState<boolean>(false);
   const [modal2, setModal2] = useState<boolean>(false);
-  const [productForDel, setProductForDel] = useState<IProduct>();
+  const [productForDel, setProductForDel] = useState<any>();
   const [idForDel, setIdForDel] = useState<string>("");
   const [nameForDel, setNameForDel] = useState<string>("");
   const [updateId, setUpdateId] = useState<string>("");
   const width = window.innerWidth;
+
+  /* checking item in favs */
+  let fav1 = favs.find((fav: any) => productForDel?.product_id === fav.id);
+  let fav2 = favs.find(
+    (fav: any) => productForDel?.product_id === fav.product_id
+  );
 
   /* Updating Card */
   const updateCard = (sign: string, id: string, q: number) => {
@@ -60,6 +67,7 @@ const Cards: FC = () => {
     }
   };
 
+  /* closing modal on screen click */
   window.addEventListener("click", () => {
     setModal(false);
     setModal2(false);
@@ -181,7 +189,7 @@ const Cards: FC = () => {
           style={{
             display: width < 850 ? "block" : "flex",
             width: "100%",
-            justifyContent: "space-between",
+            justifyContent: fav1 || fav2 ? "flex-end" : "space-between",
             boxShadow: "none",
             marginTop: "20px",
           }}
@@ -200,17 +208,19 @@ const Cards: FC = () => {
               Sil
             </Button>
           </div>
-          <Button
-            style={{ justifySelf: "flex-end" }}
-            color="success"
-            onClick={() => {
-              dispatch(deleteItemFromCart(idForDel));
-              productForDel && dispatch(updateFavorite(productForDel));
-              setModal(false);
-            }}
-          >
-            Sil və Favorilərə əlavə et
-          </Button>
+          {!fav1 && !fav2 && (
+            <Button
+              style={{ justifySelf: "flex-end" }}
+              color="success"
+              onClick={() => {
+                dispatch(deleteItemFromCart(idForDel));
+                productForDel && dispatch(updateFavorite(productForDel));
+                setModal(false);
+              }}
+            >
+              Sil və Favorilərə əlavə et
+            </Button>
+          )}
         </ButtonGroup>
       </SimpleModal>
       <SimpleModal
