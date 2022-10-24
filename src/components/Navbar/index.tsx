@@ -8,7 +8,7 @@ import { Skeleton } from "@mui/material";
 import { fetchSearchResults } from "../../redux/actions/productActions";
 import { IProduct } from "../../modules/types/products";
 import { fetchCards } from "../../redux/actions/cardActions";
-import { alertSuccess } from "../../modules/alert";
+import { getUser } from "../../redux/actions/userActions";
 
 /* Styles */
 import "./style";
@@ -44,10 +44,9 @@ const Navbar = () => {
   const { searchResults, searchLoading } = useSelector(
     (state: RootState) => state.products
   );
+  const { isLoggedin } = useSelector((state: RootState) => state.user);
   const { favs } = useSelector((state: RootState) => state.favorites);
   const dispatch = useDispatch<AppDispatch>();
-  const user = localStorage.getItem("customerId");
-  const isUserLogin = user ? true : false;
   const { items } = useSelector((state: RootState) => state.card);
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
   const [showSubState, setShowSubState] = useState<string>("");
@@ -141,10 +140,11 @@ const Navbar = () => {
   /* logging out user */
   const logout = () => {
     localStorage.removeItem("customerId");
+    localStorage.removeItem("jwt");
     localStorage.removeItem("cartId");
-    // navigate("/login", { state: { message: "Hesabdan çıxdınız" } });
-    alertSuccess("Hesabdan çıxdınız", "top-center");
+    navigate("/login", { state: { message: "Hesabdan çıxdınız" } });
     dispatch(fetchCards());
+    dispatch(getUser());
   };
 
   return (
@@ -259,7 +259,10 @@ const Navbar = () => {
                   </div>
                   {searchLoading !== "pending" ? (
                     searchResult.map((result) => (
-                      <Link to={`product/params/${result.id}`} key={result.id}>
+                      <Link
+                        to={`product/params/${result._id}`}
+                        key={result._id}
+                      >
                         <div>
                           <img src={result.image.url} alt="" />
                         </div>
@@ -303,9 +306,9 @@ const Navbar = () => {
                 <div>
                   <img src={person} alt="person" />
                 </div>
-                {isUserLogin ? <p>Hesab</p> : <p>Daxil Ol</p>}
+                {isLoggedin ? <p>Hesab</p> : <p>Daxil Ol</p>}
               </Link>
-              {isUserLogin ? (
+              {isLoggedin ? (
                 <ul>
                   <div></div>
                   <li>
@@ -365,7 +368,7 @@ const Navbar = () => {
         ) : (
           <NavbarBottom style={showSidebar ? { left: "0" } : { left: "-100%" }}>
             {categories?.[0]?.children.map((category: ICategory) => (
-              <li key={category.id} onClick={() => showSub(category)}>
+              <li key={Math.random()} onClick={() => showSub(category)}>
                 <Link to={`products/${category.slug}`}>
                   {category.name.charAt(0).toUpperCase() +
                     category.name.slice(1)}
@@ -391,7 +394,7 @@ const Navbar = () => {
                     </div>
                     <ul>
                       {category.children.map((subcategory: ICategory) => (
-                        <li key={subcategory.id}>
+                        <li key={Math.random()}>
                           <Link
                             to={`products/${category.name}?brand=${subcategory.name}`}
                           >

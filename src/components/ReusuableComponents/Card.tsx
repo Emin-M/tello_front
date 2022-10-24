@@ -22,10 +22,10 @@ const Card = ({
   const { favs } = useSelector((state: RootState) => state.favorites);
   const dispatch = useDispatch<AppDispatch>();
   const [check, setCheck] = useState<boolean>(false);
-  const id = product?.product_id ? product?.product_id : product.id;
+  const id = product?.product_id ? product?.product_id : product._id;
 
   useEffect(() => {
-    favs?.find((fav: IProduct) => fav.id === product.id)
+    favs?.find((fav: IProduct) => fav._id === product._id)
       ? setCheck(true)
       : setCheck(false);
   }, [favs]);

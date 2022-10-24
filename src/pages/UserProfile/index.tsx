@@ -12,17 +12,13 @@ const UserProfile = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(getUser());
-  }, []);
-
-  useEffect(() => {
-    if (user?.code === "ERR_BAD_REQUEST") {
+    if (user?.code === "ERR_BAD_RESPONSE") {
       localStorage.removeItem("customerId");
+      localStorage.removeItem("jwt");
     } else {
       user?.external_id &&
         localStorage.getItem("cartId") &&
-        localStorage.removeItem("cartId");
-      user?.external_id && localStorage.setItem("cartId", user?.external_id);
+        localStorage.setItem("cartId", user?.external_id);
     }
   }, [loading]);
 

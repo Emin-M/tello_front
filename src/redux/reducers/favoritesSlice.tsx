@@ -18,7 +18,7 @@ export const favoritesSlice = createSlice({
       /* checking if item is in state or not */
       let check = false;
       updatedFavorites.map((fav) => {
-        if (fav.id === payload.id) {
+        if (fav._id === payload._id) {
           check = true;
         }
       });
@@ -26,7 +26,7 @@ export const favoritesSlice = createSlice({
       /* updating item in state */
       if (check) {
         updatedFavorites = updatedFavorites.filter(
-          (updatedFav) => updatedFav.id !== payload.id
+          (updatedFav) => updatedFav._id !== payload._id
         );
         alertSuccess("Məhsul favorilərdən çıxarıldı");
       } else {

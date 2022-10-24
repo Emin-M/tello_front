@@ -3,8 +3,8 @@ import api from "../../api/api";
 import { alertSuccess } from "../../modules/alert";
 
 export const fetchCards = createAsyncThunk("card/fetchCards", async () => {
-  let cartId = localStorage.getItem("cartId") || "";
   try {
+    let cartId = localStorage.getItem("cartId") || "";
     const response = await api.get(`/carts/${cartId}`);
     return response.data;
   } catch (error) {

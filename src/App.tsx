@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "./redux/store";
 import { fetchCategories } from "./redux/actions/categoryActions";
 import { fetchCards } from "./redux/actions/cardActions";
+import { getUser } from "./redux/actions/userActions";
 
 /* Styles */
 import GlobalStyles from "./components/ReusuableComponents/styles/GlobalStyled";
@@ -24,6 +25,7 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchCategories());
     dispatch(fetchCards());
+    localStorage.getItem("jwt") && dispatch(getUser());
   }, []);
 
   /* scroll top each time location change */

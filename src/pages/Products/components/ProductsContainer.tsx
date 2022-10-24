@@ -169,7 +169,7 @@ const ProductsContainer = ({ setShowFilter }: IProps) => {
           </div>
         ) : (
           products?.map((product: IProduct) => (
-            <Card key={product?.id} product={product} target={target} />
+            <Card key={product?._id} product={product} target={target} />
           ))
         )}
       </Cards>

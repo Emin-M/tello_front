@@ -8,6 +8,7 @@ const ReletedProducts = () => {
   const { singleProduct, loading } = useSelector(
     (state: RootState) => state.products
   );
+
   return (
     <StyledReletedProducts>
       <h2>Əlaqədar Mehsullar</h2>
@@ -41,7 +42,7 @@ const ReletedProducts = () => {
       ) : (
         <div>
           {singleProduct?.related_products.map((product) => (
-            <Card key={product.id} product={product} />
+            <Card key={product._id} product={product} />
           ))}
         </div>
       )}

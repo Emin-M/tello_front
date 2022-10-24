@@ -74,7 +74,10 @@ export interface Options {
 }
 
 export interface ProductVariants {
-  id: string;
+  _id: string;
+  ratingsAverage: number;
+  ratingsQuantity: number;
+  productId: string;
   sku: string;
   description: string;
   inventory: number;
@@ -89,7 +92,7 @@ export interface ProductVariants {
 }
 
 export interface IProduct {
-  id: string;
+  _id: string;
   created: number;
   updated: number;
   active: boolean;
@@ -115,6 +118,8 @@ export interface IProduct {
   image?: any;
   related_products: any[];
   attributes: any[];
+  ratingsAverage: number;
+  ratingsQuantity: number;
 }
 
 export interface IProducts {
@@ -126,4 +131,5 @@ export interface IProducts {
   searchResults: IProduct[];
   singleProduct: IProduct | null;
   productVariants: ProductVariants[] | null;
+  selectedVariant: ProductVariants | null;
 }

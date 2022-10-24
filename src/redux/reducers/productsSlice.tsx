@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IProducts } from "../../modules/types/products";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IProducts, ProductVariants } from "../../modules/types/products";
 import {
   fetchProductById,
   fetchProducts,
@@ -16,12 +16,20 @@ const initialState: IProducts = {
   searchResults: [],
   singleProduct: null,
   productVariants: null,
+  selectedVariant: null,
 };
 
 export const productsSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {},
+  reducers: {
+    setSelectedVariant: (
+      state,
+      { payload }: PayloadAction<ProductVariants | null>
+    ) => {
+      state.selectedVariant = payload;
+    },
+  },
   extraReducers: (builder) => {
     /* Fetching Products */
     builder.addCase(fetchProducts.pending, (state) => {
@@ -31,7 +39,7 @@ export const productsSlice = createSlice({
       return (state = {
         ...state,
         loading: "succeeded",
-        totalResult: payload?.meta?.pagination?.total,
+        totalResult: payload?.totalResult,
         products: payload.data || [],
       });
     });
@@ -70,7 +78,7 @@ export const productsSlice = createSlice({
       return (state = {
         ...state,
         loading: "succeeded",
-        singleProduct: payload?.id ? payload : null,
+        singleProduct: payload?._id ? payload : null,
       });
     });
     builder.addCase(fetchProductById.rejected, (state) => {
@@ -89,10 +97,12 @@ export const productsSlice = createSlice({
       return (state = {
         ...state,
         loading: "succeeded",
-        productVariants: payload?.[0]?.id ? payload : null,
+        productVariants: payload?.[0]?._id ? payload : null,
       });
     });
     builder.addCase(fetchProductVariants.rejected, (state) => {
+      console.log("rejected");
+
       return (state = {
         ...state,
         loading: "failed",
@@ -101,5 +111,7 @@ export const productsSlice = createSlice({
     });
   },
 });
+
+export const { setSelectedVariant } = productsSlice.actions;
 
 export default productsSlice.reducer;

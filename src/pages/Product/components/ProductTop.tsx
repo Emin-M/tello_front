@@ -1,11 +1,13 @@
 import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
-import { Skeleton } from "@mui/material";
+import { Rating, Skeleton } from "@mui/material";
 import { addProductToBasket } from "../../../redux/actions/cardActions";
 import { useParams } from "react-router-dom";
 import { ProductVariants } from "../../../modules/types/products";
 import ReletedProducts from "./ReletedProducts";
+import { fetchReviews } from "../../../redux/actions/reviewActions";
+import { setSelectedVariant } from "../../../redux/reducers/productsSlice";
 
 /* Images */
 import leftArrow from "../../../assets/images/icons/arrowLeft.png";
@@ -43,6 +45,16 @@ const ProductTop: FC = () => {
     setOption_2("");
   }, []);
 
+  //! Reviews Section
+  useEffect(() => {
+    if (product?.productId === singleProduct?._id) {
+      product && dispatch(fetchReviews(product._id));
+      product && dispatch(setSelectedVariant(product));
+    } else {
+      singleProduct && dispatch(fetchReviews(singleProduct?._id));
+    }
+  }, [product, singleProduct]);
+
   /* Setting Default Options */
   useEffect(() => {
     if (singleProduct) {
@@ -63,6 +75,8 @@ const ProductTop: FC = () => {
         setProduct(productVariant);
       }
     });
+    !productVariants && setProduct(null);
+    dispatch(setSelectedVariant(null));
   }, [productVariants, option_1, option_2]);
 
   /* Setting Main Image */
@@ -106,7 +120,7 @@ const ProductTop: FC = () => {
         ? dispatch(
             addProductToBasket({
               id: id,
-              variant_id: product.id,
+              variant_id: product._id,
               quantity: orderCount,
             })
           )
@@ -197,7 +211,7 @@ const ProductTop: FC = () => {
               product?.assets?.map((image, index) => (
                 <img
                   src={image.url}
-                  key={image.id}
+                  key={image._id}
                   onClick={() => {
                     setMainImage(image.url);
                     setImageOrder(index);
@@ -210,7 +224,7 @@ const ProductTop: FC = () => {
               singleProduct?.assets?.map((image, index) => (
                 <img
                   src={image.url}
-                  key={image.id}
+                  key={image._id}
                   onClick={() => {
                     setMainImage(image.url);
                     setImageOrder(index);
@@ -230,6 +244,22 @@ const ProductTop: FC = () => {
               {productVariants ? product?.description : singleProduct?.name}
             </h2>
           )}
+          <div style={{ transform: "translateX(-5px)" }}>
+            <Rating
+              name="read-only"
+              value={
+                product
+                  ? Math.round(product?.ratingsAverage)
+                  : Math.round(singleProduct?.ratingsAverage || 0)
+              }
+              readOnly
+            />
+            |{" "}
+            {product
+              ? Math.ceil(product?.ratingsQuantity || 0)
+              : Math.ceil(singleProduct?.ratingsQuantity || 0)}{" "}
+            rəy
+          </div>
           {loading === "pending" ? (
             <Skeleton
               variant="text"

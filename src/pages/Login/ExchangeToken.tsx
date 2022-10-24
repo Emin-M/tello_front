@@ -7,6 +7,7 @@ import api from "../../api/api";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { fetchCards } from "../../redux/actions/cardActions";
+import { getUser } from "../../redux/actions/userActions";
 
 const ExchangeToken = () => {
   const { token } = useParams();
@@ -28,10 +29,13 @@ const ExchangeToken = () => {
       /* setting customerId to LS */
       !localStorage.getItem("customerId") &&
         localStorage.setItem("customerId", response?.data?.customer_id);
+      !localStorage.getItem("jwt") &&
+        localStorage.setItem("jwt", response?.data?.jwt);
+      !localStorage.getItem("cartId") &&
+        localStorage.setItem("cartId", response?.data?.external_id);
       navigate("/userprofile/personaldata");
-      setTimeout(() => {
-        dispatch(fetchCards());
-      }, 2000);
+      dispatch(getUser());
+      dispatch(fetchCards());
     } catch (error) {
       setIsLoggedIn(false);
       setTimeout(() => {

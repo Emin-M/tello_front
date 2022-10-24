@@ -25,7 +25,7 @@ import "react-phone-input-2/lib/style.css";
 import loginsvg from "../../assets/svg/login.png";
 import facebook from "../../assets/images/icons/facebook.png";
 
-/* Creating Scema For Form Validation */
+/* Creating Schema For Form Validation */
 interface IFormInputs {
   firstname: string;
   lastname: string;
@@ -76,7 +76,7 @@ const SignUp: FC = () => {
   const createUser = async (user: ICreateUser) => {
     try {
       const response = await api.post("/customers", user);
-      if (response.data.id) {
+      if (response.data._id) {
         reset();
         navigate("/login", {
           state: {
@@ -86,8 +86,9 @@ const SignUp: FC = () => {
         });
       }
     } catch (error: any) {
-      const { email } = error?.response?.data?.error?.errors;
-      email?.[0] && alertError("Email adresi isdifadə olunub");
+      console.log(error);
+
+      !error.success && alertError("Email adresi isdifadə olunub");
     }
   };
 

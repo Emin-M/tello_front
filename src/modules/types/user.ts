@@ -23,4 +23,5 @@ export interface ICreateUser {
 export interface IUser {
   loading: "idle" | "pending" | "succeeded" | "failed";
   user: IUserData | any;
+  isLoggedin: boolean;
 }

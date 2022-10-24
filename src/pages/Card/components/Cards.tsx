@@ -14,7 +14,6 @@ import {
   updateItemInCart,
 } from "../../../redux/actions/cardActions";
 import { updateFavorite } from "../../../redux/reducers/favoritesSlice";
-import { IProduct } from "../../../modules/types/products";
 import { Button, ButtonGroup, CircularProgress } from "@mui/material";
 
 /* Images */
@@ -46,7 +45,7 @@ const Cards: FC = () => {
   const width = window.innerWidth;
 
   /* checking item in favs */
-  let fav1 = favs.find((fav: any) => productForDel?.product_id === fav.id);
+  let fav1 = favs.find((fav: any) => productForDel?.product_id === fav._id);
   let fav2 = favs.find(
     (fav: any) => productForDel?.product_id === fav.product_id
   );
@@ -78,7 +77,7 @@ const Cards: FC = () => {
       <CardsStyled>
         <div>
           {items?.line_items.map((item: any) => (
-            <SingleCard key={item.id}>
+            <SingleCard key={item._id}>
               <div className="img">
                 <Link to={`/product/params/${item.product_id}`}>
                   <img src={item?.image?.url} alt={item.name} />
@@ -94,7 +93,7 @@ const Cards: FC = () => {
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <p>
                       <span>Qiyməti:</span>
-                      <span>{item.price.formatted_with_code}</span>
+                      <span>{item.line_total.formatted_with_code}</span>
                     </p>
                   </div>
                 </Link>
@@ -102,10 +101,10 @@ const Cards: FC = () => {
               <div className="quantity">
                 <div
                   onClick={(e) => {
-                    updateCard("-", item.id, item.quantity);
+                    updateCard("-", item._id, item.quantity);
                     setProductForDel(item);
-                    setIdForDel(item.id);
-                    setUpdateId(item.id);
+                    setIdForDel(item._id);
+                    setUpdateId(item._id);
                     e.stopPropagation();
                     item.variant
                       ? setNameForDel(item.variant?.description)
@@ -115,7 +114,7 @@ const Cards: FC = () => {
                   <img src={minus} alt="minus" />
                 </div>
                 <span>
-                  {updateLoading === "pending" && updateId === item.id ? (
+                  {updateLoading === "pending" && updateId === item._id ? (
                     <CircularProgress
                       color="inherit"
                       sx={{ margin: "0 20px" }}
@@ -126,8 +125,8 @@ const Cards: FC = () => {
                 </span>
                 <div
                   onClick={() => {
-                    updateCard("+", item.id, item.quantity);
-                    setUpdateId(item.id);
+                    updateCard("+", item._id, item.quantity);
+                    setUpdateId(item._id);
                   }}
                 >
                   <img src={plus} alt="plus" />
@@ -137,7 +136,7 @@ const Cards: FC = () => {
                 className="delete"
                 onClick={(e) => {
                   setModal(true);
-                  setIdForDel(item.id);
+                  setIdForDel(item._id);
                   setProductForDel(item);
                   e.stopPropagation();
                   item.variant

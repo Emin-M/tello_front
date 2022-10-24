@@ -69,9 +69,9 @@ export const fetchProductVariants = createAsyncThunk(
   async (id: string) => {
     try {
       const response = await api.get(`/products/${id}/variants`);
-      return response?.data?.data;
+      return response?.data;
     } catch (error: any) {
-      return error;
+      console.log(error);
     }
   }
 );

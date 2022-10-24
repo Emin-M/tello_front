@@ -1,6 +1,8 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Container } from "../../../components/ReusuableComponents/styles/Container.styled";
+import { AppDispatch, RootState } from "../../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
 import {
   CommentsBottom,
   CommentsComment,
@@ -10,19 +12,27 @@ import {
   CommentsTop,
   FormContainer,
 } from "./styles/Comments.styled";
-
-/* Images */
-import star_full from "../../../assets/images/icons/star_full.png";
-import star from "../../../assets/images/icons/star.png";
-import Button from "../../../components/ReusuableComponents/Button";
-import { RootState } from "../../../redux/store";
-import { useSelector } from "react-redux";
+import { Rating, Typography } from "@mui/material";
+import {
+  deleteReview,
+  fetchReviews,
+  postReview,
+} from "../../../redux/actions/reviewActions";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Comments: FC = () => {
-  const { singleProduct, loading } = useSelector(
+  const { singleProduct, selectedVariant, loading } = useSelector(
     (state: RootState) => state.products
   );
+  const { reviews, review_loading } = useSelector(
+    (state: RootState) => state.reviews
+  );
+  const { user } = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch<AppDispatch>();
+  const { isLoggedin } = useSelector((state: RootState) => state.user);
   const { id } = useParams();
+  const [starValue, setStarValue] = useState<any>(0);
+  const [reviewContent, setReviewContent] = useState<string>();
 
   if (
     (loading === "failed" && singleProduct === null) ||
@@ -30,6 +40,45 @@ const Comments: FC = () => {
   ) {
     return <></>;
   }
+
+  const createReview = () => {
+    dispatch(
+      postReview({
+        content: reviewContent,
+        rating: starValue,
+        product_id: !selectedVariant?._id ? singleProduct?._id : undefined,
+        variant_id: selectedVariant?._id,
+      })
+    );
+    setTimeout(() => {
+      selectedVariant?._id
+        ? dispatch(fetchReviews(selectedVariant?._id))
+        : singleProduct?._id && dispatch(fetchReviews(singleProduct?._id));
+      setStarValue(0);
+      setReviewContent("");
+    }, 1000);
+  };
+
+  //! formating date
+  const formatDate = (date: any) => {
+    let now = Date.now();
+    let different = Math.floor((now - date) / 1000);
+
+    if (different < 1) {
+      return "indicə";
+    } else if (different < 60) {
+      return `${different} san. əvvəl`;
+    } else if (different < 3600) {
+      return `${Math.floor(different / 60)} dəqiqə əvvəl`;
+    } else {
+      return `${("0" + date.getDate()).slice(-2)}.${(
+        "0" +
+        (date.getMonth() + 1)
+      ).slice(-2)}.${date.getFullYear()} ${date.getHours()}:${(
+        "0" + date.getMinutes()
+      ).slice(-2)}`;
+    }
+  };
 
   return (
     <CommentsContainer>
@@ -41,83 +90,118 @@ const Comments: FC = () => {
           </div>
         </CommentsTop>
         <CommentsBottom>
-          <CommentsCommentContainer>
-            <CommentsStar>
-              <h2>4</h2>
-              <div>
-                <img src={star_full} alt="star" />
-                <img src={star_full} alt="star" />
-                <img src={star_full} alt="star" />
-                <img src={star_full} alt="star" />
-                <img src={star} alt="star" />
-              </div>
-            </CommentsStar>
-            <CommentsComment>
-              <div>
-                <h2>Gunel Mammadova</h2>
-                <p>5 gün əvvəl</p>
-              </div>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                mattis viverra lacus ut et, etiam. Vel ut in nunc nunc ut sit
-                nibh tortor sit. Consectetur sit auctor odio quis suspendisse
-                tincidunt quis. Et tristique amet aenean nibh porttitor quis
-                aliquam integer. Consectetur lacus, volutpat malesuada libero.
-                Sollicitudin libero pharetra a.
-              </p>
-            </CommentsComment>
-          </CommentsCommentContainer>
-          <CommentsCommentContainer>
-            <CommentsStar>
-              <h2>4</h2>
-              <div>
-                <img src={star_full} alt="star" />
-                <img src={star_full} alt="star" />
-                <img src={star_full} alt="star" />
-                <img src={star_full} alt="star" />
-                <img src={star} alt="star" />
-              </div>
-            </CommentsStar>
-            <CommentsComment>
-              <div>
-                <h2>Gunel Mammadova</h2>
-                <p>5 gün əvvəl</p>
-              </div>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                mattis viverra lacus ut et, etiam. Vel ut in nunc nunc ut sit
-                nibh tortor sit. Consectetur sit auctor odio quis suspendisse
-                tincidunt quis. Et tristique amet aenean nibh porttitor quis
-                aliquam integer. Consectetur lacus, volutpat malesuada libero.
-                Sollicitudin libero pharetra a.
-              </p>
-            </CommentsComment>
-          </CommentsCommentContainer>
+          {reviews?.map((review: any) => (
+            <CommentsCommentContainer key={review?._id}>
+              <CommentsStar>
+                <h2>{review.rating}</h2>
+                <div>
+                  <Rating name="read-only" value={review.rating} readOnly />
+                </div>
+              </CommentsStar>
+              <CommentsComment>
+                <div>
+                  <h2>
+                    {review?.user?.firstname + " " + review?.user?.lastname}
+                  </h2>
+                  <p>{formatDate(new Date(review?.updatedAt))}</p>
+                </div>
+                <p>{review?.content ? review?.content : "-- məzmun yoxdur"}</p>
+              </CommentsComment>
+              {user?._id === review?.user?._id && (
+                <div
+                  className="trash"
+                  onClick={() => {
+                    dispatch(
+                      deleteReview({
+                        productId: singleProduct?._id && singleProduct?._id,
+                        reviewId: review._id,
+                      })
+                    );
+                    setTimeout(() => {
+                      selectedVariant?._id
+                        ? dispatch(fetchReviews(selectedVariant?._id))
+                        : singleProduct?._id &&
+                          dispatch(fetchReviews(singleProduct?._id));
+                    }, 1000);
+                  }}
+                >
+                  <DeleteIcon />
+                </div>
+              )}
+            </CommentsCommentContainer>
+          ))}
+          {!reviews?.[0] && (
+            <CommentsCommentContainer>
+              <h3
+                style={{ textAlign: "center", width: "100%", color: "#2dd06e" }}
+              >
+                ------------------------------------- * Rəy yoxdur *
+                -------------------------------------
+              </h3>
+            </CommentsCommentContainer>
+          )}
           <FormContainer>
-            <Container>
-              <h2>Rəy Bildir</h2>
-              <div>
-                <div className="form-group">
-                  <label htmlFor="">Ad</label>
-                  <input type="text" placeholder="Adınızı daxil edin" />
+            {isLoggedin ? (
+              <Container>
+                <h2>Rəy Bildir</h2>
+                <div className="star">
+                  <Typography component="legend">
+                    Mehsulu Qiymətləndirin *
+                  </Typography>
+                  <Rating
+                    name="simple-controlled"
+                    value={starValue}
+                    onChange={(event, newValue) => {
+                      setStarValue(newValue);
+                    }}
+                    size="large"
+                  />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="">Soyad</label>
-                  <input type="text" placeholder="Soyadınızı daxil edin" />
+                  <label htmlFor="">Rəyinizi yazın</label>
+                  <textarea
+                    value={reviewContent}
+                    onChange={(e) => setReviewContent(e.target.value)}
+                    placeholder="Rəyinizi buraya yazın"
+                  ></textarea>
                 </div>
+                {starValue > 0 ? (
+                  <button
+                    style={{
+                      outline: "none",
+                      border: "1px solid #2dd06e",
+                      borderRadius: "8px",
+                      width: "156px",
+                      height: "48px",
+                      color: "#ffffff",
+                      background: "#2DD06E",
+                    }}
+                    onClick={() => createReview()}
+                  >
+                    Rəyini bildir
+                  </button>
+                ) : (
+                  <button
+                    style={{
+                      outline: "none",
+                      border: "1px solid #2dd06e",
+                      borderRadius: "8px",
+                      width: "156px",
+                      height: "48px",
+                      color: "#ffffff",
+                      background: "#000000",
+                      pointerEvents: "none",
+                    }}
+                  >
+                    Rəyini bildir
+                  </button>
+                )}
+              </Container>
+            ) : (
+              <div className="notLoggedin">
+                Rəy bildirmək üçün hesaba daxil olun
               </div>
-              <div className="form-group">
-                <label htmlFor="">Rəy bildirdiyiniz məhsulu seçin</label>
-                <select id="">
-                  <option value="1">Məhsulu seçin</option>
-                </select>
-              </div>
-              <div className="form-group">
-                <label htmlFor="">Rəyinizi yazın</label>
-                <textarea placeholder="Rətinizi buraya yazın"></textarea>
-              </div>
-              <Button title="Rəyini bildir" bg="#2DD06E" color="#ffffff" />
-            </Container>
+            )}
           </FormContainer>
         </CommentsBottom>
       </Container>

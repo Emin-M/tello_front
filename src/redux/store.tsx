@@ -16,6 +16,7 @@ import productsReducer from "./reducers/productsSlice";
 import cardSlice from "./reducers/cardSlice";
 import userSlice from "./reducers/userSlice";
 import favoritesSlice from "./reducers/favoritesSlice";
+import reviewsSlice from "./reducers/reviewsSlice";
 
 const persistConfig = {
   key: "root",
@@ -31,6 +32,7 @@ export const store = configureStore({
     categories: categoriesSlice,
     card: cardSlice,
     user: userSlice,
+    reviews: reviewsSlice,
     favorites: persistedReducer,
   },
   middleware: (getDefaultMiddleware) =>

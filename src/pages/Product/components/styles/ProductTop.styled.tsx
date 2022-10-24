@@ -126,7 +126,7 @@ export const ProductFilter = styled.div`
     margin-left: 22px;
   }
 
-  > div:nth-child(4) {
+  > div:nth-child(5) {
     padding: 25px 0;
 
     li {
@@ -151,7 +151,7 @@ export const ProductFilter = styled.div`
     }
   }
 
-  > div:nth-child(3) {
+  > div:nth-child(4) {
     padding: 25px 0;
     border-bottom: 1px solid #e0e0e0;
 

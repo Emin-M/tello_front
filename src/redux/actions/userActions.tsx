@@ -1,10 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../api/api";
 
-export const getUser = createAsyncThunk("card/getUser", async () => {
-  const id = localStorage.getItem("customerId");
+export const getUser = createAsyncThunk("user/getUser", async () => {
   try {
-    const response = await api.get(`/customers/${id}`);
+    const token = localStorage.getItem("jwt");
+    const response = await api.get("/customers", {
+      headers: {
+        authorization: token ? "Bearer " + token : "",
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
     return response.data;
   } catch (error) {
     return error;
@@ -12,21 +18,20 @@ export const getUser = createAsyncThunk("card/getUser", async () => {
 });
 
 export const updateUser = createAsyncThunk(
-  "card/updateUser",
+  "user/updateUser",
   async ({
-    firstname,
-    lastname,
     email,
     phone,
+    firstname,
+    lastname,
   }: {
-    firstname?: string;
-    lastname?: string;
     email?: string;
     phone?: string;
+    firstname?: string;
+    lastname?: string;
   }) => {
-    const id = localStorage.getItem("customerId");
     try {
-      const response = await api.put(`/customers/${id}`, {
+      const response = await api.put("/customers", {
         firstname,
         lastname,
         email,
@@ -39,10 +44,9 @@ export const updateUser = createAsyncThunk(
   }
 );
 
-export const deleteUser = createAsyncThunk("card/deleteUser", async () => {
-  const id = localStorage.getItem("customerId");
+export const deleteUser = createAsyncThunk("user/deleteUser", async () => {
   try {
-    await api.get(`/customers/${id}`);
+    await api.delete("/customers");
   } catch (error) {
     return error;
   }

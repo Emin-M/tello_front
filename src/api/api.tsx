@@ -1,9 +1,10 @@
 import axios from "axios";
 
+const token = localStorage.getItem("jwt");
 export default axios.create({
-  baseURL: "https://api.chec.io/v1/",
+  baseURL: "https://rocky-cove-19186.herokuapp.com/api/v1/",
   headers: {
-    "X-Authorization": "sk_4460590f5f82fdee4ecc012ff2581d154d70f9c046eb7",
+    authorization: token ? "Bearer " + token : "",
     Accept: "application/json",
     "Content-Type": "application/json",
   },

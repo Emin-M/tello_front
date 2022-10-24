@@ -75,13 +75,13 @@ const CardContainer = ({ data, title, link }: Props) => {
             data
               ?.slice(0, 4)
               .map((product: IProduct) => (
-                <Card key={product.id} product={product} target={target} />
+                <Card key={product._id} product={product} target={target} />
               ))
           ) : (
             products
               ?.slice(0, 4)
               .map((product: IProduct) => (
-                <Card key={product.id} product={product} target={target} />
+                <Card key={product._id} product={product} target={target} />
               ))
           )}
         </CardBottom>

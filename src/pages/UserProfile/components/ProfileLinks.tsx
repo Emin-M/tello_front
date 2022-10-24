@@ -4,14 +4,15 @@ import { StyledProfileLinks } from "./styles/ProfileLinks.styled";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Button, ButtonGroup, Menu, MenuItem } from "@mui/material";
 import api from "../../../api/api";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../redux/store";
+import { fetchCards } from "../../../redux/actions/cardActions";
+import { getUser } from "../../../redux/actions/userActions";
 
 /* Images */
 import basket from "../../../assets/images/icons/basket.png";
 import person from "../../../assets/images/icons/person.png";
 import log_out from "../../../assets/svg/log-out.svg";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../redux/store";
-import { fetchCards } from "../../../redux/actions/cardActions";
 import SimpleModal from "../../../components/ReusuableComponents/Modal";
 
 /* Modal Styles */
@@ -32,22 +33,26 @@ const ProfileLinks: FC = () => {
   const logout = () => {
     localStorage.removeItem("customerId");
     localStorage.removeItem("cartId");
+    localStorage.removeItem("jwt");
     navigate("/login", { state: { message: "Hesabdan çıxdınız" } });
     dispatch(fetchCards());
+    dispatch(getUser());
   };
 
   /* deleting user */
   const deleteUser = async () => {
-    const id = localStorage.getItem("customerId");
     try {
-      await api.delete(`/customers/${id}`);
+      await api.delete("/customers");
       localStorage.removeItem("customerId");
       localStorage.removeItem("cartId");
+      localStorage.removeItem("jwt");
       navigate("/signup", {
         state: {
           message: "Hesabıbız uğurla silindi",
         },
       });
+      dispatch(fetchCards());
+      dispatch(getUser());
     } catch (error) {
       console.log(error);
     }

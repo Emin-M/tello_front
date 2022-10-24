@@ -46,6 +46,15 @@ export const CommentsCommentContainer = styled.div`
   padding: 40px 0;
   border-bottom: 1px solid #bdbdbd;
 
+  .trash {
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+  }
+
   @media (max-width: 850px) {
     flex-direction: column;
     align-items: center;
@@ -65,7 +74,6 @@ export const CommentsStar = styled.div`
     font-size: 72px;
     line-height: 91px;
     color: #000000;
-    margin-bottom: 40px;
   }
 
   @media (max-width: 850px) {
@@ -119,6 +127,16 @@ export const FormContainer = styled.div`
   flex-direction: column;
   padding: 40px 0;
   padding-bottom: 150px;
+  position: relative;
+
+  .notLoggedin {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-size: 50px;
+    text-align: center;
+    opacity: 0.5;
+  }
 
   h2 {
     font-weight: 600;
@@ -136,7 +154,17 @@ export const FormContainer = styled.div`
 
   > div > div:nth-child(2) {
     display: flex;
-    gap: 30px;
+  }
+
+  .star {
+    display: flex;
+    flex-direction: column;
+
+    span {
+      transform: translateX(-2px);
+      margin-top: 10px;
+      width: 20%;
+    }
   }
 
   .form-group {

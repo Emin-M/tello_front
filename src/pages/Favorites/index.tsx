@@ -61,7 +61,7 @@ const Favorites: FC = () => {
         ) : (
           <div className="favs">
             {favs.map((item) => (
-              <Card key={item.id} product={item} sku={item.sku} />
+              <Card key={item._id} product={item} sku={item.sku} />
             ))}
           </div>
         )}
