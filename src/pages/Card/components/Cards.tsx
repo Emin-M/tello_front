@@ -35,6 +35,7 @@ const Cards: FC = () => {
   const { items, updateLoading } = useSelector(
     (state: RootState) => state.card
   );
+  const { isLoggedin } = useSelector((state: RootState) => state.user);
   const { favs } = useSelector((state: RootState) => state.favorites);
   const dispatch = useDispatch<AppDispatch>();
   const [modal, setModal] = useState<boolean>(false);
@@ -174,7 +175,18 @@ const Cards: FC = () => {
           >
             Səbəti təmizlə
           </button>
-          <PayButton cartItems={items?.line_items} />
+          {isLoggedin ? (
+            <PayButton cartItems={items?.line_items} />
+          ) : (
+            <>
+              <Link to="/login">
+                <button>Hesaba daxil olun</button>
+                <p style={{ color: "red", margin: "5px 0 10px 0" }}>
+                  Ödəniş etmək üçün hesaba daxil olun
+                </p>
+              </Link>
+            </>
+          )}
         </CardRight>
       </CardsStyled>
       <SimpleModal
