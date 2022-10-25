@@ -15,12 +15,13 @@ import {
 } from "../../../redux/actions/cardActions";
 import { updateFavorite } from "../../../redux/reducers/favoritesSlice";
 import { Button, ButtonGroup, CircularProgress } from "@mui/material";
+import SimpleModal from "../../../components/ReusuableComponents/Modal";
+import PayButton from "../../../components/Pay/PayButton";
 
 /* Images */
 import minus from "../../../assets/svg/minus.svg";
 import plus from "../../../assets/svg/plus.svg";
 import del from "../../../assets/svg/delete.svg";
-import SimpleModal from "../../../components/ReusuableComponents/Modal";
 
 /* Modal Button Styles */
 const styleButtonGroup = {
@@ -173,7 +174,7 @@ const Cards: FC = () => {
           >
             Səbəti təmizlə
           </button>
-          <button>Səbəti təsdiqlə</button>
+          <PayButton cartItems={items?.line_items} />
         </CardRight>
       </CardsStyled>
       <SimpleModal
