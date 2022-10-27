@@ -5,7 +5,6 @@ import ProfileInner from "./components/ProfileInner";
 import { StyledProfile } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import { getUser } from "../../redux/actions/userActions";
 
 const UserProfile = () => {
   const { user, loading } = useSelector((state: RootState) => state.user);

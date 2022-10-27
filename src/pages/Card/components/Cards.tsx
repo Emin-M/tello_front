@@ -176,7 +176,7 @@ const Cards: FC = () => {
             Səbəti təmizlə
           </button>
           {isLoggedin ? (
-            <PayButton cartItems={items?.line_items} />
+            <PayButton cartId={items?.id} cartItems={items?.line_items} />
           ) : (
             <>
               <Link to="/login">

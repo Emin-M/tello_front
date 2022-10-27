@@ -19,6 +19,7 @@ import {
   postReview,
 } from "../../../redux/actions/reviewActions";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { formatDate } from "../../../utils/dateFormat";
 
 const Comments: FC = () => {
   const { singleProduct, selectedVariant, loading } = useSelector(
@@ -59,27 +60,6 @@ const Comments: FC = () => {
     }, 1000);
   };
 
-  //! formating date
-  const formatDate = (date: any) => {
-    let now = Date.now();
-    let different = Math.floor((now - date) / 1000);
-
-    if (different < 1) {
-      return "indicə";
-    } else if (different < 60) {
-      return `${different} san. əvvəl`;
-    } else if (different < 3600) {
-      return `${Math.floor(different / 60)} dəqiqə əvvəl`;
-    } else {
-      return `${("0" + date.getDate()).slice(-2)}.${(
-        "0" +
-        (date.getMonth() + 1)
-      ).slice(-2)}.${date.getFullYear()} ${date.getHours()}:${(
-        "0" + date.getMinutes()
-      ).slice(-2)}`;
-    }
-  };
-
   return (
     <CommentsContainer>
       <Container>
@@ -103,7 +83,7 @@ const Comments: FC = () => {
                   <h2>
                     {review?.user?.firstname + " " + review?.user?.lastname}
                   </h2>
-                  <p>{formatDate(new Date(review?.updatedAt))}</p>
+                  <p>{formatDate(new Date(review?.createdAt))}</p>
                 </div>
                 <p>{review?.content ? review?.content : "-- məzmun yoxdur"}</p>
               </CommentsComment>

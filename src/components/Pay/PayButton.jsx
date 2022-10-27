@@ -1,10 +1,11 @@
 import api from "../../api/api";
 
-const PayButton = ({ cartItems }) => {
+const PayButton = ({ cartId, cartItems }) => {
   const handleCheckout = () => {
     api
       .post(`checkout`, {
         cartItems,
+        cartId,
       })
       .then((response) => {
         if (response.data.session.url) {
