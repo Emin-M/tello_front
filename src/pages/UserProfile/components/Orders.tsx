@@ -7,13 +7,11 @@ import {
 } from "./styles/Orders.styled";
 import { Top } from "./styles/Top.styled";
 import api from "../../../api/api";
+import Loading from "../../../components/ReusuableComponents/Loading";
 import { formatDate } from "../../../utils/dateFormat";
 
 /* Images */
 import shoppingCard from "../../../assets/svg/shopping-cart.svg";
-import { RootState } from "../../../redux/store";
-import { useSelector } from "react-redux";
-import Loading from "../../../components/ReusuableComponents/Loading";
 
 const Orders = () => {
   const [orders, setOrders] = useState<any>();

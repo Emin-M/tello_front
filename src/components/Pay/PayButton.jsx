@@ -9,6 +9,9 @@ const PayButton = ({ cartId, cartItems }) => {
       })
       .then((response) => {
         if (response.data.session.url) {
+          alert(
+            "Ödəniş test modundadır. Yoxlanış üçün '4242-4242-4242-4242' card məlumatından isdifadə edin."
+          );
           window.location.href = response.data.session.url;
         }
       })
