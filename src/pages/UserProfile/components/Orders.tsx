@@ -11,16 +11,22 @@ import { formatDate } from "../../../utils/dateFormat";
 
 /* Images */
 import shoppingCard from "../../../assets/svg/shopping-cart.svg";
+import { RootState } from "../../../redux/store";
+import { useSelector } from "react-redux";
+import Loading from "../../../components/ReusuableComponents/Loading";
 
 const Orders = () => {
   const [orders, setOrders] = useState<any>();
+  const [loading, setLoading] = useState(true);
 
   const fetchOrders = async () => {
     try {
       const response = await api.get("/orders");
       setOrders(response?.data?.orders);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -32,14 +38,15 @@ const Orders = () => {
       <Top>
         <h2>Sifarişlərim</h2>
       </Top>
-      {!orders ? (
+      {loading ? <Loading /> : null}
+      {!orders && !loading ? (
         <OrdersEmpty>
           <img src={shoppingCard} alt="shoppingCard" />
           <p>Səbətinizdə hazırda heç bir sifarişiniz yoxdur</p>
         </OrdersEmpty>
       ) : (
         <StyledOrdersFull>
-          {orders.map((order: any, index: any) => (
+          {orders?.map((order: any, index: any) => (
             <div key={Math.random()}>
               <div className="header">
                 <p>{index + 1}.</p>
