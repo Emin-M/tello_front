@@ -81,7 +81,7 @@ const ProfileLinks: FC = () => {
         >
           <SettingsIcon />
         </Button>
-        <Menu
+        {/* <Menu
           id="basic-menu"
           anchorEl={anchorEl}
           open={open}
@@ -99,7 +99,7 @@ const ProfileLinks: FC = () => {
           >
             Hesabı sil
           </MenuItem>
-        </Menu>
+        </Menu> */}
       </div>
       <ul>
         <li>
