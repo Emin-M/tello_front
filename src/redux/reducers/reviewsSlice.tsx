@@ -16,19 +16,19 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     /* Post Review */
-    // builder.addCase(postReview.pending, (state) => {
-    //   return (state = { ...state, review_loading: "pending" });
-    // });
-    // builder.addCase(postReview.fulfilled, (state, { payload }) => {
-    //   return (state = {
-    //     ...state,
-    //     review_loading: "succeeded",
-    //     reviews: payload,
-    //   });
-    // });
-    // builder.addCase(postReview.rejected, (state) => {
-    //   return (state = { ...state, review_loading: "failed" });
-    // });
+    builder.addCase(postReview.pending, (state) => {
+      return (state = { ...state, review_loading: "pending" });
+    });
+    builder.addCase(postReview.fulfilled, (state, { payload }) => {
+      return (state = {
+        ...state,
+        review_loading: "succeeded",
+        reviews: payload,
+      });
+    });
+    builder.addCase(postReview.rejected, (state) => {
+      return (state = { ...state, review_loading: "failed" });
+    });
 
     /* Get Reviews */
     builder.addCase(fetchReviews.pending, (state) => {
@@ -46,19 +46,19 @@ export const userSlice = createSlice({
     });
 
     /* Delete Review */
-    // builder.addCase(deleteReview.pending, (state) => {
-    //   return (state = { ...state, review_loading: "pending" });
-    // });
-    // builder.addCase(deleteReview.fulfilled, (state, { payload }) => {
-    //   return (state = {
-    //     ...state,
-    //     review_loading: "succeeded",
-    //     reviews: payload,
-    //   });
-    // });
-    // builder.addCase(deleteReview.rejected, (state) => {
-    //   return (state = { ...state, review_loading: "failed" });
-    // });
+    builder.addCase(deleteReview.pending, (state) => {
+      return (state = { ...state, review_loading: "pending" });
+    });
+    builder.addCase(deleteReview.fulfilled, (state, { payload }) => {
+      return (state = {
+        ...state,
+        review_loading: "succeeded",
+        reviews: payload,
+      });
+    });
+    builder.addCase(deleteReview.rejected, (state) => {
+      return (state = { ...state, review_loading: "failed" });
+    });
   },
 });
 
